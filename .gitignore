@@ -2,6 +2,6 @@
 composer.lock
 *.log
 thinkphp
-/.env
+#/.env
 nbproject
 /public/static/pc/node_modules
