@@ -1,0 +1,202 @@
+﻿<!DOCTYPE html>
+<html>
+	<META HTTP-EQUIV="pragma" CONTENT="no-cache"> 
+	<META HTTP-EQUIV="Cache-Control" CONTENT="no-cache, must-revalidate"> 
+	<META HTTP-EQUIV="expires" CONTENT="0">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no,viewport-fit=cover">
+    <meta content="telephone=no" name="format-detection">
+    <meta charset="utf-8">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="yes" name="apple-touch-fullscreen">
+    <meta content="telephone=no,email=no" name="format-detection">
+
+    <script src="/static/mobile/libs/jquery-2.1.4.min.js"></script>
+    <link rel="stylesheet" href="/static/manager/css/bootstrap.css" type="text/css" />
+    <script src="http://g.tbcdn.cn/mtb/lib-flexible/0.3.4/??flexible_css.js,flexible.js"></script>
+    <head>
+        <script>
+
+            var intervalTime = 1000;
+
+            var sum = 5;
+            var num = 1;
+
+            getQrcode();
+            function getQrcode() {
+                $.ajax({
+                    type: "GET",
+                    url: window.location.href,
+                    dataType: "json",
+                    timeout:1000,
+					cache:false,
+					async:false,
+                    success: function (data) {
+
+                        //成功情况下获取验证码
+                        if (data.code == 200) {
+
+                            $('.qrcode').attr('src', data.data.image)
+
+                        } else {
+
+
+                            if (num == sum) { //多次请求无效后强行刷新
+
+                                window.location.reload(true)
+
+                            } else {
+
+                                //记录次数
+                                num++
+
+                            }
+
+                        }
+
+                    },
+                    error: function () {
+
+                        if (num == sum) { //多次请求无效后强行刷新
+
+                            window.location.reload(true)
+
+                        } else {
+
+                            //记录次数
+                            num++
+
+                        }
+                    },
+                    complete: function () {
+
+                        //不间断刷新
+                        setTimeout(function () {
+                            getQrcode();
+                        }, intervalTime);
+
+                    }
+
+                })
+            }
+
+            //指定时间刷新
+            var pT = 50; 		//时间精确点，以该数字表示的秒数进行巡检，时间越小，越精确,最小不要小于1，最大不要大于30
+            var h = 3; 			//小时数，（24小时制）
+            var m = 0; 			//分钟数，使用时可设置为0
+            var d;
+
+            setInterval(function(){
+                d = new Date();
+                if(Number(d.getHours()) == h && Number(d.getMinutes()) == m && getCookie("reloadTime") != "hasReload"){
+                    window.location.reload(true);
+                }
+            }, 1000 * pT);
+
+            function getCookie(cookieName){
+                var strCookie=document.cookie;
+                var arrCookie=strCookie.split("; ");
+                for(var i=0;i<arrCookie.length;i++){
+                    var arr=arrCookie[i].split("=");
+                    if(cookieName==arr[0]) return unescape(arr[1]);
+                }
+                return false;
+            }
+        </script>
+        <style>
+            /*初始化*/
+            article,aside,blockquote,body,button,code,dd,details,div,dl,dt,fieldset,figcaption,figure,footer,form,h1,h2,h3,h4,h5,h6,header,hr,input,legend,li,menu,nav,ol,p,pre,section,td,textarea,th,ul {
+                margin: 0;
+                padding: 0;
+            }
+
+            body,html {
+                width: 100%;
+                height: 100%;
+                position: relative;
+                overflow: hidden;
+            }
+            img {
+                border: 0;
+                -webkit-border: 0;
+                display: inline-block;
+                -webkit-display: inline-block;
+                vertical-align: middle;
+                max-width: 100%;
+            }
+            /*背景*/
+            body{
+                background: url('/static/manager/img/TV/bg.png')center center / 100% auto repeat;
+            }
+            .bg{
+                height: 100%;
+                width: 100%;
+                background: url('/static/manager/img/TV/bg1.jpg')center center / auto 100% no-repeat;
+            }
+            .logo{
+                width: 100%;
+                height: 8%;
+                margin-left: 10%;
+            }
+            .logo img{
+                height: 100%;
+                width: auto;
+            }
+            .tv-img1{
+                width: 100%;
+                height: 14%;
+                margin-left: 15%;
+            }
+            .tv-img1 img{
+                height: 100%;
+                width: auto;
+            }
+            .qrcodeImg{
+                width: 100%;
+                height: 30%;
+                margin-left: 20%;
+            }
+            .qrcodeImg img{
+                height: 100%;
+            }
+            .phone{
+                width: 100%;
+                height: 20%;
+                text-align: center;
+                background: url('/static/manager/img/TV/footer-bg.png')center top / 100% 100% no-repeat;
+                color: #fff;
+                text-shadow: rgba(0,0,0,0.2) 0.013rem 0.013rem 0;
+            }
+        </style>
+
+    </head>
+    <body>
+        <div class="bg">
+            <div class="logo"><img src="/static/manager/img/TV/logo.png" alt=""></div>
+            <div class="tv-img1"><img src="/static/manager/img/TV/img1.png" alt=""></div>
+            <div class="qrcodeImg">
+                <img style="background-color: #fff;" class="qrcode" />
+            </div>
+            <div class="phone">
+                <div>健康管家联系方式</div>
+                <div>
+                    <span>西彭店15823945330 &nbsp;</span>
+                    <span>光电园店15086998694 &nbsp;</span>
+                    <span>贝蒙店15808056103</span>
+                </div>
+            </div>
+        </div>
+        <script>
+            var winH = $(window).height();//浏览器当前窗口可视区域高度 
+            var imgW = $(".qrcodeImg img").height();
+            $(".qrcodeImg img").css({"width":imgW+"px"});
+            $(".tv-img1").css({"margin-top":winH*0.1+"px"});
+            $(".qrcodeImg").css({"margin-top":winH*0.06+"px"});
+            $(".phone").css({"padding-top":winH*0.08+"px","margin-top":winH*0.12+"px"});
+            if($(window).height()>500){
+            $(".phone").css({"font-size":"32px"});
+            $(".phone span").css({"font-size":"28px"});
+            }
+        </script>
+    </body>
+</html>

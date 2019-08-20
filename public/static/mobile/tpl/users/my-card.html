@@ -1,0 +1,65 @@
+<ion-view class="hx-page" style="background-color: #fff" hide-nav-bar="true" ng-init="setDocumentTitle('我的会员卡')" ng-controller="myCardCtrl">
+
+    <ion-content overflow-scroll="false" scrollbar-y="false" has-bouncing="true">
+				
+		<div class="hx-pd card-pd">
+			
+<!--			<div class="card-mode">
+				<div class="card-mode-bg" ng-style="'uploads/'+cardInfo.image | adaptBg"></div>
+				<div class="card-mode-tit tr">周一至周日 00:00-24:00</div>
+				<div class="card-mode-name">{{cardInfo.card_name}}</div>
+			</div>
+-->			
+
+			<div class="card-single">
+				<div class="card-img">
+					<div class="card-bg" ng-style="'uploads/'+cardInfo.image | adaptBg"></div>
+				</div>
+			</div>
+			
+		</div>
+		
+		<div class="hx-pd">
+			
+			<div class="my-card-mode">
+				
+				<!--title-->
+				<div class="my-card-name">{{cardInfo.card_name}}</div>
+				<div class="my-card-txt" ng-if="cardInfo.active==1">有效期：{{cardInfo.create_time}} 至 {{cardInfo.expire_time}}</div>
+				<div class="my-card-txt" ng-if="cardInfo.active==0">有效期：未激活</div>
+				<div class="my-card-txt" ng-if="cardInfo.type==2">已使用{{cardInfo.use_times}}/总次数{{cardInfo.times}}</div>
+				<div class="my-card-txt" ng-if="cardInfo.max_use>1" ng-repeat="i in cardInfo.other_users">{{i.real_name}}（{{i.phone}}）</div>
+				
+				<div class="my-card-btn after-ipt">
+					<a href="javascript:;" ng-if="cardInfo.master && (cardInfo.addMbr_status == 0 || cardInfo.max_use > cardInfo.other_users.length)" ng-click="getIpt()">添加成员</a>
+					<a ng-if="cardInfo.card_status==1" href="#/users/card-dtl/{{cardInfo.card_id}}">再买一张</a>
+				</div>
+				<div class="add-ipt"></div>
+<!--				<div class="my-card-btn after-ipt" ng-if="cardInfo.master">
+					<a href="#/users/member-card/{{cardInfo.sold_card_id}}">查看成员</a>
+				</div>-->
+				<div class="my-card-btn after-ipt">
+					<a href="#/users/member-card/{{cardInfo.sold_card_id}}">查看成员</a>
+				</div>
+				<div class="my-card-btn">
+					<a href="javascript:;" ng-if="memberList.length>0" ng-click="member()">保存</a>
+				</div>
+				
+			</div>
+			
+			
+			<!--描述-->
+			<div class="my-card-dce" id="description"></div>	
+			
+		</div>
+		
+		
+	
+    </ion-content>
+
+</ion-view>
+
+
+
+
+

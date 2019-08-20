@@ -1,0 +1,257 @@
+<div class="index general" ng-controller="indexController">
+    <div class="top row">
+        <div class="m-b-sm row f-14 c-3">您当前的位置：<span>{{txt}}</span></div>
+    </div>
+    <div class="content">
+        <div class="box1 row" ng-if="load==200">
+            <div class="app-ix-tit">销售统计</div>
+            <div class="app-ix-cont">
+            	<div class="mwq-content row">
+            		<div class="biaoqian col-md-4" ng-init="loadTotal('day',1);loadTotal('week',1);loadTotal('month',1)">
+		                <div class="card">
+		                    <div class="title f-16 m-b-sm">会员卡销量</div>
+		                    <div class="hx-card"></div>
+		                    <div class="shuju row m-b-xs edit"  ng-click="go('statistica-card',3)">
+		                        <div class="col-md-6 com-xs-6 f-12 text-left">￥{{total.card[2]}}</div>
+		                        <div class="col-md-6 com-xs-6 f-12 text-right">本月销量</div>
+		                    </div>
+		                    <div class="shuju row m-b-xs edit" ng-click="go('statistica-card',2)">
+		                        <div class="col-md-6 com-xs-6 f-12 text-left">￥{{total.card[1]}}</div>
+		                        <div class="col-md-6 com-xs-6 f-12 text-right">本周销量</div>
+		                    </div>
+		                    <div class="shuju row m-b-xs edit" ng-click="go('statistica-card',1)">
+		                        <div class="col-md-6 com-xs-6 f-12 text-left">￥{{total.card[0]}}</div>
+		                        <div class="col-md-6 com-xs-6 f-12 text-right">今日销量</div>
+		                    </div>
+		                </div>
+		            </div>
+		            <div class="biaoqian col-md-4" ng-init="loadTotal('day',3);loadTotal('week',3);loadTotal('month',3)">
+		                <div class="private">
+		                    <div class="title f-16 m-b-sm">私教课销量</div>
+		                    <div class="hx-private"></div>
+		                    <div class="shuju row m-b-xs edit" ng-click="go('statistica-private',3)">
+		                        <div class="col-md-6 com-xs-6 f-12 text-left">￥{{total.coachCourse[2]}}</div>
+		                        <div class="col-md-6 com-xs-6 f-12 text-right">本月销量</div>
+		                    </div>
+		                    <div class="shuju row m-b-xs edit" ng-click="go('statistica-private',2)">
+		                        <div class="col-md-6 com-xs-6 f-12 text-left">￥{{total.coachCourse[1]}}</div>
+		                        <div class="col-md-6 com-xs-6 f-12 text-right">本周销量</div>
+		                    </div>
+		                    <div class="shuju row m-b-xs edit" ng-click="go('statistica-private',1)">
+		                        <div class="col-md-6 com-xs-6 f-12 text-left">￥{{total.coachCourse[0]}}</div>
+		                        <div class="col-md-6 com-xs-6 f-12 text-right">今日销量</div>
+		                    </div>
+		                </div>
+		            </div>
+		            <div class="biaoqian col-md-4" ng-init="loadTotal('day',2);loadTotal('week',2);loadTotal('month',2)">
+		                <div class="group">
+		                    <div class="title f-16 m-b-sm">小团课销量</div>
+		                    <div class="hx-group"></div>
+		                    <div class="shuju row m-b-xs edit" ng-click="go('statistica-group',3)">
+		                        <div class="col-md-6 com-xs-6 f-12 text-left">￥{{total.groupCourse[2]}}</div>
+		                        <div class="col-md-6 com-xs-6 f-12 text-right">本月销量</div>
+		                    </div>
+		                    <div class="shuju row m-b-xs edit" ng-click="go('statistica-group',2)">
+		                        <div class="col-md-6 com-xs-6 f-12 text-left">￥{{total.groupCourse[1]}}</div>
+		                        <div class="col-md-6 com-xs-6 f-12 text-right">本周销量</div>
+		                    </div>
+		                    <div class="shuju row m-b-xs edit" ng-click="go('statistica-group',1)">
+		                        <div class="col-md-6 com-xs-6 f-12 text-left">￥{{total.groupCourse[0]}}</div>
+		                        <div class="col-md-6 com-xs-6 f-12 text-right">今日销量</div>
+		                    </div>
+		                </div>
+		            </div>
+            	</div>
+            	<div class="mwq-content row">
+		            <div class="biaoqian col-md-4" ng-init="loadTotal('day',4);loadTotal('week',4);loadTotal('month',4)">
+		                <div class="bean">
+		                    <div class="title f-16 m-b-sm">金豆充值</div>
+		                    <div class="hx-bean"></div>
+		                    <div class="shuju row m-b-xs edit "  ng-click="go('statistica-bean',3)">
+		                        <div class="col-md-6 com-xs-6 f-12 text-left">￥{{total.bean[2]}}</div>
+		                        <div class="col-md-6 com-xs-6 f-12 text-right">本月充值</div>
+		                    </div>
+		                    <div class="shuju row m-b-xs edit" ng-click="go('statistica-bean',2)">
+		                        <div class="col-md-6 com-xs-6 f-12 text-left">￥{{total.bean[1]}}</div>
+		                        <div class="col-md-6 com-xs-6 f-12 text-right">本周充值</div>
+		                    </div>
+		                    <div class="shuju row m-b-xs edit" ng-click="go('statistica-bean',1)">
+		                        <div class="col-md-6 com-xs-6 f-12 text-left">￥{{total.bean[0]}}</div>
+		                        <div class="col-md-6 com-xs-6 f-12 text-right">今日充值</div>
+		                    </div>
+		                </div>
+		            </div>
+		            <div class="biaoqian col-md-4" ng-init="loadUsers('day',0);loadUsers('week',0);loadUsers('month',0)">
+		                <div class="member zhuce">
+		                    <div class="title f-16 m-b-sm">注册会员</div>
+		                    <div class="hx-zhuce"></div>
+		                    <div class="shuju row m-b-xs edit" ng-click="go('statistica-member',3,0)">
+		                        <div class="col-md-6 com-xs-6 f-12 text-left">{{total.newUsers[2]}}</div>
+		                        <div class="col-md-6 com-xs-6 f-12 text-right">本月增加会员</div>
+		                    </div>
+		                    <div class="shuju row m-b-xs edit" ng-click="go('statistica-member',2,0)">
+		                        <div class="col-md-6 com-xs-6 f-12 text-left">{{total.newUsers[1]}}</div>
+		                        <div class="col-md-6 com-xs-6 f-12 text-right">本周增加会员</div>
+		                    </div>
+		                    <div class="shuju row m-b-xs edit" ng-click="go('statistica-member',1,0)">
+		                        <div class="col-md-6 com-xs-6 f-12 text-left">{{total.newUsers[0]}}</div>
+		                        <div class="col-md-6 com-xs-6 f-12 text-right">今日增加会员</div>
+		                    </div>
+		                </div>
+		            </div>
+		            <div class="biaoqian col-md-4" ng-init="loadUsers('day',1);loadUsers('week',1);loadUsers('month',1)">
+		                <div class="member gouka">
+		                    <div class="title f-16 m-b-sm">购卡会员</div>
+		                    <div class="hx-gouka"></div>
+		                    <div class="shuju row m-b-xs edit" ng-click="go('statistica-member',3,1)">
+		                        <div class="col-md-6 com-xs-6 f-12 text-left">{{total.newMember[2]}}</div>
+		                        <div class="col-md-6 com-xs-6 f-12 text-right">本月购卡会员</div>
+		                    </div>
+		                    <div class="shuju row m-b-xs edit" ng-click="go('statistica-member',2,1)">
+		                        <div class="col-md-6 com-xs-6 f-12 text-left">{{total.newMember[1]}}</div>
+		                        <div class="col-md-6 com-xs-6 f-12 text-right">本周购卡会员</div>
+		                    </div>
+		                    <div class="shuju row m-b-xs edit" ng-click="go('statistica-member',1,1)">
+		                        <div class="col-md-6 com-xs-6 f-12 text-left">{{total.newMember[0]}}</div>
+		                        <div class="col-md-6 com-xs-6 f-12 text-right">今日购卡会员</div>
+		                    </div>
+		                </div>
+		            </div>
+		        </div>
+		        <div class="mwq-content row">
+            		<div class="biaoqian col-md-4" ng-init="loadTotal('day',6);loadTotal('week',6);loadTotal('month',6)">
+		                <div class="bound">
+		                    <div class="title f-16 m-b-sm">新增绑定</div>
+		                    <div class="hx-bound"></div>
+		                    <div class="shuju row m-b-xs edit"  ng-click="go('statistica-bound',3)">
+		                        <div class="col-md-6 com-xs-6 f-12 text-left">￥{{total.bound[2]}}</div>
+		                        <div class="col-md-6 com-xs-6 f-12 text-right">本月绑定金额</div>
+		                    </div>
+		                    <div class="shuju row m-b-xs edit" ng-click="go('statistica-bound',2)">
+		                        <div class="col-md-6 com-xs-6 f-12 text-left">￥{{total.bound[1]}}</div>
+		                        <div class="col-md-6 com-xs-6 f-12 text-right">本周绑定金额</div>
+		                    </div>
+		                    <div class="shuju row m-b-xs edit" ng-click="go('statistica-bound',1)">
+		                        <div class="col-md-6 com-xs-6 f-12 text-left">￥{{total.bound[0]}}</div>
+		                        <div class="col-md-6 com-xs-6 f-12 text-right">今日绑定金额</div>
+		                    </div>
+		                </div>
+		            </div>
+		            <div class="biaoqian col-md-4" ng-init="loadTotal('day',5);loadTotal('week',5);loadTotal('month',5)">
+		                <div class="eliminate">
+		                    <div class="title f-16 m-b-sm">取消旷课</div>
+		                    <div class="hx-eliminate"></div>
+		                    <div class="shuju row m-b-xs edit"  ng-click="go('statistica-eliminate',3)">
+		                        <div class="col-md-6 com-xs-6 f-12 text-left">￥{{total.eliminate[2]}}</div>
+		                        <div class="col-md-6 com-xs-6 f-12 text-right">本月取消旷课</div>
+		                    </div>
+		                    <div class="shuju row m-b-xs edit" ng-click="go('statistica-eliminate',2)">
+		                        <div class="col-md-6 com-xs-6 f-12 text-left">￥{{total.eliminate[1]}}</div>
+		                        <div class="col-md-6 com-xs-6 f-12 text-right">本周取消旷课</div>
+		                    </div>
+		                    <div class="shuju row m-b-xs edit" ng-click="go('statistica-eliminate',1)">
+		                        <div class="col-md-6 com-xs-6 f-12 text-left">￥{{total.eliminate[0]}}</div>
+		                        <div class="col-md-6 com-xs-6 f-12 text-right">今日取消旷课</div>
+		                    </div>
+		                </div>
+		            </div>
+            	</div>
+            </div>
+            <div class="app-ix-tit">
+            	场馆统计
+            	<select ng-init="getShopList()" ng-model="total.shopId" ng-change="again()">
+            		<option value="">所有场馆</option>
+            		<option ng-repeat="i in shopList" value="{{i.shop_id}}">{{i.city}}-{{i.shop_name}}</option>
+            	</select>
+            </div>
+            <div class="app-ix-cont">
+            	<div class="mwq-content row">
+	            	<div class="biaoqian col-md-4" ng-init="loadSign('day');loadSign('week');loadSign('month')">
+		                <div class="sign">
+		                    <div class="title f-16 m-b-sm">签到人数</div>
+		                    <div class="hx-sign"></div>
+		                    <div class="shuju row m-b-xs edit" ng-click="go('statistica-sign',3)">
+		                        <div class="col-md-6 com-xs-6 f-12 text-left">{{total.sign[2]}}</div>
+		                        <div class="col-md-6 com-xs-6 f-12 text-right">本月签到人数</div>
+		                    </div>
+		                    <div class="shuju row m-b-xs edit" ng-click="go('statistica-sign',2)">
+		                        <div class="col-md-6 com-xs-6 f-12 text-left">{{total.sign[1]}}</div>
+		                        <div class="col-md-6 com-xs-6 f-12 text-right">本周签到人数</div>
+		                    </div>
+		                    <div class="shuju row m-b-xs edit" ng-click="go('statistica-sign',1)">
+		                        <div class="col-md-6 com-xs-6 f-12 text-left">{{total.sign[0]}}</div>
+		                        <div class="col-md-6 com-xs-6 f-12 text-right">今日签到人数</div>
+		                    </div>
+		                </div>
+		            </div>
+		            <div class="biaoqian col-md-4" ng-init="loadAppt('day',1);loadAppt('week',1);loadAppt('month',1)">
+		                <div class="appointment appt-com">
+		                    <div class="title f-16 m-b-sm">公共课预约</div>
+		                    <div class="hx-appt-com"></div>
+		                    <div class="shuju row m-b-xs edit" ng-click="go('statistica-appointment',3,1)">
+		                        <div class="col-md-6 com-xs-6 f-12 text-left">{{total.groupAppt[2]}}</div>
+		                        <div class="col-md-6 com-xs-6 f-12 text-right">本月预约人数</div>
+		                    </div>
+		                    <div class="shuju row m-b-xs edit" ng-click="go('statistica-appointment',2,1)">
+		                        <div class="col-md-6 com-xs-6 f-12 text-left">{{total.groupAppt[1]}}</div>
+		                        <div class="col-md-6 com-xs-6 f-12 text-right">本周预约人数</div>
+		                    </div>
+		                    <div class="shuju row m-b-xs edit" ng-click="go('statistica-appointment',1,1)">
+		                        <div class="col-md-6 com-xs-6 f-12 text-left">{{total.groupAppt[0]}}</div>
+		                        <div class="col-md-6 com-xs-6 f-12 text-right">今日预约人数</div>
+		                    </div>
+		                </div>
+		            </div>
+		            <div class="biaoqian col-md-4" ng-init="loadAppt('day',3);loadAppt('week',3);loadAppt('month',3)">
+		                <div class="appointment appt-pri">
+		                    <div class="title f-16 m-b-sm">私教课预约</div>
+		                    <div class="hx-appt-pri"></div>
+		                    <div class="shuju row m-b-xs edit" ng-click="go('statistica-appointment',3,3)">
+		                        <div class="col-md-6 com-xs-6 f-12 text-left">{{total.coachAppt[2]}}</div>
+		                        <div class="col-md-6 com-xs-6 f-12 text-right">本月预约人数</div>
+		                    </div>
+		                    <div class="shuju row m-b-xs edit" ng-click="go('statistica-appointment',2,3)">
+		                        <div class="col-md-6 com-xs-6 f-12 text-left">{{total.coachAppt[1]}}</div>
+		                        <div class="col-md-6 com-xs-6 f-12 text-right">本周预约人数</div>
+		                    </div>
+		                    <div class="shuju row m-b-xs edit" ng-click="go('statistica-appointment',1,3)">
+		                        <div class="col-md-6 com-xs-6 f-12 text-left">{{total.coachAppt[0]}}</div>
+		                        <div class="col-md-6 com-xs-6 f-12 text-right">今日预约人数</div>
+		                    </div>
+		                </div>
+		            </div>
+		        </div>
+            </div>
+	    </div>
+        <br  />
+        <br  />
+        <div class="box2 row">
+        	<div class="col-md-8 left" style="height: 100%;" ng-show="load==200">
+        		<div class="bc-white" style="box-shadow: 0 2px 8px 0 rgba(0,0,0,0.12);border-radius: 4px;">
+        			<div id="main" style="width: 100%;height:500px; padding: 10px;"></div>
+        		</div>
+        	</div>
+        	<div class="col-md-4 right" ng-if="load==200">
+        		<div class="feedback bc-white row" ng-init="feedBack()">
+                    <div class="title row">
+                        <div class="col-md-6 col-xs-6 no-padder text-left f-16">最新反馈</div>
+                        <div class="col-md-6 col-xs-6 c-click f-12 text-right no-padder edit" ng-click="go('statistica-feedback',0)">查看全部</div>
+                    </div>
+                    <div class="fankui row" ng-repeat="i in feedBackList.list">
+                        <div class="line1 row">
+                            <div class="touxiang col-md-2">
+                                <img class="img-circle" ng-style="'uploads/'+i.avatar | adaptBg">
+                            </div>
+                            <div class="name col-md-10 no-padder">{{i.real_name}}</div>
+                        </div>
+                        <div class="line2 row">
+                            <div class="col-md-offset-2 col-md-6 no-padder text-left">{{i.content}}</div>
+                            <div class="col-md-4 no-padder text-right">{{i.create_time}}</div>
+                        </div>
+                    </div>
+                </div>
+        	</div>
+        </div>
+        <div ng-if="load!=200" style="text-align: center;font-size: 32px;">欢迎使用 倾城运动.家 后台管理系统</div>
+    </div>
+</div>

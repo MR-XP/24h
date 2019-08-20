@@ -1,0 +1,483 @@
+<div class="comcourse general plan" ng-controller="planController">
+	<div class="top row">
+		<div class="m-b-sm row f-14 c-3">您当前的位置：<span>{{txt}}</span></div>
+	</div>
+	<div class="tab-content">
+		<div class="row-nav">
+			<ul class="nav nav-pills bc-white">
+		  		<li ng-class="{'active': tabs[0]}">
+		    		<a href ng-click="tab(0)" class="font-bold">公共排课</a>
+		    		<i ng-if="tabs[0]==true" class="fa fa-angle-up jiantou"></i>
+		  		</li>
+		  		<li ng-class="{'active': tabs[1]}">
+		    		<a href ng-click="tab(1)" class="font-bold">私教时间</a>
+		    		<i ng-if="tabs[1]==true" class="fa fa-angle-up jiantou"></i>
+		  		</li>
+		  		<li ng-class="{'active': tabs[2]}">
+		    		<a href ng-click="tab(2)" class="font-bold">小团课排课</a>
+		    		<i ng-if="tabs[2]==true" class="fa fa-angle-up jiantou"></i>
+		  		</li>
+			</ul>
+		</div>
+		<div class="tab-pane bc-white" ng-if="tabs[0]" ng-class="{'active': tabs[0]}" ng-controller="rowController">
+			<div class="content chakan" style="padding-top: 10px;">
+          		<div class="xp-rowCourse-top row">
+          			<div href="javascript:;" class="xp-rowCourse-btn" ng-click="open()">+排课</div>
+          			<div href="javascript:;" class="xp-week-btn" ng-click="copy(row.start_time,'week')">复制本周课程</div>
+          			<div style="cursor: pointer;" class="xp-week-btn" ng-click="newWeek(-7)">上一周</div>
+          			<div style="cursor: pointer;" class="xp-week-btn" ng-click="newWeek(7)">下一周</div>
+          			<div class="address">
+			            <select class="form-control" ng-model="selectShop.province" ng-options="key as key for (key,value) in area"  data-tap-disabled="true" ng-change="loadShop()">
+			                <option value="">选择省份</option>
+			            </select>
+			            <select class="form-control" ng-model="selectShop.city" ng-options="key as key for (key,value) in area[selectShop.province]" ng-change="loadShop()"  data-tap-disabled="true">
+			                <option value="">选择市</option>
+			            </select>
+			            <select class="form-control" ng-model="selectShop.county" ng-options="value as value for value in area[selectShop.province][selectShop.city]"  data-tap-disabled="true" ng-change="loadShop()">
+			                <option value="">选择区/县</option>
+			            </select>
+			            <select class="form-control" ng-model="row.shop_id" ng-options="v.shop_id as v.shop_name for v in shopList" ng-change="loadList()">
+			                <option value="" ng-if="selectShop.county=='' || selectShop.county=='null' || selectShop.county==null">全部场馆</option>
+			            </select>
+				    </div>
+          		</div>
+          		<div class="xp-rowCourse-body">
+          			<week-date loadtype="1"></week-date>
+          			<div class="xp-rowCourse-cont">
+          				<div class="xp-rowCourse-row" ng-repeat="i in nowWeek">
+          					<div ng-repeat="p in rowCourseList[i]" ng-mouseover="show_modal = true" ng-mouseleave="show_modal = false">
+          						<div class="xp-rowCourse-col p-lr-10 comCourse" ng-class="{alpha1 : p.status==0}">
+	          						<div class="course-box">
+	          							<div class="course-name single">{{p.course_name}}</div>
+		          						<div class="single">{{p.start_time | limitTo:-8 | limitTo:5}} - {{p.end_time | limitTo:-8| limitTo:5}}</div>
+		          						<div class="single">
+		          							<span ng-if="compareCourse(p)==1" class="c-red">未成团</span>
+		          							<span ng-if="compareCourse(p)==2">已成团</span>
+		          							<span ng-if="compareCourse(p)==3">进行中</span>
+		          							<span ng-if="compareCourse(p)==4" class="c-green">已完成</span>
+		          							<span>({{p.user_count}}/{{p.max_count}})</span>
+		          							<span ng-if="compareCourse(p)==4 && compareUser(p)==0" class="c-red">(半价)</span>
+		          						</div>
+		          						<div class="single coach-status">
+		          							<span>教练 {{p.coach_name}}</span>
+		          							<span ng-if="compareCoach(p)==1 && compareCourse(p)!=1" style="color: #a5a5a5;">(未签到)</span>
+		          							<span ng-if="compareCoach(p)==2 && compareCourse(p)!=1" class="c-green">(已签到)</span>
+		          							<span ng-if="compareCoach(p)==3 && compareCourse(p)!=1">(迟到{{lateTime}}分钟)</span>
+		          							<span ng-if="compareCoach(p)==4 && compareCourse(p)!=1" class="c-red">(已旷课)</span>
+		          							<span ng-if="compareCoach(p)==5 && compareCourse(p)!=1">(未签出)</span>
+		          							<span ng-if="compareCoach(p)==6 && compareCourse(p)!=1">(早退{{leaveTime}}分钟)</span>
+		          							<span ng-if="compareCoach(p)==7 && compareCourse(p)!=1">(迟到{{lateTime}}分钟,早退{{leaveTime}}分钟)</span>
+		          						</div>
+		          						<div class="row bianji" ng-if="show_modal">
+		          							<div class="col-md-4 col-xs-4 no-padder edit c-click single" ng-click="edit(p)">编辑</div>
+		          							<div class="col-md-4 col-xs-4 no-padder edit c-click single" ng-click="lookUser(p.appointments)">预约详情</div>
+		          							<div class="col-md-4 col-xs-4 no-padder edit c-click single" ng-if="p.status!=0" ng-click="cancel(p.plan_id,p.user_count)">取消</div>
+		          							<div class="col-md-4 col-xs-4 no-padder single" ng-if="p.status==0">已取消</div>
+		          						</div>
+	          						</div>
+	          					</div>
+          					</div>
+          				</div>
+          			</div>
+          			<div class="grey" id="grey"></div>
+          		</div>
+			</div>
+			<!--排课详情-->
+			<link type="text/css" rel="stylesheet" href="/static/manager/js/plugin/time/m-dist/bootstrap-clockpicker.min.css">
+			<link type="text/css" rel="stylesheet" href="/static/manager/js/plugin/time/m-time/css/github.min.css">
+			<script type="text/javascript" src="/static/manager/js/plugin/time/m-dist/bootstrap-clockpicker.min.js"></script>
+			<script type="text/javascript" src="/static/manager/js/plugin/time/m-time/js/highlight.min.js"></script>
+			<div class="rowCourse-dtl" ng-show="rowDtl.look">
+				<div class="rowCourse-dtl-cont">
+					<div class="rowCourse-dtl-top">
+						<div class="col-md-6 col-xs-6 padder-l-none">排课详情</div>
+						<div class="col-md-6 col-xs-6 text-right"><span ng-click="rowDtl.look=false">X</span></div>
+					</div>
+					<form class="form-horizontal row" style="padding: 10px 20px;">
+		                <div class="form-group">
+		                    <label class="col-md-2 col-xs-2 control-label padder-lr-none">日期：</label>
+		                    <div class="col-md-9 col-xs-9 padder-lr-none">
+		                    	<input class="form-control" type="text" data-field="date" ng-model="rowDtl.now_day" ng-change="load()">
+		                    </div>
+		                </div>
+		                <div class="form-group">
+		                    <label class="col-md-2 col-xs-2 control-label padder-lr-none">选择课程：</label>
+		                    <div class="col-md-9 col-xs-9 padder-lr-none">
+
+		                        <select class="form-control" ng-init="loadGroup()" ng-model="rowDtl.course_id" ng-options="i.course_id as i.course_name for i in groupList" ng-change="upTime()"></select>
+		                    </div>
+		                </div>
+		                <div class="form-group">
+		                    <label class="col-md-2 col-xs-2 control-label padder-lr-none">任课教练：</label>
+		                    <div class="col-md-9 col-xs-9 padder-lr-none">
+		                        <select class="form-control" ng-init="loadCoach()" ng-model="rowDtl.coach_user_id" ng-options="i.user_id as i.real_name for i in coachList"></select>
+		                    </div>
+		                </div>
+		                <div class="form-group">
+		                    <label class="col-md-2 col-xs-2 control-label padder-lr-none">上课时间：</label>
+		                    <div class="col-md-9 col-xs-9 padder-lr-none">
+		                        <div class="col-md-5 col-xs-5 padder-lr-none">
+		                            <div class="input-group clockpicker">
+		                            	<input class="form-control" type="text" data-field="time" ng-model="rowDtl.start_time" ng-change="load()">
+						                <!-- <input selecttime type="text" class="form-control" ng-model="rowDtl.start_time">
+						                <span class="input-group-addon">
+						                    <span class="glyphicon glyphicon-time"></span>
+						                </span> -->
+						            </div>
+		                        </div>
+		                        <div class="col-md-offset-2 col-xs-offset-2 col-md-5 col-xs-5 padder-lr-none">
+		                            <input type="text" class="form-control" data-mask="99:99" ng-model="rowDtl.end_time" readonly="readonly" ng-change="verifyTime('end_time')">
+		                        </div>
+		                    </div>
+		                    <div class="col-md-12 col-xs-12 text-center m-t">根据课程时长自动显示结束时间</div>
+		                </div>
+		                <div class="form-group">
+		                    <label class="col-md-2 col-xs-2 control-label padder-lr-none">上课地点：</label>
+		                    <div class="col-md-9 col-xs-9 padder-lr-none">
+		                        <select class="form-control" ng-model="rowDtl.shop_id" ng-9nit="loadShop()" ng-options="i.shop_id as i.city + '-' + i.county + '-' +i.shop_name for i in shopList">
+
+		                        </select>
+		                    </div>
+		                </div>
+		                <div class="form-group">
+		                    <div class="col-md-offset-2 col-xs-offset-2">
+		                        <button class="save" ng-click="saveDtl()">保存</button>
+		                        <button class="cancel" ng-click="rowDtl.look=false">取消</button>
+		                    </div>
+		                </div>
+            		</form>
+				</div>
+			</div>
+			<div class="rowCourse-dtl" ng-if="users.show">
+				<div class="rowCourse-dtl-cont rowCourse-dtl-cont2">
+					<div class="rowCourse-dtl-top">
+						<div class="col-md-6 col-xs-6 padder-l-none">预约人数</div>
+						<div class="col-md-6 col-xs-6 text-right edit"><span ng-click="users.show=false">X</span></div>
+					</div>
+					<div class="users-top row text-center">
+						<div class="col-md-3 col-xs-3">头像</div>
+						<div class="col-md-3 col-xs-3">姓名</div>
+						<div class="col-md-3 col-xs-3">电话</div>
+						<div class="col-md-3 col-xs-3">到场时间</div>
+					</div>
+					<div class="users-cont text-center">
+						<div class="row" ng-repeat="i in users.list">
+							<div class="col-md-3 col-xs-3">
+								<!-- <div class="coach-img" ng-style="i.user.avatar | adaptBg"></div> -->
+								<img class="coach-img" ng-style="'uploads/'+i.user.avatar | adaptBg">
+							</div>
+							<div class="col-md-3 col-xs-3">{{i.user.real_name}}</div>
+							<div class="col-md-3 col-xs-3">{{i.user.phone}}</div>
+							<div class="col-md-3 col-xs-3" ng-if="i.sign==0">未进场</div>
+							<div class="col-md-3 col-xs-3" ng-if="i.sign!=0">{{i.sign_time}}</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="tab-pane bc-white" ng-if="tabs[1]" ng-class="{'active': tabs[1]}" ng-controller="coachPlanController">
+			<div class="content paike" style="padding-top: 10px;">
+				<div class="xp-rowCourse-top row">
+					<div>选择教练:</div>
+					<select ng-model="rowDtl.coach_user_id" ng-options="i.user_id as i.real_name for i in coachList" ng-change="loadList()">
+					</select>
+          			<div href="javascript:;" class="xp-rowCourse-btn" ng-click="open()">添加</div>
+          			<div href="javascript:;" class="xp-week-btn" ng-click="copy(row.start_time,'week')">复制本周</div>
+          			<div style="cursor: pointer;" class="xp-week-btn" ng-click="newWeek(-7)">上一周</div>
+          			<div style="cursor: pointer;" class="xp-week-btn" ng-click="newWeek(7)">下一周</div>
+          		</div>
+          		<div class="xp-rowCourse-body">
+          			<week-date loadtype="2"></week-date>
+          			<div class="xp-rowCourse-cont">
+          				<div class="xp-rowCourse-row" ng-repeat="i in nowWeek">
+          					<div  ng-repeat="p in rowCourseList[i]" ng-mouseover="show_modal = true" ng-mouseleave="show_modal = false">
+          						<div class="xp-rowCourse-col p-lr-10" ng-class="{alpha1 : p.status==0}">
+	          						<div class="course-name single" ng-if="p.course_name!=''">{{p.course_name}}</div>
+	          						<div class="course-name single" ng-if="p.course_name==''">暂无课程预约</div>
+	          						<div class="single">
+	          							{{p.start_time | limitTo:-8 | limitTo:5}} - {{p.end_time | limitTo:-8| limitTo:5}} 
+	          							<span ng-if="compareCourse(p)==4 && compareUser(p)==0" class="c-red">(半价)</span>
+	          						</div>
+	          						<div class="single coach-status">
+	          							<span>{{p.coach_name}}</span>
+	          							<span ng-if="compareCoach(p)==1 && compareCourse(p)!=1" style="color: #a5a5a5;">(未签到)</span>
+	          							<span ng-if="compareCoach(p)==2 && compareCourse(p)!=1" class="c-green">(已签到)</span>
+	          							<span ng-if="compareCoach(p)==3 && compareCourse(p)!=1">(迟到{{lateTime}}分钟)</span>
+	          							<span ng-if="compareCoach(p)==4 && compareCourse(p)!=1" class="c-red">(已旷课)</span>
+	          							<span ng-if="compareCoach(p)==5 && compareCourse(p)!=1">(未签出)</span>
+	          							<span ng-if="compareCoach(p)==6 && compareCourse(p)!=1">(早退{{leaveTime}}分钟)</span>
+	          							<span ng-if="compareCoach(p)==7 && compareCourse(p)!=1">(迟到{{lateTime}}分钟,早退{{leaveTime}}分钟)</span>
+	          						</div>
+	          						<div class="row bianji">
+	          							<div class="col-md-6 col-xs-6 no-padder text-center edit c-click single" ng-click="lookUser(p.appointments)">
+	          								预约详情
+	          							</div>
+	          							<div class="col-md-6 col-xs-6 no-padder text-center edit c-click single" ng-show="p.shop!=null" tabindex="0" role="button" data-toggle="popover" data-placement="bottom" data-trigger="focus" data-content="{{p.shop.city + p.shop.county + p.shop.address + p.shop.shop_name}}">
+	          								查看场馆
+	          							</div>
+	          							<div class="col-md-6 col-xs-6 no-padder text-center edit c-click single" ng-show="p.shop==null" tabindex="0" role="button" data-toggle="popover" data-placement="bottom" data-trigger="focus" data-content="暂无场馆">
+	          								查看场馆
+	          							</div>
+	          							<style>
+											.popover.bottom > .arrow {
+											    top: -21px;
+											}
+											.popover-content{
+												margin-top: 0 !important;
+												color: #333 !important;
+											}
+										</style>
+										<script>
+											$(function () {
+												$("[data-toggle='popover']").popover();
+											});
+										</script>
+	          						</div>
+	          						<div class="row bianji" ng-if="show_modal">
+	          							<div class="col-md-6 col-xs-6 no-padder text-center edit c-click single" ng-click="edit(p)">
+	          								编辑
+	          							</div>
+	          							<div class="col-md-6 col-xs-6 no-padder text-center edit c-click single" ng-click="cancel(p.plan_id)" ng-if="p.status!=0">
+	          								取消
+	          							</div>
+	          							<div class="col-md-6 col-xs-6 no-padder text-center single" ng-if="p.status==0">
+	          								已取消
+	          							</div>
+	          						</div>
+	          					</div>
+          					</div>
+          				</div>
+          			</div>
+          			<div class="grey" id="grey-p"></div>
+          		</div>
+			</div>
+			<div class="rowCourse-dtl" ng-show="rowDtl.look">
+				<div class="rowCourse-dtl-cont">
+					<div class="rowCourse-dtl-top">
+						<div class="col-md-6 col-xs-6 padder-l-none">添加/编辑时间</div>
+						<div class="col-md-6 col-xs-6 text-right"><span ng-click="rowDtl.look=false">X</span></div>
+					</div>
+					<form class="form-horizontal" style="padding: 0 20px;">
+		                <div class="form-group">
+		                    <label class="col-md-2 col-xs-2 control-label padder-lr-none">日期：</label>
+		                    <div class="col-md-9 col-xs-9 padder-lr-none">
+		                    	<input class="form-control" type="text" data-field="date" ng-model="rowDtl.now_day" ng-change="load()">
+		                    </div>
+		                </div>
+		                <div class="form-group">
+		                    <label class="col-md-2 col-xs-2 control-label padder-lr-none">上课时间：</label>
+		                    <div class="col-md-9 col-xs-9 padder-lr-none">
+		                        <div class="col-md-5 col-xs-5 padder-lr-none">
+		                            <div class="input-group clockpicker">
+						                <!-- <input selecttime type="text" class="form-control" ng-model="rowDtl.start_time">
+						                <span class="input-group-addon">
+						                    <span class="glyphicon glyphicon-time"></span>
+						                </span> -->
+						                <input class="form-control" type="text" data-field="time" ng-model="rowDtl.start_time" ng-change="load()">
+						            </div>
+		                        </div>
+		                        <div class="col-md-offset-2 col-xs-offset-2 col-md-5 col-xs-5 padder-lr-none">
+		                            <input type="text" class="form-control" data-mask="99:99" ng-model="rowDtl.end_time" readonly="readonly" ng-change="verifyTime('end_time')">
+		                        </div>
+		                    </div>
+		                    <div class="col-md-12 col-xs-12 text-center m-t">根据课程时长自动显示结束时间</div>
+		                </div>
+		                <div class="form-group">
+		                    <div class="col-md-offset-2 col-xs-offset-2">
+		                        <button class="save" ng-click="saveDtl()">保存</button>
+		                        <button class="cancel" ng-click="rowDtl.look=false">取消</button>
+		                    </div>
+		                </div>
+            		</form>
+				</div>
+			</div>
+			<div class="rowCourse-dtl" ng-if="users.show">
+				<div class="rowCourse-dtl-cont rowCourse-dtl-cont2">
+					<div class="rowCourse-dtl-top">
+						<div class="col-md-6 col-xs-6 padder-l-none">预约的会员</div>
+						<div class="col-md-6 col-xs-6 text-right"><span ng-click="users.show=false">X</span></div>
+					</div>
+					<div class="users-top row text-center">
+						<div class="col-md-3 col-xs-3">头像</div>
+						<div class="col-md-3 col-xs-3">姓名</div>
+						<div class="col-md-3 col-xs-3">电话</div>
+						<div class="col-md-3 col-xs-3">到场时间</div>
+					</div>
+					<div class="users-cont text-center">
+						<div class="row" ng-repeat="i in users.list">
+							<div class="col-md-3 col-xs-3">
+								<!-- <div class="coach-img" ng-style="'uploads/'+i.user.avatar | adaptBg"></div> -->
+								<img class="coach-img" ng-style="'uploads/'+i.user.avatar | adaptBg">
+							</div>
+							<div class="col-md-3 col-xs-3">{{i.user.real_name}}</div>
+							<div class="col-md-3 col-xs-3">{{i.user.phone}}</div>
+							<div class="col-md-3 col-xs-3" ng-if="i.sign==0">未进场</div>
+							<div class="col-md-3 col-xs-3" ng-if="i.sign!=0">{{i.sign_time}}</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="tab-pane bc-white" ng-if="tabs[2]" ng-class="{'active': tabs[2]}" ng-controller="rowGroupController">
+			<div class="content chakan" style="padding-top: 10px;">
+          		<div class="xp-rowCourse-top row">
+          			<div href="javascript:;" class="xp-rowCourse-btn" ng-click="open()">+排课</div>
+          			<div href="javascript:;" class="xp-week-btn" ng-click="copy(row.start_time,'week')">复制本周课程</div>
+          			<div style="cursor: pointer;" class="xp-week-btn" ng-click="newWeek(-7)">上一周</div>
+          			<div style="cursor: pointer;" class="xp-week-btn" ng-click="newWeek(7)">下一周</div>
+          			<div class="address">
+			            <select class="form-control" ng-model="selectShop.province" ng-options="key as key for (key,value) in area"  data-tap-disabled="true" ng-change="loadShop()">
+			                <option value="">选择省份</option>
+			            </select>
+			            <select class="form-control" ng-model="selectShop.city" ng-options="key as key for (key,value) in area[selectShop.province]" ng-change="loadShop()"  data-tap-disabled="true">
+			                <option value="">选择市</option>
+			            </select>
+			            <select class="form-control" ng-model="selectShop.county" ng-options="value as value for value in area[selectShop.province][selectShop.city]"  data-tap-disabled="true" ng-change="loadShop()">
+			                <option value="">选择区/县</option>
+			            </select>
+			            <select class="form-control" ng-model="row.shop_id" ng-options="v.shop_id as v.shop_name for v in shopList" ng-change="loadList()">
+			                <option value="" ng-if="selectShop.province=='' || selectShop.province=='null' || selectShop.province==null">全部场馆</option>
+			            </select>
+				    </div>
+          		</div>
+          		<div class="xp-rowCourse-body">
+          			<week-date loadtype="1"></week-date>
+          			<div class="xp-rowCourse-cont">
+          				<div class="xp-rowCourse-row" ng-repeat="i in nowWeek">
+          					<div ng-repeat="p in rowCourseList[i]" ng-mouseover="show_modal = true" ng-mouseleave="show_modal = false">
+          						<div class="xp-rowCourse-col p-lr-10" ng-class="{alpha1 : p.status==0}">
+	          						<div class="course-box">
+	          							<div class="course-name single">{{p.course_name}}</div>
+		          						<div class="single">{{p.start_time | limitTo:-8 | limitTo:5}} - {{p.end_time | limitTo:-8| limitTo:5}}</div>
+		          						<div class="single">
+		          							<span ng-if="compareCourse(p)==1" class="c-red">未成团</span>
+		          							<span ng-if="compareCourse(p)==2">已成团</span>
+		          							<span ng-if="compareCourse(p)==3">进行中</span>
+		          							<span ng-if="compareCourse(p)==4" class="c-green">已完成</span>
+		          							<span>({{p.user_count}}/{{p.max_count}})</span>
+		          							<span ng-if="compareCourse(p)==4 && compareUser(p)==0" class="c-red">(半价)</span>
+		          						</div>
+		          						<div class="single coach-status">
+		          							<span>教练 {{p.coach_name}}</span>
+		          							<span ng-if="compareCoach(p)==1 && compareCourse(p)!=1" style="color: #a5a5a5;">(未签到)</span>
+		          							<span ng-if="compareCoach(p)==2 && compareCourse(p)!=1" class="c-green">(已签到)</span>
+		          							<span ng-if="compareCoach(p)==3 && compareCourse(p)!=1">(迟到{{lateTime}}分钟)</span>
+		          							<span ng-if="compareCoach(p)==4 && compareCourse(p)!=1" class="c-red">(已旷课)</span>
+		          							<span ng-if="compareCoach(p)==5 && compareCourse(p)!=1">(未签出)</span>
+		          							<span ng-if="compareCoach(p)==6 && compareCourse(p)!=1">(早退{{leaveTime}}分钟)</span>
+		          							<span ng-if="compareCoach(p)==7 && compareCourse(p)!=1">(迟到{{lateTime}}分钟,早退{{leaveTime}}分钟)</span>
+		          						</div>
+		          						<div class="row bianji" ng-if="show_modal">
+		          							<div class="col-md-4 col-xs-4 no-padder edit c-click single" ng-click="edit(p)">编辑</div>
+		          							<div class="col-md-4 col-xs-4 no-padder edit c-click single" ng-click="lookUser(p.appointments)">预约详情</div>
+		          							<div class="col-md-4 col-xs-4 no-padder edit c-click single" ng-click="cancel(p.plan_id)" ng-if="p.status!=0">取消</div>
+		          							<div class="col-md-4 col-xs-4 no-padder single" ng-if="p.status==0">已取消</div>
+		          						</div>
+	          						</div>
+	          					</div>
+          					</div>
+          				</div>
+          			</div>
+          			<div class="grey" id="grey-g"></div>
+          		</div>
+			</div>
+			<!--排课详情-->
+			<link type="text/css" rel="stylesheet" href="/static/manager/js/plugin/time/m-dist/bootstrap-clockpicker.min.css">
+			<link type="text/css" rel="stylesheet" href="/static/manager/js/plugin/time/m-time/css/github.min.css">
+			<script type="text/javascript" src="/static/manager/js/plugin/time/m-dist/bootstrap-clockpicker.min.js"></script>
+			<script type="text/javascript" src="/static/manager/js/plugin/time/m-time/js/highlight.min.js"></script>
+			<div class="rowCourse-dtl" ng-show="rowDtl.look">
+				<div class="rowCourse-dtl-cont">
+					<div class="rowCourse-dtl-top">
+						<div class="col-md-6 col-xs-6 padder-l-none">排课详情</div>
+						<div class="col-md-6 col-xs-6 text-right"><span ng-click="rowDtl.look=false">X</span></div>
+					</div>
+					<form class="form-horizontal row" style="padding: 10px 20px;">
+		                <div class="form-group">
+		                    <label class="col-md-2 col-xs-2 control-label padder-lr-none">日期：</label>
+		                    <div class="col-md-9 col-xs-9 padder-lr-none">
+		                    	<input class="form-control" type="text" data-field="date" ng-model="rowDtl.now_day" ng-change="load()">
+		                    </div>
+		                </div>
+		                <div class="form-group">
+		                    <label class="col-md-2 col-xs-2 control-label padder-lr-none">任课教练：</label>
+		                    <div class="col-md-9 col-xs-9 padder-lr-none">
+		                        <select class="form-control" ng-init="loadCoach()" ng-model="rowDtl.coach_user_id" ng-options="i.user_id as i.real_name for i in coachList" ng-change="loadGroup()">
+		                        	<option value="">选择教练</option>
+		                        </select>
+		                    </div>
+		                </div>
+		                <div class="form-group">
+		                    <label class="col-md-2 col-xs-2 control-label padder-lr-none">选择课程：</label>
+		                    <div class="col-md-9 col-xs-9 padder-lr-none">
+
+		                        <select class="form-control" ng-init="loadGroup()" ng-model="rowDtl.course_id" ng-options="i.course_id as i.course_name for i in groupList" ng-change="upTime()">
+		                        	<option value="">选择小团课</option>
+		                        </select>
+		                    </div>
+		                </div>
+		                <div class="form-group">
+		                    <label class="col-md-2 col-xs-2 control-label padder-lr-none">上课时间：</label>
+		                    <div class="col-md-9 col-xs-9 padder-lr-none">
+		                        <div class="col-md-5 col-xs-5 padder-lr-none">
+		                            <div class="input-group clockpicker">
+		                            	<input class="form-control" type="text" data-field="time" ng-model="rowDtl.start_time" ng-change="load()">
+						                <!-- <input selecttime type="text" class="form-control" ng-model="rowDtl.start_time">
+						                <span class="input-group-addon">
+						                    <span class="glyphicon glyphicon-time"></span>
+						                </span> -->
+						            </div>
+		                        </div>
+		                        <div class="col-md-offset-2 col-xs-offset-2 col-md-5 col-xs-5 padder-lr-none">
+		                            <input type="text" class="form-control" data-mask="99:99" ng-model="rowDtl.end_time" readonly="readonly" ng-change="verifyTime('end_time')">
+		                        </div>
+		                    </div>
+		                    <div class="col-md-12 col-xs-12 text-center m-t">根据课程时长自动显示结束时间</div>
+		                </div>
+		                <div class="form-group">
+		                    <label class="col-md-2 col-xs-2 control-label padder-lr-none">上课地点：</label>
+		                    <div class="col-md-9 col-xs-9 padder-lr-none">
+		                        <select class="form-control" ng-model="rowDtl.shop_id" ng-9nit="loadShop()" ng-options="i.shop_id as i.city + '-' + i.county + '-' +i.shop_name for i in shopList">
+
+		                        </select>
+		                    </div>
+		                </div>
+		                <div class="form-group">
+		                    <div class="col-md-offset-2 col-xs-offset-2">
+		                        <button class="save" ng-click="saveDtl()">保存</button>
+		                        <button class="cancel" ng-click="rowDtl.look=false">取消</button>
+		                    </div>
+		                </div>
+            		</form>
+				</div>
+			</div>
+			<div class="rowCourse-dtl" ng-if="users.show">
+				<div class="rowCourse-dtl-cont rowCourse-dtl-cont2">
+					<div class="rowCourse-dtl-top">
+						<div class="col-md-6 col-xs-6 padder-l-none">预约人数</div>
+						<div class="col-md-6 col-xs-6 text-right edit"><span ng-click="users.show=false">X</span></div>
+					</div>
+					<div class="users-top row text-center">
+						<div class="col-md-3 col-xs-3">头像</div>
+						<div class="col-md-3 col-xs-3">姓名</div>
+						<div class="col-md-3 col-xs-3">电话</div>
+						<div class="col-md-3 col-xs-3">到场时间</div>
+					</div>
+					<div class="users-cont text-center">
+						<div class="row" ng-repeat="i in users.list">
+							<div class="col-md-3 col-xs-3">
+								<!-- <div class="coach-img" ng-style="i.user.avatar | adaptBg"></div> -->
+								<img class="coach-img" ng-style="'uploads/'+i.user.avatar | adaptBg">
+							</div>
+							<div class="col-md-3 col-xs-3">{{i.user.real_name}}</div>
+							<div class="col-md-3 col-xs-3">{{i.user.phone}}</div>
+							<div class="col-md-3 col-xs-3" ng-if="i.sign==0">未进场</div>
+							<div class="col-md-3 col-xs-3" ng-if="i.sign!=0">{{i.sign_time}}</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="dtBox"></div>
+</div>

@@ -1,0 +1,231 @@
+<ion-view id="user-groCourse-dtl" style="background-color: #fff;" hide-nav-bar="true" ng-init="setDocumentTitle('精品团课详情')" ng-controller="userGroCourseDtlCtrl">
+	<ion-content class="user-scroll"  overflow-scroll="false" scrollbar-y="false" has-bouncing="true" delegate-handle="mainScroll">
+		<!--公共课详情-->
+		<div class="groCourse-content">
+			<div class="groCourse-img" ng-style="'uploads/'+groCourseDtl.course.cover | adaptBg"></div>
+			<div class="user-content">
+				<div class="course-name">
+					<div class="name">{{groCourseDtl.course.course_name}}</div>
+					<div class="appt-num"><span>预约满{{groCourseDtl.course.min_user}}人开课</span><span>累计参课{{groCourseDtl.course.signed}}人</span></div>
+				</div>
+				<div class="course-time row">
+			    <div class="col col-75">
+						<div class="time">
+							<span>时间</span>
+							<span>{{groCourseDtl.start_time | limitTo:10}}</span>
+							<span>{{groCourseDtl.start_time | limitTo:-8 | limitTo:5}}-{{groCourseDtl.end_time | limitTo:-8 | limitTo:5}}</span>
+						</div>
+						<div class="addr">
+							<span>地址</span>
+							<span>{{groCourseDtl.shop.address}}</span>
+						</div>
+			    </div>
+			    <div class="col col-25 addr-icon"><img class="icon" src="./static/mobilev2/images/location_icon.png" /></div>
+				</div>
+				<div class="coach row">
+					<div class="col col-75">
+						<div class="coach-name">{{groCourseDtl.coach_name}}</div>
+						<div class="coach-intro">{{groCourseDtl.coach.intro}}</div>
+			    </div>
+			    <div class="col col-25 coach-img"><img class="icon" ng-style="'uploads/'+groCourseDtl.coach.avatar | adaptBg" /></div>
+				</div>
+				<div class="course-dtl">
+					<div class="course-title primary-title">课程介绍</div>
+					<div class="course-intro">{{groCourseDtl.course.intro}}</div>
+					<div class="course-img" ng-repeat="i in groCourseDtl.course.images">
+						<img ng-src="uploads/{{i}}" />
+					</div>
+				</div>
+				<div class="course-appt-rules">
+					<div class="row primary-title">
+						<div class="col col-70">
+							<div class="rules-txt">约课规则</div>
+						</div>
+						<div class="col col-30 t-r rules-btn" ng-click="goRules(groCourseDtl.plan_id)">规则详情</div>
+					</div>
+					<div><img src="./static/mobilev2/images/comcourse_img1.png" /></div>
+					<div class="secondary-title">官方发起课程取消</div>
+					<div class="specific-txt">课程开始前60分钟预约会员不足该课程最小开课人数时，后台系统会自动取消课程，请大家知悉，谢谢您的理解与配合；若开课后到场会员不足该课程最小开课人数，在征得您同意的情况下，教练可现场取消课程。</div>
+				</div>
+				<div class="discuss">
+					<div class="course-title primary-title discuss-title">会员评价</div>
+					<div class="discuss-list" ng-repeat="i in courseComment" ng-init="stars=getStars(i.rate)">
+						<div class="comment-line1">
+							<div class="head-icon"><img ng-style="'uploads/'+i.avatar | adaptBg" /></div>
+							<div class="comment-title">
+								<span class="user-name">{{i.real_name}}</span>
+								<img class="stars" ng-repeat="j in stars" src="./static/mobilev2/images/star_icon.png" />
+								<span class="f-r shop-name">{{i.shop_name}}</span>
+							</div>
+							<div class="comment-time">{{i.create_time | limitTo:10}}</div>
+						</div>
+						<div class="comment-line2">{{i.content}}</div>
+					</div>
+				</div>
+				<div class="comment-more" ng-hide="courseComment.page_no == commentList.total_pages || commentList.total_pages == 0" ng-click="moreComment()">
+					共{{commentList.total_results}}条评价
+					<img class="click-more" src="./static/mobilev2/images/down_icon.png" />
+				</div>
+				<div class="t-c no-comment" ng-if="commentList.total_results == 0">暂时没有该课程的评价</div>
+			</div>
+		</div>
+		<style>
+			/*对话框样式*/
+			.tc .popup{
+				width: 6.213rem !important;
+				padding: 0 !important;
+				background-color: #fff !important;
+				border-radius: 0.107rem;
+			}
+			.tc .popup .popup-head {
+		    padding: 0.533rem 0 !important;
+		    border: none !important;
+		    color: #323232;
+			}
+			[data-dpr="1"] .tc .popup .popup-head {
+		    font-size: 16px;
+			}
+			[data-dpr="2"] .tc .popup .popup-head {
+		    font-size: 32px;
+			}
+			[data-dpr="3"] .tc .popup .popup-head {
+		    font-size: 48px;
+			}
+			.tc .popup .popup-body {
+		    padding: 0 0.32rem 0.533rem 0.32rem !important;
+		    overflow: auto;
+		    color: #545556;
+			}
+			[data-dpr="1"] .tc .popup .popup-body {
+		    font-size: 14px;
+			}
+			[data-dpr="2"] .tc .popup .popup-body {
+		    font-size: 28px;
+			}
+			[data-dpr="3"] .tc .popup .popup-body {
+		    font-size: 42px;
+			}
+			.tc .popup .popup-buttons {
+				padding: 0 !important;
+				height: 0.88rem !important;
+				min-height: 0.88rem !important;
+
+			}
+			.tc .popup .popup-buttons .button {
+		    min-height: 1.067rem !important;
+			}
+			.tc .popup .button:after {
+		    position: absolute;
+		    top: 0 !important;
+		    right: 0 !important;
+		    bottom: 0 !important;
+		    left: 0 !important;
+			}
+			.tc .popup .popup-buttons .button {
+		    margin-right: 0 !important; 
+		    background-color: #fff;
+		    border-radius: 0 !important;
+		    border-width: 0 !important;
+    		border-style: solid;
+			}
+			[data-dpr="1"] .tc .popup .popup-buttons .button {
+		    font-size: 14px;
+			}
+			[data-dpr="2"] .tc .popup .popup-buttons .button {
+		    font-size: 28px;
+			}
+			[data-dpr="3"] .tc .popup .popup-buttons .button {
+		    font-size: 42px;
+			}
+			.tc .popup .button.button-default{
+				border-bottom-left-radius: 0.107rem !important;
+				border-top: 1px solid #f4f4f4 !important;
+				color: #cdcdd3;
+			}
+			.tc .popup .button.button-positive {
+		    border-color: transparent;
+		    background-color: #ff9d35;
+		    color: #fff;
+		    border-bottom-right-radius: 0.107rem !important;
+			}
+		</style>
+	</ion-content>
+	<script id="templates/modal.html" type="text/ng-template">
+    <ion-modal-view>
+      <ion-content id="buyGroCourse-model" has-bouncing="false">
+				<div class="mwq-content-course">
+					<div class="dtl-padder">
+						<div class="course-dtl">
+							<div class="course-txt">
+		        		<div class="course-price">
+		        			<button class="price c-orange">￥{{groCourseDtl.course.price}}</button>
+		        		</div>
+		        		<div class="course-ins c-32">已选：{{groCourseDtl.course.course_name}}*{{groCourseDtl.min_count}}次</div>
+		        		<div class="course-time c-9b">该课程{{groCourseDtl.course.expire_day}}天内有效</div>
+		        	</div>
+		        	<div class="course-close" ng-click="closeModal()"><img src="./static/mobilev2/images/close_icon.png" alt=""></div>
+						</div>
+						<div class="course-name">
+							<!-- <button class="first" ng-click="chooseNum(groCourseDtl.min_count)">{{groCourseDtl.course.course_name}}*{{groCourseDtl.min_count}}次</button>
+							<button class="second" ng-click="chooseNum(0)">{{groCourseDtl.course.course_name}}*1次体验课</button> -->
+							<button class="first c-orange">{{groCourseDtl.course.course_name}}*{{groCourseDtl.min_count}}次</button>
+						</div>
+					</div>
+					<div class="order-submit">提交订单</div>	
+				</div>
+      </ion-content>
+    </ion-modal-view>
+  </script>
+	<style>
+    .modal {
+      display: block;
+      position: absolute;
+      top: 0;
+      z-index: 10;
+      overflow: hidden;
+      min-height: 100%;
+      width: 100%;
+      background-color: rgba(0,0,0,0.3);
+    }
+    #buyGroCourse-model{
+	    background: rgba(0,0,0,0) !important;
+    }
+    #buyGroCourse-model .scroll{
+    	height: 100%;
+    }
+    .mwq-content-course{
+    	background: #fff;
+    	width: 100%;
+    	height: 7.12rem;
+    	position: absolute;
+    	bottom: 0;
+    }
+    .modal-backdrop {
+	    position: fixed;
+	    top: 0;
+	    right: 0;
+	    bottom: 0;
+	    left: 0;
+	    z-index: 1040;
+	    background-color: rgba(0,0,0,0);
+		}
+	</style>
+	<ion-footer-bar id="footer-btn" class="no-padder">
+		<div class="groCourse-btn row row-l row-r">
+	  	<div class="col col-60 schedule">
+  			<div class="appt-record">已约{{groCourseDtl.user_count}}/{{groCourseDtl.max_count}}</div>
+	  		<div class="progress">
+					<div class="progress-bar" style="width:{{progressBar}}; background:#ff9d35;"></div>
+				</div>
+	  	</div>
+	  	<div class="col col-40">
+				<div class="groCourse-btn-buy" ng-click="save()">立即预约</div>
+	  	</div>
+	  </div>
+	</ion-footer-bar>
+</ion-view>
+
+
+
+
+

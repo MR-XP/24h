@@ -1,0 +1,59 @@
+<ion-view class="hx-page" style="background-color: #fff" hide-nav-bar="true" ng-init="setDocumentTitle('我的优惠劵')" ng-controller="myCouponCtrl">
+
+    <ion-content overflow-scroll="true" scrollbar-y="false" has-bouncing="true" delegate-handle="mainScroll">
+		
+		<div class="coupon-mode" ng-if="info.length>0">
+
+			<ion-slide-box does-continue="false" show-pager="true" slide-interval="2000" on-slide-changed="getId($index)"> 
+			
+				<ion-slide ng-repeat="i in info" class="coupon-slide">
+					
+					<div class="coupon-bar" ng-style="'uploads/'+i.cover | adaptBg">
+						<div class="coupon-name">优惠劵</div>
+						<div class="coupon-txt">{{i.coupon_name}}</div>
+						<div class="coupon-money" ng-if="i.type==1">{{i.discount_value * 100}}<span>%</span></div>
+						<div class="coupon-money" ng-if="i.type==2"><span>￥</span>{{i.discount_value}}</div>
+						<div class="coupon-term">过期时间  {{i.expire_time}}</div>
+					</div>
+					
+				</ion-slide>
+				
+			</ion-slide-box>
+		
+			<div class="coupon-des">
+				1.优惠劵请在有效期内使用，逾期自动失效，请务必在
+				有效期内使用。<br />
+				2.优惠劵可用于购买会员卡或私教课，但必须大于该优
+				惠劵的价格。<br />
+				3.使用优惠劵购买会员卡或私教课时不能参与送优
+				惠劵活动。<br />
+				<span ng-if="coupon.is_give==1">4.可将优惠劵赠与他人。</span>
+			</div>
+			
+			<div class="qcyd-btn qcyd-btn-large" ng-click="location('users/coach-list')">立即使用</div>
+			<div class="coupon-give" ng-if="coupon.is_give==1" ng-click="give.show=true">赠与好友</div>
+			
+			<div class="my-card-mode" ng-if="coupon.is_give==1 && give.show">
+				<input class="setipt" type="tel" maxlength="11" ng-model="give.phone" />
+				<div class="my-card-btn">
+					<a href="javascript:;" ng-click="save()">提交</a>
+				</div>
+			</div>
+			
+		</div>
+		
+		<div class="tc c-9 m-t-30" ng-if="!info || info.length==0">您还没有优惠劵呢！</div>
+		<div class="my-card-mode" ng-if="!info || info.length==0">
+			<div class="my-card-btn">
+				<a href="#/users/card-list">去逛逛</a>
+			</div>
+		</div>
+		
+    </ion-content>
+
+</ion-view>
+
+
+
+
+

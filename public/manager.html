@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en" data-ng-app="app">
+    <head>
+        <meta charset="utf-8" />
+        <title>24H--管理后台</title>
+        <meta name="description" content="app, web app, responsive, responsive layout, admin, admin panel, admin dashboard, flat, flat ui, ui kit, AngularJS, ui route, charts, widgets, components" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+        <link rel="stylesheet" href="/static/manager/css/bootstrap.css" type="text/css" />
+        <link rel="stylesheet" href="/static/manager/css/animate.css" type="text/css" />
+        <link rel="stylesheet" href="/static/manager/css/font-awesome.min.css" type="text/css" />
+        <link rel="stylesheet" href="/static/manager/css/bootstrap-fileinput.css" type="text/css" />
+        <link rel="stylesheet" href="/static/manager/css/simple-line-icons.css" type="text/css" />
+        <link rel="stylesheet" href="/static/manager/css/app.css" type="text/css" />
+        <link rel="stylesheet" href="/static/manager/css/mwq.css" type="text/css" />
+        <link rel="stylesheet" href="/static/manager/css/xp.css" type="text/css" />
+
+        <link type="text/css" rel="stylesheet" href="/static/manager/js/plugin/summernote/summernote.css">
+
+        <script>
+
+            window.user = {$user};
+            window.nodes = {$nodes};
+            window.node_ids = {$node_ids};
+            window.rules = {$rules};  //所有节点
+            window.base_url = '{$base_url}';
+            window.static_domain = '{$static_domain}';
+            window.memberID = '';
+
+        </script>
+
+    </head>
+    <body ng-controller="AppCtrl">
+        <div class="app" id="app" ng-class="{'app-header-fixed':app.settings.headerFixed, 'app-aside-fixed':app.settings.asideFixed, 'app-aside-folded':app.settings.asideFolded, 'app-aside-dock':app.settings.asideDock, 'container':app.settings.container}" ui-view></div>
+
+
+        <!-- jQuery -->
+        <script src="/static/manager/vendor/jquery/jquery.min.js"></script>
+
+        <!-- Angular -->
+        <script src="/static/manager/vendor/angular/angular.js"></script>
+        <script src="/static/manager/vendor/angular/angular-animate/angular-animate.js"></script>
+        <script src="/static/manager/vendor/angular/angular-cookies/angular-cookies.js"></script>
+        <script src="/static/manager/vendor/angular/angular-resource/angular-resource.js"></script>
+        <script src="/static/manager/vendor/angular/angular-sanitize/angular-sanitize.js"></script>
+        <script src="/static/manager/vendor/angular/angular-touch/angular-touch.js"></script>
+        <!-- Vendor -->
+        <script src="/static/manager/vendor/angular/angular-ui-router/angular-ui-router.js"></script>
+        <script src="/static/manager/vendor/angular/ngstorage/ngStorage.js"></script>
+        <!-- App -->
+        <script src="/static/manager/js/app.js"></script>
+        <script src="/static/manager/js/config.js"></script>
+        <script src="/static/manager/js/config.lazyload.js"></script>
+        <script src="/static/manager/js/config.router.js"></script>
+        <script src="/static/manager/js/main.js"></script>
+        <script src="/static/manager/js/services/ui-load.js"></script>
+        <script src="/static/manager/js/services/ui-services.js"></script>
+        <script src="/static/manager/js/filters/fromNow.js"></script>
+
+        <script src="/static/manager/js/directives/setnganimate.js"></script>
+        <script src="/static/manager/js/directives/ui-butterbar.js"></script>
+        <script src="/static/manager/js/directives/ui-focus.js"></script>
+        <script src="/static/manager/js/directives/ui-fullscreen.js"></script>
+        <script src="/static/manager/js/directives/ui-jq.js"></script>
+        <script src="/static/manager/js/directives/ui-module.js"></script>
+        <script src="/static/manager/js/directives/ui-nav.js"></script>
+        <script src="/static/manager/js/directives/ui-scroll.js"></script>
+        <script src="/static/manager/js/directives/ui-shift.js"></script>
+        <script src="/static/manager/js/directives/ui-toggleclass.js"></script>
+        <script src="/static/manager/js/directives/ui-validate.js"></script>
+
+
+        <script src="/static/manager/js/controllers/bootstrap.js"></script>
+        <!-- bootstrap -->
+        <script src="/static/manager/vendor/angular/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+        <script type="text/javascript">
+            var app = angular.module('ui.bootstrap.carousel',['ui.bootstrap.transition']);
+            app.controller('CarouselController',['$scope','$timeout','$transition',function($scope,$timeout,$transition){
+
+            }]);
+            app.directive('carousel',[function(){
+                return {
+
+                }
+            }]);
+        </script>
+        <!-- lazyload -->
+        <script src="/static/manager/vendor/angular/oclazyload/ocLazyLoad.js"></script>
+        <!-- translate -->
+        <script src="/static/manager/vendor/angular/angular-translate/angular-translate.js"></script>
+        <script src="/static/manager/vendor/angular/angular-translate/loader-static-files.js"></script>
+        <script src="/static/manager/vendor/angular/angular-translate/storage-cookie.js"></script>
+        <script src="/static/manager/vendor/angular/angular-translate/storage-local.js"></script>
+        <script src="/static/manager/vendor/bootstrap/js/bootstrap.min.js"></script>
+
+        <!-- App -->
+        <script src="/static/manager/js/app.js"></script>
+        <script src="/static/manager/js/config.js"></script>
+        <script src="/static/manager/js/config.lazyload.js"></script>
+        <script src="/static/manager/js/config.router.js"></script>
+        <script src="/static/manager/js/main.js"></script>
+        <script src="/static/manager/js/services/ui-load.js"></script>
+        <script src="/static/manager/js/services/ui-store.js"></script>
+        <script src="/static/manager/js/services/ui-services.js"></script>
+        <script src="/static/manager/js/services/public.js"></script>
+        <script src="/static/manager/js/filters/fromNow.js"></script>
+        <script src="/static/manager/js/directives/setnganimate.js"></script>
+        <script src="/static/manager/js/directives/ui-butterbar.js"></script>
+        <script src="/static/manager/js/directives/ui-focus.js"></script>
+        <script src="/static/manager/js/directives/ui-fullscreen.js"></script>
+        <script src="/static/manager/js/directives/ui-jq.js"></script>
+        <script src="/static/manager/js/directives/ui-module.js"></script>
+        <script src="/static/manager/js/directives/ui-nav.js"></script>
+        <script src="/static/manager/js/directives/ui-scroll.js"></script>
+        <script src="/static/manager/js/directives/ui-shift.js"></script>
+        <script src="/static/manager/js/directives/ui-toggleclass.js"></script>
+        <script src="/static/manager/js/directives/ui-validate.js"></script>
+
+        <script src="/static/manager/js/controllers/bootstrap.js"></script>
+
+        <script type="text/javascript" src="/static/manager/js/plugin/summernote/summernote.min.js"></script>
+        <script type="text/javascript" src="/static/manager/js/plugin/summernote/lang/summernote-zh-CN.js"></script>
+        <script type="text/javascript" src="/static/manager/js/plugin/bootstrap-fileinput.js"></script>
+        <script type="text/javascript" src="/static/manager/js/plugin/layer/layer.js"></script>
+
+
+        <!-- 自定义指令 -->
+        <script src="/static/manager/js/directives/public.js"></script>
+
+        <!-- Lazy loading -->
+
+        <!--百度地图-->
+        <script src="http://api.map.baidu.com/api?v=1.5&services=false&ak=5202126d38c010ca90e79bd0f5d25b14"></script>
+
+        <script src="/static/manager/js/filters/public.js"></script>
+
+
+        <link type="text/css" rel="stylesheet" href="/static/manager/js/plugin/datetimepicker/DateTimePicker.css">
+        <script type="text/javascript" src="/static/manager/js/plugin/datetimepicker/DateTimePicker.js"></script>
+        <script type="text/javascript" src="/static/manager/js/plugin/datetimepicker/i18n/DateTimePicker-i18n.js"></script>
+
+
+        <!-- 上传图片 -->
+        <link type="text/css" rel="stylesheet" href="/static/manager/js/plugin/cropper/cropper.min.css">
+        <script type="text/javascript" src="/static/manager/js/plugin/cropper/cropper.js"></script>
+        <link type="text/css" rel="stylesheet" href="/static/manager/js/plugin/cropper/sitelogo.css">
+        <script type="text/javascript" src="/static/manager/js/plugin/cropper/html2canvas.min.js"></script>
+        <script type="text/javascript" src="/static/manager/js/plugin/font_icon/iconfont.js"></script>
+        <link type="text/css" rel="stylesheet" href="/static/manager/js/plugin/font_icon/iconfont.css">
+
+        <!-- 统计echarts引入 -->
+        <script type="text/javascript" src="/static/manager/js/plugin/echarts.js"></script>
+
+        <!-- 省市区三级联动加载 -->
+        <script type="text/javascript" src="/static/manager/js/plugin/area.js"></script>
+
+    </body>
+</html>

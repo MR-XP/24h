@@ -1,0 +1,118 @@
+<div class="statistica-commission statistica general " ng-controller="statisticaCommissionController">
+	<div class="top row">
+		<div class="weizhi">
+			<div class="m-b-sm col-md-6 col-xs-6 no-padder">
+				您当前的位置：
+				<span class="c-orange font-bold">{{txt}}</span>
+				<span class="c-orange font-bold" ng-show="commissionList.shop_name!=null">- {{commissionList.shop_name}}</span>
+				<span class="c-orange font-bold" ng-show="commissionList.shop_name==null || commissionList.shop_name=='null' ">- 所有场馆</span>
+			</div>
+			<div class="m-b-sm col-md-6 col-xs-6 no-padder fanhui edit-w" ng-click="go()">返回</div>
+		</div>
+		<div class="select">
+			<div class="m-select">
+				<select ng-model="parmList.user_type" ng-change="load()">
+					<option value="0">所有</option>
+					<option value="1">教练</option>
+					<option value="2">会籍</option>
+					<option value="3">管家</option>
+				</select>
+			</div>
+			<div class="m-select">
+				<div class="separator-1">
+					<input type="text" data-field="date" data-format="MM-yyyy" readonly ng-model="parmList.myMonth" ng-change="load()" placeholder="选择其它月份">
+				</div>
+			</div>
+			<div class="m-select">
+	            <select class="form-control" ng-model="parmListShop.province" ng-options="key as key for (key,value) in area"  data-tap-disabled="true" ng-change="getShopList()">
+	                <option value="">选择省份</option>
+	            </select>
+	        </div>
+	        <div class="m-select">
+	            <select class="form-control" ng-model="parmListShop.city" ng-options="key as key for (key,value) in area[parmListShop.province]" ng-change="getShopList()"  data-tap-disabled="true">
+	                <option value="">选择市</option>
+	            </select>
+	        </div>
+	        <div class="m-select">
+	            <select class="form-control" ng-model="parmListShop.county" ng-options="value as value for value in area[parmListShop.province][parmListShop.city]"  data-tap-disabled="true" ng-change="getShopList()">
+	                <option value="">选择区/县</option>
+	            </select>
+	        </div>
+	        <div class="m-select">
+	            <select class="form-control" ng-model="parmList.shop_id" ng-options="v.shop_id as v.shop_name for v in shopList" ng-change="load()">
+	                <option value="">选择场馆</option>
+	            </select>
+	        </div>
+		</div>
+	</div>
+	<div class="content">
+		<div class="box row">
+			<div class="list row">
+				<div class="col-md-2 col-xs-2 m-box no-padder single">头像</div>
+				<div class="col-md-2 col-xs-2 m-box no-padder single">员工姓名</div>
+				<div class="col-md-2 col-xs-2 m-box no-padder single">性别</div>
+				<div class="col-md-2 col-xs-2 m-box no-padder single">总销量/总耗课量(元)</div>
+				<div class="col-md-2 col-xs-2 m-box no-padder single">员工总提成(元)</div>
+				<div class="col-md-2 col-xs-2 m-box no-padder single">场馆收入(元)</div>
+			</div>
+			<div class="list-details tankuang" ng-repeat="v in commissionList.list">
+				<div class="col-md-2 col-xs-2 m-box no-padder single touxiang">
+					<img ng-style="'uploads/'+v.avatar | adaptBg">
+				</div>
+				<div class="col-md-2 col-xs-2 m-box no-padder single">{{v.real_name}}</div>
+				<div class="col-md-2 col-xs-2 m-box no-padder single">{{v.sex_text}}</div>
+				<div class="col-md-2 col-xs-2 m-box no-padder single">{{::v.sales_card_value+v.sales_course_value}}</div>
+				<div class="col-md-2 col-xs-2 m-box no-padder single c-click edit" data-toggle="modal" data-target="#myModal" data-backdrop="static" ng-click="goTime(v)">{{v.total_value}}</div>
+				<div class="col-md-2 col-xs-2 m-box no-padder single">{{::v.sales_card_value+v.sales_course_value-v.total_value}}</div>
+			</div>
+		</div>
+		<div class="page-footer">
+			<div class="pull-left col-md-6 col-xs-6 no-padder text-left">
+				<span class="text-sm">共{{commissionList.total_results}}条记录，共{{commissionList.total_pages}}页，</span>
+				<span class="text-sm">当前显示第{{commissionList.page_no}}页，</span>
+				<span class="text-sm">每页显示{{commissionList.page_size}}条</span>
+			</div>
+        	<div class="col-md-6 col-xs-6 no-padder text-right">
+        		<pagination total-items="commissionList.total_results" ng-model="parmList.page_no" max-size="maxSize" class="pagination-sm m-t-none m-b" boundary-links="true" rotate="false" num-pages="commissionList.page_size" ng-click="pages()" items-per-page="commissionList.page_size"></pagination>
+        	</div>
+		</div>
+	</div>
+	<div id="dtBox-1"></div>
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	  	<div class="modal-dialog" role="document">
+	   		<div class="modal-content">
+	    		<div class="modal-header">
+			        <div class="row">
+	        			<div class="col-md-3 col-xs-3 text-center">会员头像</div>
+	        			<div class="col-md-3 col-xs-3 text-center">昵称</div>
+	        			<div class="col-md-3 col-xs-3 text-center single">耗课/购卡/售课</div>
+	        			<div class="col-md-3 col-xs-3 text-center">价格</div>
+	        		</div>
+			    </div>
+	      		<div class="modal-body">
+	        		<div class="row shuju" ng-repeat="p in xqCardList">
+	        			<div class="col-md-3 col-xs-3 text-center single touxiang"><img ng-src="/uploads/{{p.avatar}}" alt=""></div>
+	        			<div class="col-md-3 col-xs-3 text-center single">{{p.real_name}}</div>
+	        			<div class="col-md-3 col-xs-3 text-center single">{{p.product_info}}</div>
+	        			<div class="col-md-3 col-xs-3 text-center single">{{p.price}}</div>
+	        		</div>
+	        		<div class="row shuju" ng-repeat="v in xqCourseList">
+	        			<div class="col-md-3 col-xs-3 text-center single touxiang"><img ng-src="/uploads/{{v.avatar}}" alt=""></div>
+	        			<div class="col-md-3 col-xs-3 text-center single">{{v.real_name}}</div>
+	        			<div class="col-md-3 col-xs-3 text-center single">{{v.product_info}}</div>
+	        			<div class="col-md-3 col-xs-3 text-center single">{{v.price}}</div>
+	        		</div>
+	        		<div class="row shuju" ng-repeat="k in xqUsedCourseList">
+	        			<div class="col-md-3 col-xs-3 text-center single touxiang"><img ng-src="/uploads/{{k.avatar}}" alt=""></div>
+	        			<div class="col-md-3 col-xs-3 text-center single">{{k.real_name}}</div>
+	        			<div class="col-md-3 col-xs-3 text-center single">{{k.course_name}}</div>
+	        			<div class="col-md-3 col-xs-3 text-center single">{{k.price}}</div>
+	        		</div>
+	      		</div>
+	      		<div class="modal-footer">
+	        		<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+	      		</div>
+	    	</div>
+	  	</div>
+	</div>
+</div>

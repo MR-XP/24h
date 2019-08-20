@@ -1,0 +1,258 @@
+<script type="text/javascript">
+
+	app.controller('navController', ['$scope','$location',
+							function($scope,$location) {
+
+		//导航图标
+		$scope.loadIcon=function(tit){
+
+			switch(tit){
+
+				//阿里图标
+				case '老板统计':
+				return 'icon-tongji iconfont';
+				break;
+				case '权限管理':
+				return 'icon-quanxian iconfont';
+				break;
+				case '会员管理':
+				return 'icon-huiyuan iconfont';
+				break;
+				case '会员卡':
+				return 'icon-huiyuanka iconfont';
+				break;
+				case '教练':
+				return 'icon-jiaolianfengcai iconfont';
+				break;
+				case '课程管理':
+				return 'icon-kecheng iconfont';
+				break;
+				case '排课管理':
+				return 'icon-paike iconfont';
+				break;
+				case '商户设置':
+				return 'icon-shangdian iconfont';
+				break;
+				case '订单管理':
+				return 'icon-dingdan iconfont';
+				break;
+				case '优惠券':
+				return 'icon-youhuiquan iconfont';
+				break;
+/*				case '财务统计':
+				return 'icon-caiwutongji iconfont';
+				break;*/
+				case '销售人员':
+				return 'icon-xiaoshou iconfont';
+				break;
+				case '活动竞猜':
+				return 'icon-jingcai iconfont';
+				break;
+
+			}
+
+		}
+
+		//导航地址
+		$scope.loadUrl=function(tit){
+
+			switch(tit){
+
+				case '老板统计':			//一级导航
+				return 'app.index';
+				break;
+				case '会员管理':			//一级导航
+				return 'app.member';
+				break;
+				case '会员卡':			//一级导航
+				return 'app.clubcard';
+				break;
+				case '优惠券':			//一级导航
+				return 'app.coupon';
+				break;
+				case '课程管理':			//一级导航
+				return 'app.course';
+				break;
+				case '排课管理':			//一级导航
+				return 'app.plan';
+				break;
+/*				case '财务统计':			//一级导航
+				return 'app.financial';
+				break;*/
+				case '销售人员':			//一级导航
+				return 'app.sales';
+				break;
+				case '活动竞猜':			//一级导航
+				return 'app.activity';
+				break;
+
+				//教练下二级导航
+				case '管理教练':
+				return 'app.coach';
+				break;
+				case '教练申请列表':
+				return 'app.apply';
+				break;
+
+				//订单管理下二级导航
+				case '订单列表':
+				return 'app.order';
+				break;
+				case '代购列表':
+				return 'app.audit';
+				break;
+
+
+				//权限管理下二级导航
+				case '用户管理':
+				return 'app.user';
+				break;
+				case '用户组管理':
+				return 'app.permissions';
+				break;
+
+				//商户设置下二级导航
+				case '店铺列表':
+				return 'app.store';
+				break;
+				case '获取分区':
+				return 'app.partition';
+				break;
+
+			}
+
+		}
+
+		//遍历
+		$scope.navList=[];
+	    $scope.ego=function(){
+
+	    	//一级导航
+	    	for(var i=0;i<$scope.ruleList.length;i++){
+
+	    		//二级导航
+	    		for(var j=0;j<$scope.ruleList[i].child.length;j++){
+
+
+					if($.inArray($scope.ruleList[i].child[j].id,$scope.rules)!=-1){
+
+	    				$scope.navList.push({
+
+	    					title	:	$scope.ruleList[i].child[j].title,
+	    					urll	:	$scope.loadUrl($scope.ruleList[i].child[j].title),
+	    					icon	:	$scope.loadIcon($scope.ruleList[i].child[j].title),
+	    					child	:	[]
+
+	    				})
+
+						//三级导航
+		    			for(var k=0;k<$scope.ruleList[i].child[j].child.length;k++){
+
+
+		    				if($.inArray($scope.ruleList[i].child[j].child[k].id,$scope.rules)!=-1){
+
+								for(var q=0;q<$scope.navList.length;q++){
+
+									if($scope.navList[q]['title']==$scope.ruleList[i].child[j].title){
+
+										$scope.navList[q].child.push({
+
+				    						title	:	$scope.ruleList[i].child[j].child[k].title,
+					    					urll	:	$scope.loadUrl($scope.ruleList[i].child[j].child[k].title),
+					    					icon	:	'',
+					    					child	:	[]
+
+			    						})
+									}
+
+								}
+
+
+
+
+		    				}
+
+		    			}
+	    			}
+
+
+
+	    		}
+
+	    	}
+	    }
+
+		//获取到值
+		$scope.rules=[];
+		$scope.load=function(){
+
+			//自身节点
+		    for(var i=0;i<window.node_ids.length;i++){
+		    	$scope.rules.push(parseInt(window.node_ids[i]))
+		    }
+
+			//所有节点
+			$scope.ruleList=window.rules;
+		    $scope.ego()
+
+		}
+		$scope.load()
+
+	}]);
+
+</script>
+<!-- list -->
+<ul class="nav m-nav" ng-controller="navController">
+
+	<li class="yiji" nav ng-repeat="nav in navList" ng-if="nav.icon">
+
+		<a ng-if="!nav.urll" class="auto">
+
+	      <span ng-if="!nav.urll" class="pull-right text-muted">
+	        <i class="fa fa-fw fa-angle-right text"></i>
+	        <i class="fa fa-fw fa-angle-down text-active"></i>
+	      </span>
+
+	      <i class="{{nav.icon}} icon"></i>
+	      <span>{{nav.title}}</span>
+	    </a>
+
+	    <a ng-if="nav.urll" ui-sref="{{nav.urll}}" class="auto">
+
+	      <i class="{{nav.icon}} icon"></i>
+	      <span>{{nav.title}}</span>
+
+	    </a>
+
+	    <ul ng-if="!nav.urll" class="nav nav-sub dk">
+
+		    <li ui-sref-active="active" ng-repeat="sub in nav.child" ng-if="sub.urll">
+
+		        <a ui-sref="{{sub.urll}}">
+
+		          <span>{{sub.title}}</span>
+
+		        </a>
+
+		    </li>
+
+	    </ul>
+
+    </li>
+<style>
+	.nav i{
+		font-size: 22px !important;
+	}
+	.nav i.icon-huiyuanqia1{
+		font-size: 20px !important;
+	}
+	.navi ul.nav li a{
+		padding: 13px 20px !important;
+	}
+	.navi ul.nav li li a{
+		padding-left: 55px !important;
+		font-size: 14px;
+	}
+</style>
+
+<!-- / list -->

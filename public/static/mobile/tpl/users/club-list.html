@@ -1,0 +1,60 @@
+<ion-view class="hx-page" style="background-color: #fff;" hide-nav-bar="true" ng-init="setDocumentTitle('场馆列表')" ng-controller="clubListCtrl">
+	
+	<ion-header-bar class="header-80 p-rel">
+		
+		<!--场馆选择-->
+		<div class="club-header" ng-click="showCity()">
+			
+			<img ng-src="static/mobile/img/icon/map-city.png">
+			{{userLoc.province}}-{{ userLoc.city == userLoc.province ? '主城区':userLoc.city}}
+			
+		</div>
+		
+		<div class="people-mode">
+			<div>共{{shop.list.length}}家店</div>
+		</div>
+	
+    </ion-header-bar>
+    
+	<ion-content class="hx-cont-noBtm" overflow-scroll="false" scrollbar-y="false" has-bouncing="true">
+
+		<div class="hx-pd">
+			
+			<div class="club-li" ng-repeat="i in shop.list" ng-click="go(i.shop_id)">
+				<div class="club-img" ng-style="'uploads/'+i.cover | adaptBg"></div>
+				<div class="club-name">{{i.shop_name}}</div>
+				<div class="club-add">{{i.address}}</div>
+				<div class="club-square" ng-if="i.juli!=0">距离{{radius=i.juli * 0.001 | limitTo:6}}公里</div>
+				<i class="icon ion-ios-arrow-right"></i>
+			</div>
+			
+		</div>
+
+	</ion-content>
+	
+	<!--城市menu-->
+	<div loadcity class="region-mode">
+		
+		<div class="region-tit">
+			选择城市
+			<div class="region-close" ng-click="closeCity()">
+				<div></div>
+			</div>
+		</div>
+		
+		<div class="region-cont">
+			
+			<div class="region-nav" ng-repeat="i in citys" type="0" ng-click="getProvince(i.province,$index,i.child[0].city)">
+				
+				<div class="region-nav-tit" ng-class='{"c-red" : i.province == userLoc.province}'>{{i.province}}</div>
+				<div class="region-snav">
+					<div ng-repeat="p in i.child" ng-class='{"c-red" : p.city == userLoc.city}'  ng-click="getCity(p.city,true)">{{ p.city == i.province ? '主城区':p.city}}</div>
+				</div>
+				
+			</div>
+			
+		</div>
+		
+	</div>
+	
+</ion-view>

@@ -1,0 +1,70 @@
+<div class="statistica-sign statistica general " ng-controller="statisticaSignController">
+	<div class="top row">
+		<div class="weizhi">
+			<div class="m-b-sm col-md-6 col-xs-6 no-padder">您当前的位置：<span class="c-orange font-bold">{{txt}}</span></div>
+			<div class="m-b-sm col-md-6 col-xs-6 no-padder fanhui edit-w" ng-click="go()">返回</div>
+		</div>
+		<div class="screening row">
+			<div class="select">
+				<div class="m-select">
+					<select ng-options="k.shop_id as k.shop_name for k in newStoreList.list" ng-model="parmList.shop_id" ng-change="load()">
+						<option value="">选择场馆</option>
+					</select>
+				</div>
+				<div class="m-select">
+					<select ng-model="parmList.order" ng-change="load()">
+						<option value="a.pay_time asc">支付时间升序</option>
+						<option value="a.pay_time desc">支付时间降序</option>
+						<option value="a.price asc">价格升序</option>
+						<option value="a.price desc">价格降序</option>
+					</select>
+				</div>
+				<div class="m-select">
+					<input type="text" placeholder="请输入手机号查找" ng-model="parmList.phone" ng-change="load()">
+				</div>
+				<div class="m-select">
+					<span class="time">开始时间</span>
+					<input type="text" data-field="datetime" ng-model="parmList.start_time" ng-change="load()" readonly>
+				</div>
+				<div class="m-select">
+					<span class="time">结束时间</span>
+					<input type="text" data-field="datetime" ng-model="parmList.end_time" ng-change="load()" readonly>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="content">
+		<div class="box row">
+			<div class="list row">
+				<div class="col-md-2 col-xs-2 m-box no-padder">头像</div>
+				<div class="col-md-2 col-xs-2 m-box no-padder">会员名</div>
+				<div class="col-md-2 col-xs-2 m-box no-padder">电话</div>
+				<div class="col-md-2 col-xs-2 m-box no-padder">入场时间</div>
+				<div class="col-md-2 col-xs-2 m-box no-padder">离场时间</div>
+				<div class="col-md-2 col-xs-2 m-box no-padder">锻炼时长</div>
+			</div>
+			<div class="list-details" ng-repeat="i in statisticaSignList.list" ng-init="nowTime=setTime(i.sign_time,i.out_time)">
+				<div class="col-md-2 col-xs-2 m-box no-padder touxiang">
+					<img ng-style="'uploads/'+i.avatar | adaptBg">
+				</div>
+				<div class="col-md-2 col-xs-2 m-box no-padder">{{i.real_name}}</div>
+				<div class="col-md-2 col-xs-2 m-box no-padder">{{i.phone}}</div>
+				<div class="col-md-2 col-xs-2 m-box no-padder">{{i.sign_time}}</div>
+				<div class="col-md-2 col-xs-2 m-box no-padder" ng-if="i.out_time=='0000-00-00 00:00:00'">未扫离场码</div>
+				<div class="col-md-2 col-xs-2 m-box no-padder" ng-if="i.out_time!='0000-00-00 00:00:00'">{{i.out_time}}</div>
+				<div class="col-md-2 col-xs-2 m-box no-padder">{{nowTime}}</div>
+			</div>
+		</div>
+		<div class="page-footer">
+			<div class="pull-left col-md-6 col-xs-6 no-padder text-left">
+				<span class="text-sm">共{{statisticaSignList.total_results}}条记录，共{{statisticaSignList.total_pages}}页，</span>
+				<span class="text-sm">当前显示第{{statisticaSignList.page_no}}页，</span>
+				<span class="text-sm">每页显示{{statisticaSignList.page_size}}条</span>
+			</div>
+        	<div class="col-md-6 col-xs-6 no-padder text-right">
+        		<pagination total-items="statisticaSignList.total_results" ng-model="parmList.page_no" max-size="maxSize" class="pagination-sm m-t-none m-b" boundary-links="true" rotate="false" num-pages="statisticaSignList.page_size" ng-click="pages()" items-per-page="statisticaSignList.page_size"></pagination>
+        	</div>
+		</div>
+	</div>
+	<div id="dtBox"></div>
+</div>

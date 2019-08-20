@@ -1,0 +1,62 @@
+<ion-view class="hx-page mwq-member-index" style="background-color: #f28019;" hide-nav-bar="true" ng-init="setDocumentTitle('销售个人中心')" ng-controller="memberIndexCtrl">
+	<ion-header-bar class="header-80 p-rel" style="background-color: #f28019">
+		<!--场馆选择-->
+		<div class="club-header c-f" ng-click="showCity()">
+			<img ng-src="static/mobile/img/icon/map-city-white.png"> {{userLoc.province}}{{ userLoc.city == userLoc.province ? '':('-'+userLoc.city)}}-{{shop.county}}-{{shop.name}}
+		</div>
+		<div class="people-mode">
+			<div class="c-f">当前在场 {{peopleSum}} 人</div>
+		</div>
+	</ion-header-bar>
+
+	<ion-content class="member-cont" overflow-scroll="false" scrollbar-y="false" has-bouncing="true">
+
+		<div class="mwq-content">
+			<div class="box1">
+				<div class="cover">
+					<a class="member-img" ng-style="'uploads/'+info.avatar | adaptBg"></a>
+				</div>
+				<p class="name">会籍顾问-{{info.real_name}}</p>
+				<div class="qrcode">
+					<img ng-src="{{dataCode}}" alt="">
+				</div>
+				<div class="describe">扫码即可购买会员卡</div>
+			</div>
+			<div class="box2">
+				<div class="check">
+					<a href="#/saleman/user-list">点击查看您的{{userNum}}位客户</a>
+				</div>
+			</div>
+		</div>
+	</ion-content>
+
+	<!--城市menu-->
+	<div loadcity class="region-mode">
+		<div class="region-tit">
+			选择城市
+			<div class="region-close" ng-click="closeCity()">
+				<div></div>
+			</div>
+		</div>
+		<div class="region-cont">
+			<div class="region-nav" ng-repeat="i in citys" type="0" ng-click="getProvince(i.province,$index,i.child[0].city)">
+				<div class="region-nav-tit" ng-class='{"c-red" : i.province == userLoc.province}'>{{i.province}}</div>
+				<div class="region-snav">
+					<div ng-repeat="p in i.child" ng-class='{"c-red" : p.city == userLoc.city}' ng-click="getCity(p.city,false)">{{ p.city == i.province ? '主城区':p.city}}</div>
+				</div>
+			</div>
+		</div>
+		<br />
+		<br />
+		<br />
+		<div class="region-tit">
+			选择场馆
+		</div>
+		<div class="region-cont">
+			<div class="region-nav" ng-repeat="i in shop.list track by $index" type="0" ng-click="getShopId(i,true)">
+				<div class="region-nav-tit" ng-class='{"c-red" : i.shop_id == shop.id}'>{{i.county}}-{{i.shop_name}}</div>
+			</div>
+		</div>
+	</div>
+
+</ion-view>

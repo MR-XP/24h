@@ -1,0 +1,26 @@
+<div class="certificate-photos general" ng-controller="certificatePhotosController">
+    <div class="top row">
+        <div class="m-b-sm col-md-6 col-xs-6 no-padder">您当前的位置：<span class="c-orange font-bold">{{txt}}</span></div>
+        <div class="m-b-sm col-md-6 col-xs-6 no-padder fanhui text-right edit" ng-click="go()">返回</div>
+    </div>
+    <div class="content">
+        <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner" role="listbox" style="width: 700px;height: 600px;">
+                <div class="item" ng-repeat="i in applyList" ng-class="{'active' : $index==0}">
+                    <img ng-src="uploads/{{i}}">
+                    <div class="carousel-caption"></div>
+                </div>
+            </div>
+            <div style="width: 700px;text-align: center;margin: 0 auto;">
+                <div class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </div>
+                <div class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+                    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

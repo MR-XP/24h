@@ -1,0 +1,23 @@
+{
+    "name": "qcyd/24h",
+    "description": "",
+    "type": "project",
+    "keywords": [
+        "qcyd"
+    ],
+    "homepage": "http://www.51dong.cc/",
+    "require": {
+        "php": ">=5.6.0",
+        "topthink/framework": "5.0.10",
+        "phpoffice/phpexcel": "1.8.*",
+        "aliyuncs/oss-sdk-php": "~2.0",
+        "topthink/think-captcha": "1.0.7",
+        "workerman/gatewayclient": "3.0.0"
+    },
+    "extra": {
+        "think-path": "thinkphp"
+    },
+    "config": {
+        "preferred-install": "dist"
+    }
+}

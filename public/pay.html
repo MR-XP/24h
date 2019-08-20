@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html> 
+    <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta content="telephone=no" name="format-detection">
+    <title>订单详情</title>
+        <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" media="screen"  />
+        <link rel="stylesheet" href="static/mobile/libs/ionic-1.3.3/css/ionic.min.css">
+        <link rel="stylesheet" href="static/mobile/css/app.css?v=1.7.5">
+        <link rel="stylesheet" href="static/mobile/css/xp.css?v=1.7.5">
+        <script src="static/mobile/libs/jquery-2.1.4.min.js"></script>
+        <script src="static/mobile/libs/ionic-1.3.3/js/ionic.bundle.min.js"></script>
+        <script src="static/mobile/libs/ocLazyLoad.min.js"></script>
+        <script src="static/mobile/js/app.js?v=1.7.5"></script>
+        <script src="static/mobile/js/filters.js?v=1.7.5"></script>
+        <script src="static/mobile/js/directives.js?v=1.7.5"></script>
+        <script src="static/mobile/js/ctrls.js?v=1.7.5"></script>
+        <script src="static/mobile/js/services.js?v=1.7.5"></script>
+    </head>
+    
+    <body ng-app="App">
+    	
+    <ion-nav-view>
+    	
+    <ion-view class="hx-page" style="background-color: #fff" hide-nav-bar="true" ng-controller="payCtrl">
+
+	    <ion-content class="hx-cont-noTop" overflow-scroll="false" scrollbar-y="false" has-bouncing="true">
+						
+			<div class="hx-pd card-pd">
+					
+				<div class="card-mode" ng-hide="info.type==4 || info.type==5  || info.type==6">
+					<div class="card-mode-bg" ng-style="'uploads/'+info.image | adaptBg"></div>
+				</div>
+				
+				<div class="card-wk">
+					<div class="card-wk-top">
+						{{info.product_info}} <span ng-if="info.type==4">个金豆</span>
+						<div class="card-wk-money">￥{{info.price}}</div>
+					</div>
+				</div>
+					
+			</div>
+
+			<div class="hx-pd card-pd">
+				
+				<!--协议-->
+				<div class="card-wk card-wk2 p-rel" ng-click="set()">
+					<div class="card-wk-btn" ng-class="{'card-wk-btn-gray':!wk}"></div>
+					<div class="card-wk-top">
+						我已阅读并同意
+					</div>
+					<div class="card-wk-txt" style="color: #4e7ff2;" ng-click="show()">&lt;&lt;倾城运动会员购买协议&gt;&gt;</div>
+				</div>
+				
+			</div>	
+
+
+			<!--支付方式-->
+			<div class="recharge-mode">
+				<a href="javascript:;" class="xp-radio-list" ng-click="ckType(1,!payShow.wx)">
+					<img src="static/mobile/img/icon/wx.png" />微信支付
+					<div class="xp-radio-btn" ng-class="{'xp-radio-btn-blue':payShow.wx}"></div>
+				</a>
+				<div class="recharge-wr"></div>
+				<a href="javascript:;" class="xp-radio-list" ng-click="ckType(2,!payShow.site)" ng-hide="info.type==4">
+					<img src="static/mobile/img/icon/bean-big.png" />金豆支付(余额:{{info.pre_paid}})
+					<div class="xp-radio-btn" ng-class="{'xp-radio-btn-blue':payShow.site}"></div>
+				</a>
+				<div class="recharge-wr"></div>
+				<div class="pay-coupon-tit" ng-if="info.use_coupon.length>0 && info.type!=4">优惠劵</div>
+				<div ng-if="info.use_coupon.length>0 && info.type!=4" ng-repeat="i in info.use_coupon track by $index">
+					<a href="javascript:;" class="xp-radio-list" ng-click="ckType(3,$index)">
+						<img src="static/mobile/img/icon/coupon.png" />{{i.coupon_name}}(抵扣:￥{{i.discount_value}})
+						<div class="xp-radio-btn" ng-class="{'xp-radio-btn-blue':payShow.coupon==$index}"></div>
+					</a>
+					<div class="recharge-wr"></div>
+				</div>
+				
+			</div>
+
+	    </ion-content>
+
+	    <ion-footer-bar class="hx-foot">
+			
+			<a href="javascript:;" class="qcyd-btn qcyd-btn-large" ng-click="nowPay()">立即支付</a>
+			
+	    </ion-footer-bar>
+	    
+		<!--
+	    	协议内容
+	    -->
+		<div class="aet-mode">
+			<div class="aet-top">
+				倾城运动·家
+			</div>
+			<div class="aet-cont">
+			    <div class="tc">欢迎成为倾城运动·家，24H社区智能健身的会员，为了您在本会所健身时享受到优质、完善的服务，请您认真阅读本会所须知。</div><br />
+			   	<div class="tl"> 申请加入倾城运动·家的会员，必须年满十六周岁并在六十周岁（含六十周岁）具备完全的法律行为能力，并同意遵守本会所相关管理规章制度。
+			   	 正面签字的会员（以下简称会员）：倾城运动·家（以下简称会所）。</div><br />
+			    <div class="tl"> 成为本会所的会员，均应办理会所的相关入会手续，并已知晓本会所的有关健身规则与警示，并承诺遵守本会所的相关规定。</div>
+				<br /><br />1、入会会员必须保证在本会所填写的会员资料真实、完整、有效、必要时出示相关证件。会员如有资料变动，须及时通知会所，否则引起的会员纠纷，均由会员本人承担。
+				<br /><br />2.、进入会所请主动扫描二维码，会员仅限本人和绑定的家人使用,若使用会员权限带入他人进入,该会员接受承担带入非扫码进入人的费用。非正常扫码进入者若意外受伤责由该会员承担责任。若三次发现带入非扫码人员,将封停会员卡使用权限。
+				<br /><br />3、严禁心肺功能疾病、脊椎病、皮肤病及其他一切传染病患者进入本会所，不适合健身运动者在入会时如有隐瞒，所发生的一切后果本会所不负任何责任。
+				<br /><br />4、严禁会员携带或绑定十六周岁以下的人员进入场馆,以免造成意外。若执意带入十六周岁以下人员进入,产生的任何及全部后果及责任均由会员本人自行承担。
+				<br /><br />6、此须知指定的会籍及权利属会员本人所有，会员可能参加本会所的各种健身课程，免费使用会所内的器械、设施（收费项目除外，具体使用依据会所的管理规定进行）。
+				<br /><br />（1）会员卡转让：本会所主要售卖家庭卡,情侣卡,为绑定卡,所以不支持转卡服务。
+				<br /><br />（2）会员停卡:本会所主要售卖家庭卡,情侣卡,为绑定卡,所以不支持停卡服务。
+				<br /><br />（3）本会所会员因本人原因退会，所缴纳的会费概不退还。
+				<br /><br />7、会员有遵守本须知和会所各区域的义务，如有违反相关规定的发生，本会所有权终止其会员资格，已缴纳的费用将不予退还。
+				<br /><br />8、本会所内严禁吸烟、随地吐痰、乱扔垃圾：请自觉维护会所的环境卫生。
+				<br /><br />9、运动前严禁饮用含酒精类饮品。
+				<br /><br />10、为了会的健身安全，会员须穿着运动服、运动鞋参加锻炼，且不得穿着不得体或有伤风化的服饰进行锻炼，否则会所有权取消会员当天锻炼资格。
+				<br /><br />11、会员在参加锻炼时请勿携带珠宝饰品及其他贵重物品，以免丢失或造成意外。
+				<br /><br />12、禁止会员在本会所内销售任何商品，不得参与任何盈利性健身指导，违反须知的本会所有权收回会员卡并取消会员资格。
+				<br /><br />13、责任免除条款：
+				<br /><br />（1）因会员在本会所内从事任何体育锻炼或活动、或任何设施（包括但不限于会员现在将来可能使用的健身器材、走廊、或参加任何活动、课程、项目、培训）而产生的任何及全部后果及责任均由会员本人自行承担，除非该后果或责任完全是由于本会所人员故意或重大过失造成意外。
+				<br /><br />（2）会员在此声明，会员具备完全民事行为能力，自愿参加本会所并已理解和预见到本会所内从事任何体育锻炼或活动、或使用任何设施可能发生的各种危险、风险及其后果（如受伤、感染疾病，由此引发治疗及相关费用及损失、遗失或个人财物损毁、被盗等，并承诺会员将自行承担在上述过程中由于商行列原因而引起的任何损失或损害（除非该情况完全是由于本会所的人员故意或疏忽造成的）。
+				<br /><br />14、本会所保留变更收费标准、增加、改进或者取消本会所某类项目、设施或课程的权利。本会所将在做出前述任何一项变更时，将变更内容张贴于本会所告知栏目中，变更自通知张贴后开始生效。
+				<br /><br />15、温馨提示：在购买会员卡时，会员享受的是预付式服务，在会员享受会员资格后，由于会员本人原因造成无法继续享受服务时。会员个人承担其损失。
+				<br /><br />16、会员确认已取得本须知的副本和参阅了公示板会员手册,改须知副本及付款收据副本作为会员取得正式会员卡前人进入本会所的依据。
+				<br /><br />17、如因个人原因,需更换手机号码或者微信,在工作人员确认使用人不变的情况下,需缴纳200元手续费,方可更换为新的微信或手机号。
+				<br /><br />18、家庭共享卡可免费绑定2位家人,如需再增加会员卡使用名额,每增加一位则需支付会员卡购买价格的40％手续费,以此类推。
+				<br /><br />19、家庭共享成员,开卡时间以其中一位首次进场锻炼为主,所有会员及算激活成功。
+				<br /><br />20、家庭共享卡限于绑定直系亲属，如系统后台检测出不是家庭成员,一律取消使用权限且解除绑定权限。
+				<br /><br />21、本入会申请自双方同意之日生效。
+				<br /><br />22、本须知内容的最终解释权归本会所所有。
+				</div>
+				<div class="qcyd-btn qcyd-btn-small" ng-click="close()">
+				我已了解，关闭
+			</div>
+		</div>
+		
+		<!--赠送优惠劵-->
+		<div class="bean-mode">
+			<div class="bean-div" ng-click="go()">
+				<img src="static/mobile/img/temporary/coupon.png" />
+			</div>
+		</div>
+		
+	</ion-view>
+    	
+    </ion-nav-view>
+
+	</body>
+	
+	<script>
+	
+	function getLocation(cb) {
+	    	
+		console.log('fuck you')
+			
+	}	
+	
+	//订单购买
+	app.controller("payCtrl", ["$scope","$ionicLoading","ajaxService","$popup","$location","$ionicPopup","$timeout",
+					   function ($scope,$ionicLoading,ajaxService,$popup,$location,$ionicPopup,$timeout) {
+		
+		$ionicLoading.show(HX_CONFIG.loadingBase);
+		
+		$scope.payJson='';
+		
+		//支付
+		$scope.newPay={
+			
+			order_id		:	'',
+			coupon_user_id	:	0,
+			use_pre_paid	:	0,
+			pay_type		:	'WXPAY'
+			
+		}
+		
+		//支付状态显示
+		$scope.payShow={
+			
+			wx			:	true,
+			site		:	false,
+			coupon		:	-1
+			
+		}
+		
+		//支付点击状态
+		$scope.ckType=function(type,num){
+
+			if(type==1)
+				$scope.payShow.wx=num
+			
+			if(type==2)
+				$scope.payShow.site=num
+
+			if(type==3){
+				
+				if($scope.payShow.coupon == num){
+					$scope.payShow.coupon=-1;
+					$scope.newPay.coupon_user_id=0
+				}else{
+					$scope.payShow.coupon=num;
+					$scope.newPay.coupon_user_id=$scope.info.use_coupon[num].coupon_user_id
+				}
+
+			}
+
+		}
+		
+		//订单详情加载
+		$scope.load=function(){
+			
+			$scope.newPay.order_id=location.href.substr(location.href.indexOf('=')+1);	//获取订单ID
+
+			ajaxService.ajax('orderDetail',{
+					
+				order_id : $scope.newPay.order_id
+				
+			},function(json){
+				
+				
+				if(json.code==200){
+					
+					$scope.info=json.data;
+					$ionicLoading.hide();
+				}else{
+					
+					$popup.alert('尊敬的用户',null,'该订单已经支付或者取消了，即将返回个人中心');
+					window.location.href=location.href.substr(0,location.href.lastIndexOf('pay')-1);
+
+				}
+				
+			})
+			
+		}
+		$scope.load();
+
+		
+		//购买类型
+		$scope.nowPay=function(){
+			
+			if(!$scope.wk){
+				$popup.alert('尊敬的用户',null,'您得同意协议才行哟');
+				return
+			}else{
+				
+				//未选择
+				if(!$scope.payShow.wx && !$scope.payShow.site){
+					
+					$popup.alert('尊敬的用户',null,'至少选择一种微信或者金豆支付方式');
+					return
+				}
+				
+				//支付类型
+				if($scope.payShow.wx && !$scope.payShow.site){
+					$scope.newPay.pay_type='WXPAY';
+					$scope.newPay.use_pre_paid=0
+				}
+				if($scope.payShow.site && !$scope.payShow.wx){
+					$scope.newPay.pay_type='SITEPAY';
+					$scope.newPay.use_pre_paid=1
+				}
+				if($scope.payShow.wx && $scope.payShow.site){
+					$scope.newPay.pay_type='WXPAY';
+					$scope.newPay.use_pre_paid=1
+				}
+				
+				//执行
+				$scope.pay()
+			
+			}
+	
+		}
+		
+		$scope.pay=function(){
+			$ionicLoading.show(HX_CONFIG.loadingBase);
+			ajaxService.ajax('pay',{
+		   		
+		   		order_id		:	$scope.newPay.order_id,
+				coupon_user_id	:	$scope.newPay.coupon_user_id,
+				use_pre_paid	:	$scope.newPay.use_pre_paid,
+				pay_type		:	$scope.newPay.pay_type
+		   		
+		   	},function(json){
+		   		
+		   		$ionicLoading.hide();
+				$scope.payJson=json;
+				
+		   		if(json.code==200){
+	
+		   			if(json.data.need_pay){
+		   				
+						if (typeof WeixinJSBridge == "undefined"){
+						   if( document.addEventListener ){
+						       document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
+						   }else if (document.attachEvent){
+						       document.attachEvent('WeixinJSBridgeReady', onBridgeReady); 
+						       document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
+						   }
+						}else{
+						   onBridgeReady(json);
+						}
+		   				
+		   			}else{
+
+		   				if(json.data.send_coupon){
+		   					$('.bean-mode').show();
+							$timeout(function(){
+								$('.bean-div').css({'height':'100%','width':'100%'})
+							},800)
+		   				}else{
+		   					
+		   					$popup.alert('尊敬的用户',null,'恭喜您支付成功，即将返回个人中心');
+			   				$timeout(function(){
+			   					window.location.href=location.href.substr(0,location.href.lastIndexOf('pay')-1);
+			   				},600)
+			   				
+		   				}
+		   				
+		   			}
+					
+		   		}else{
+	
+		    		$popup.alert('尊敬的用户',null,json.message);
+		    			
+		    	}
+	
+		   	})
+			
+		}
+		
+		
+		
+
+		//微信支付
+		function onBridgeReady(json){
+		   WeixinJSBridge.invoke(
+		       'getBrandWCPayRequest', {
+		           "appId"		: 	json.data.params.appId,     		//公众号名称，由商户传入     
+		           "timeStamp"	:	json.data.params.timeStamp,       	//时间戳，自1970年以来的秒数     
+		           "nonceStr"	:	json.data.params.nonceStr, 			//随机串     
+		           "package"	:	json.data.params.package,  			//订单详情扩展字符串   
+		           "signType"	:	json.data.params.signType,         //微信签名方式
+		           "paySign"	:	json.data.params.paySign 			//微信签名 
+		       },
+		       function(res){     
+		           if(res.err_msg == "get_brand_wcpay_request:ok" ) {							           	
+		           		
+						if($scope.payJson.data.send_coupon){
+		   					$('.bean-mode').show();
+							$timeout(function(){
+								$('.bean-div').css({'height':'100%','width':'100%'})
+							},800)
+		   				}else{
+		   					
+		   					$popup.alert('尊敬的用户',null,'恭喜您支付成功，即将返回个人中心');
+			   				$timeout(function(){
+			   					window.location.href=location.href.substr(0,location.href.lastIndexOf('pay')-1);
+			   				},600)
+			   				
+		   				}
+						
+		           }     
+		       }
+		   )
+		}
+
+
+		//支付成功后返回
+		$scope.go=function(){
+			$('.bean-div').css({'height':'0','width':'0'})
+			$timeout(function(){
+				$('.bean-mode').hide();
+				window.location.href=location.href.substr(0,location.href.lastIndexOf('pay')-1);
+			},800)
+		}
+		
+		
+		//协议
+		$scope.wk=false;
+		
+		$scope.set=function(){
+			$scope.wk=!$scope.wk;
+		}
+		
+		function stopPropagation(e) {  
+		    e = e || window.event;  
+		    if(e.stopPropagation) { //W3C阻止冒泡方法  
+		        e.stopPropagation();  
+		    } else {  
+		        e.cancelBubble = true; //IE阻止冒泡方法  
+		    }  
+		}
+		
+		//弹出协议
+		$scope.show=function(){
+			stopPropagation();
+			$('.aet-mode').slideDown(250);
+		}
+	    
+	    $scope.close=function(){
+	   		$('.aet-mode').slideUp(250);
+	    }
+
+	}]);
+
+	</script>
+</html>

@@ -1,0 +1,91 @@
+<div class="bg">
+	<div class="edit-permissions" ng-controller="editpermissionsController">
+	    <div class="title bc-darkpurple">
+	        <div class="pull-left details">权限编辑</div>
+	        <div class="pull-right close" ng-click="location('app/permissions')">X</div>
+	    </div>
+	    <div class="content f-12">
+	    	<form class="form-inline" role="form">
+		    	<div class="row fenzu">
+		    		<div class="col-md-1 col-xs-1 no-padder text-right name">分组名称：</div>
+		    		<div class="col-md-11 col-xs-11 no-padder text-left"><input type="text" ng-model="info.title"></div>
+		    	</div>
+		    	
+		    	<div class="row shezhi m-t-md">
+		    		<div class="col-md-1 col-xs-1 no-padder text-right name">管理场馆：</div>
+		    		<div class="col-md-11 col-xs-11 text-left function wrapper-md">
+		    			<div class="row gongneng m-b-md">
+		    				<div class="col-md-12 col-xs-12 no-padder m-b-sm font-bold">
+		    				场馆罗列
+		    				&nbsp;
+		    				&nbsp;
+		    				&nbsp;
+		    				<label class="i-checks i-checks-sm">
+				                <input all2 type="checkbox">
+				                <i></i>全选
+						    </label>
+		    				</div>
+		    				<div class="col-md-12 col-xs-12 no-padder">
+		    					<div class="col-md-3 col-xs-3 padder-l-none m-b-sm single" ng-repeat="i in shopList">
+		    						<div class="checkbox row">
+							            <label class="i-checks i-checks-sm">
+							                <input class="my-ipt shop-ipt" type="checkbox" value="{{i.shop_id}}">
+							                <i></i>{{i.city}} - {{i.shop_name}}
+							            </label>
+							        </div>
+		    					</div>
+		    				</div>
+		    			</div>
+		    		</div>
+		    	</div>
+		    	
+		    	<div class="row shezhi m-t-md" ng-repeat="sub in ruleList">
+		    		<div class="col-md-1 col-xs-1 no-padder text-right name">{{sub.title}}：</div>
+		    		<div class="col-md-11 col-xs-11 text-left function wrapper-md">
+		    			<div class="row gongneng m-b-md" ng-repeat="navsub in sub.child">
+		    				<div class="col-md-12 col-xs-12 no-padder m-b-sm font-bold">
+		    				{{navsub.title}}
+		    				&nbsp;
+		    				&nbsp;
+		    				&nbsp;
+		    				<label class="i-checks i-checks-sm">
+				                <input all2 type="checkbox">
+				                <i></i>全选
+						    </label>
+		    				</div>
+		    				<div class="col-md-3 col-xs-3 no-padder single">
+		    					<div class="checkbox">
+						            <label class="i-checks i-checks-sm">
+						                <input class="my-ipt rule-ipt" type="checkbox" value="{{navsub.id}}">
+						                <i></i>导航显示
+						            </label>
+						        </div>
+		    				</div>
+		    				<div class="col-md-9 col-xs-9 no-padder">
+		    					<div repeatfinish class="col-md-3 col-xs-3 m-b-sm single" ng-repeat="navnode in navsub.child" load="ego()">
+		    						<div class="checkbox row">
+							            <label class="i-checks i-checks-sm">
+							                <input class="my-ipt rule-ipt" type="checkbox" value="{{navnode.id}}">
+							                <i></i>{{navnode.title}}
+							            </label>
+							        </div>
+		    					</div>
+		    				</div>
+		    			</div>
+		    		</div>
+		    	</div>
+		    	<div class="row">
+		    		<div class="col-md-offset-1 col-xs-offset-1 m-t-md">
+		    			<button class="save" ng-click="save()">保存</button>
+	                    <button class="cancel" ng-click="location('app/permissions')">取消</button>
+		    		</div>
+		    	</div>
+	    	</form>
+	    </div>
+	</div>
+</div>
+
+
+
+
+

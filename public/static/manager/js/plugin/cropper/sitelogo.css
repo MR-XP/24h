@@ -1,0 +1,294 @@
+.upimg .modal-dialog{
+  width: 755px !important;
+}
+
+//上传封面图样式85*50
+.upimg .avatar-view {
+  display: block;
+  width: 85px;
+  height: 50px;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.upimg .avatar-view img {
+  width: 100%;
+}
+
+.upimg .avatar-upload {
+  overflow: hidden;
+}
+
+.upimg .avatar-upload label {
+  display: block;
+  float: left;
+  clear: left;
+  width: 100px;
+}
+
+.upimg .avatar-upload input {
+  display: block;
+  margin-left: 110px;
+}
+
+.upimg .avater-alert {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.upimg .avatar-wrapper {
+  /*height: 364px;*/
+  height: 400px;
+  width: 100%;
+  margin-top: 15px;
+  box-shadow: inset 0 0 5px rgba(0,0,0,.25);
+  background-color: #fcfcfc;
+  overflow: hidden;
+}
+
+.upimg .avatar-wrapper img {
+  display: block;
+  height: auto;
+  max-width: 100%;
+}
+
+.upimg .avatar-preview {
+  float: left;
+  margin-top: 15px;
+  margin-right: 15px;
+  border: 1px solid #eee;
+  border-radius: 4px;
+  background-color: #fff;
+  overflow: hidden;
+}
+
+.upimg .avatar-preview:hover {
+  border-color: #ccf;
+  box-shadow: 0 0 5px rgba(0,0,0,.15);
+}
+
+.upimg .avatar-preview img {
+  width: 100%;
+}
+
+.upimg .preview-lg {
+  height: 364px;
+  width: 538px;
+  margin-top: 15px;
+}
+
+.upimg .preview-md {
+  height: 100px;
+  width: 100px;
+}
+
+.upimg .preview-sm {
+  height: 50px;
+  width: 50px;
+}
+
+@media (min-width: 992px) {
+  .avatar-preview {
+    float: none;
+  }
+}
+
+.upimg .avatar-btns {
+  margin-top: 30px;
+  margin-bottom: 15px;
+}
+
+.upimg .avatar-btns .btn-group {
+  margin-right: 5px;
+}
+
+
+//上传详情图样式85*50
+.upimg .avatar-view1 {
+  display: block;
+  width: 85px;
+  height: 50px;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.upimg .avatar-view1 img {
+  width: 100%;
+}
+
+.upimg .avatar-upload1 {
+  overflow: hidden;
+}
+
+.upimg .avatar-upload1 label {
+  display: block;
+  float: left;
+  clear: left;
+  width: 100px;
+}
+
+.upimg .avatar-upload1 input {
+  display: block;
+  margin-left: 110px;
+}
+
+.upimg .avater-alert {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.upimg .avatar-wrapper1 {
+  height: 364px;
+  width: 100%;
+  margin-top: 15px;
+  box-shadow: inset 0 0 5px rgba(0,0,0,.25);
+  background-color: #fcfcfc;
+  overflow: hidden;
+}
+
+.upimg .avatar-wrapper1 img {
+  display: block;
+  height: auto;
+  max-width: 100%;
+}
+
+.upimg .avatar-preview1 {
+  float: left;
+  margin-top: 15px;
+  margin-right: 15px;
+  border: 1px solid #eee;
+  border-radius: 4px;
+  background-color: #fff;
+  overflow: hidden;
+}
+
+.upimg .avatar-preview1:hover {
+  border-color: #ccf;
+  box-shadow: 0 0 5px rgba(0,0,0,.15);
+}
+
+.upimg .avatar-preview1 img {
+  width: 100%;
+}
+
+.upimg .preview-lg {
+  height: 364px;
+  width: 538px;
+  margin-top: 15px;
+}
+
+@media (min-width: 992px) {
+  .avatar-preview1 {
+    float: none;
+  }
+}
+
+.upimg .avatar-btns1 {
+  margin-top: 30px;
+  margin-bottom: 15px;
+}
+
+.upimg .avatar-btns1 .btn-group {
+  margin-right: 5px;
+}
+
+//上传封面图样式50*50
+.upimg .avatar-view2 {
+  display: block;
+  width: 85px;
+  height: 50px;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.upimg .avatar-view2 img {
+  width: 100%;
+}
+
+.upimg .avatar-body {
+  padding-right: 10px;
+  padding-left: 10px;
+}
+
+.upimg .avatar-upload2 {
+  overflow: hidden;
+}
+
+.upimg .avatar-upload2 label {
+  display: block;
+  float: left;
+  clear: left;
+  width: 100px;
+}
+
+.upimg .avatar-upload2 input {
+  display: block;
+  margin-left: 110px;
+}
+
+.upimg .avater-alert {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.upimg .avatar-wrapper2 {
+  height: 364px;
+  width: 100%;
+  margin-top: 15px;
+  box-shadow: inset 0 0 5px rgba(0,0,0,.25);
+  background-color: #fcfcfc;
+  overflow: hidden;
+}
+
+.upimg .avatar-wrapper2 img {
+  display: block;
+  height: auto;
+  max-width: 100%;
+}
+
+.upimg .avatar-preview2 {
+  float: left;
+  margin-top: 15px;
+  margin-right: 15px;
+  border: 1px solid #eee;
+  border-radius: 4px;
+  background-color: #fff;
+  overflow: hidden;
+  width: 500px !important;
+  height: 500px !important;
+  margin: 0 120px;
+}
+
+.upimg .avatar-preview2:hover {
+  border-color: #ccf;
+  box-shadow: 0 0 5px rgba(0,0,0,.15);
+}
+
+.upimg .avatar-preview2 img {
+  width: 100%;
+}
+
+.upimg .preview-lg {
+  height: 430px;
+  width: 731px;
+  margin-top: 15px;
+}
+
+
+@media (min-width: 992px) {
+  .avatar-preview2 {
+    float: none;
+  }
+}
+
+.upimg .avatar-btns2 {
+  margin-top: 30px;
+  margin-bottom: 15px;
+}
+
+.upimg .avatar-btns2 .btn-group {
+  margin-right: 5px;
+}
+
+
+

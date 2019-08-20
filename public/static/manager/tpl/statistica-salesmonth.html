@@ -1,0 +1,29 @@
+<div class="statistica-salesmonth statistica general " ng-controller="statisticaSalesMonthController">
+	<div class="top row">
+		<div class="weizhi">
+			<div class="m-b-sm col-md-6 col-xs-6 no-padder">您当前的位置：<span class="c-orange font-bold">{{txt}}</span></div>
+			<div class="m-b-sm col-md-6 col-xs-6 no-padder fanhui edit-w" ng-click="go()">返回</div>
+		</div>
+	</div>
+	<div class="content">
+		<div class="box row">
+			<div class="list row">
+				<div class="col-md-2 col-xs-2 m-box no-padder">场馆封面</div>
+				<div class="col-md-2 col-xs-2 m-box no-padder">场馆名称</div>
+				<div class="col-md-2 col-xs-2 m-box no-padder">场馆管家</div>
+				<div class="col-md-2 col-xs-2 m-box no-padder">本月总销量（元）</div>
+				<div class="col-md-2 col-xs-2 m-box no-padder">员工总提成（元）</div>
+				<div class="col-md-2 col-xs-2 m-box no-padder">场馆收入（元）</div>
+			</div>
+			<div class="list-details" ng-repeat="v in salesMonthList">
+				<div class="col-md-2 col-xs-2 m-box no-padder m-cover"><img ng-src="/uploads/{{v.cover}}" alt=""></div>
+				<div class="col-md-2 col-xs-2 m-box no-padder">{{v.shop_name}}</div>
+				<div class="col-md-2 col-xs-2 m-box no-padder">{{v.user.real_name}}</div>
+				<div class="col-md-2 col-xs-2 m-box no-padder">{{v.income}}</div>
+				<div class="col-md-2 col-xs-2 m-box no-padder">{{v.staffing}}</div>
+				<div class="col-md-2 col-xs-2 m-box no-padder">{{::v.income-v.staffing}}</div>
+			</div>
+		</div>
+	</div>
+	<div id="dtBox"></div>
+</div>

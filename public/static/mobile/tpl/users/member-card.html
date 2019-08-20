@@ -1,0 +1,59 @@
+<ion-view class="hx-page" style="background-color: #f8f8f8" hide-nav-bar="true" ng-init="setDocumentTitle('我的会员卡-成员列表')" ng-controller="memberCardCtrl">
+
+    <ion-content overflow-scroll="false" scrollbar-y="false" has-bouncing="true">
+		
+		<div class="member-card" id="card-list-M">
+			<div class="card-list" ng-repeat="i in list">
+				<div>
+					<a href="#/users/sign-record/{{i.user_id}}/{{i.sold_card_id}}" class="member-li">
+						<div class="member-img" ng-style="'uploads/'+i.avatar | adaptBg"></div>
+						<div class="member-name">{{i.real_name}}</div>
+						<div class="member-phone">{{i.phone}}</div>
+						<div class="member-float">总签到{{i.count}}次</div>
+						<div class="member-arr"></div>
+					</a>
+				</div>
+				<div class="choose">
+					<!-- <div class="row no-padder">
+		      	<div class="col no-padder" ng-if="i.status==0">正常</div>
+		      	<div class="col no-padder greey" ng-if="i.status==1">已锁定</div>
+		      	<div class="col no-padder">
+					    <div class="slideThree"> 
+					      <input class="switch" type="checkbox" value="{{i.sold_card_id}}" name="check"  ng-click="lock(i.sold_card_id,i.status,i.user_id)" />
+					      <label class="switch-lable"></label>
+					    </div>
+		      	</div>
+		      </div> -->
+		      <!-- <span ng-if="i.status==0">正常</span>
+		      <span class="greey" ng-if="i.status==1">已锁定</span>
+      		<label class="toggle toggle-assertive" ng-click="lock(i.sold_card_id,i.status,i.user_id)">
+			      <input type="checkbox" class="switch" value="{{i.sold_card_id}}" name="check">
+			      <div class="track">
+			        <div class="handle"></div>
+			      </div>
+			    </label> -->
+			    <div class="col no-padder col-left">
+			    	<span ng-if="i.status==0">正常</span>
+			    	<span class="greey" ng-if="i.status==1">已锁定</span>
+			    </div>
+			      <div class="col no-padder col-right">
+			      	<label class="toggle toggle-assertive" ng-click="lock(i.sold_card_id,i.status,i.user_id)">
+					      <input type="checkbox" class="switch" value="{{i.sold_card_id}}" name="check">
+					      <div class="track">
+					        <div class="handle"></div>
+					      </div>
+					</label>
+			      </div>
+				</div>
+				<div class="split"></div>
+			</div>
+		</div>
+		
+    </ion-content>
+
+</ion-view>
+
+
+
+
+

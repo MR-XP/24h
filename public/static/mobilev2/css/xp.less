@@ -1,0 +1,3513 @@
+﻿@import 'public.less';
+
+//主体
+.hx-page{
+    .bg-c(#f8f8f8);
+    .f-s()
+}
+
+.hx-head,.hx-foot{
+    .pd();
+    .ovr()
+}
+
+.hx-foot{
+    .hg(100px);
+    .bg-c()
+}
+
+.hx-cont{
+    top:80px;
+    bottom: 100px
+}
+
+.hx-cont-noTop{
+    bottom: 100px;
+}
+
+.hx-cont-noBtm{
+    top:80px;
+}
+
+.hx-pd{
+    .pd(0 24px);
+    .ovr()
+}
+
+.header-80{
+    .hg(80px);
+    .pd(0); 
+}
+
+.header-230{
+    .hg(230px);
+    .pd(0);
+    .dsp() 
+}
+
+//用户信息
+.user-bar{
+    .hg(230px);
+    .pd(35px 40px);
+    .bg-c();
+    .pos();
+    
+    //头像类
+    .user-img{
+        .dsp();
+        .hg(160px);
+        .wh(160px);
+        .br(1px solid #e2e2e2);
+        .mg(right,30px);
+        .br-rs(50%);
+        .fl
+    }
+    
+    //名字类
+    .user-name{
+        .f-s(36px);
+        .let(2px);
+        .mg(top,36px);
+        .f-w(500);
+        opacity: .87;
+        
+        i{
+            .mg(left,15px)
+        }
+    }
+    
+    //豆类
+    .user-bean{
+        .f-s(24px);
+        .hg(24px);
+        .l-hg(24px);
+        .c-9;
+        .mg(top,28px);
+        .pos();
+        
+        span{
+            .dsp(inline-block);
+            .wh(37px);
+            .hg(20px);
+            .mg(left,15px);
+            background: url(../img/icon/bean.png) center center / 100% 100% no-repeat;
+            
+        }
+    }
+    
+    //二维码类
+    .QR-mode{
+        .pos(absolute);
+        top:56px;
+        right: 40px;
+        
+        .QR-img{
+            .dsp();
+            .wh(80px);
+            .hg(80px);
+            background:url(../img/icon/sign-img.png) center center / 100% 100% no-repeat;
+            .mg(left,15px);
+            .mg(bottom,15px)
+        }
+        
+        .QR-txt{
+            .f-s(22px);
+            .c-9
+        }
+    }
+    
+    //等级类
+    .grade-mode{
+        .p-abs;
+        .hg(54px);
+        .l-hg(54px);
+        .br(top,1px solid #e0e0e0);
+        .br(bottom,1px solid #e0e0e0);
+        .br(left,1px solid #e0e0e0);
+        .pd(0 20px);
+        .ovr();
+        -webkit-border-top-left-radius: 35px;
+        border-top-left-radius: 35px;
+        -webkit-border-bottom-left-radius: 35px;
+        border-bottom-left-radius: 35px;
+        right: 0;
+        top: 50%;
+        .mg(top,-26px);
+        
+        .grade-num{
+            .c(#f28019);
+            font-style:italic;
+            .fl;
+            .f-w();
+            .f-s(28px)
+        }
+        
+        .grade-txt{
+            .f-s(24px);
+            opacity: .87;
+            .fl
+        }
+    }
+}
+
+//类别
+.ix-category{
+    .bg-c();
+    .ovr();
+    .pd(30px 24px);
+    
+    img{
+        .wh(30%);
+        .hg(auto);
+        .br-rs(6px);
+        box-shadow: 0 6px 20px 3px rgba(0,0,0,.2);
+        -webkit-box-shadow: 0 6px 20px 3px rgba(0,0,0,.2);
+        .fl;
+    }
+    
+    img:nth-child(2){
+        .mg(0 5%)
+    }
+}
+
+//浮动二维码
+.qr-mode{
+    .pos(fixed);
+    .wh(100px);
+    .hg(100px);
+    .br-rs(6px);
+    .ovr();
+    .bg(url(../img/icon/sign-img.png) center center / 100% 100% no-repeat);
+    box-shadow: 0 8px 20px 0px rgba(242,128,25,.8);
+    -webkit-box-shadow: 0 8px 20px 0px rgba(242,128,25,.8);
+    right: 35px;
+    bottom: 150px;
+    z-index: 999;
+}
+
+//列表菜单
+.menu-list{
+    .bg-c();
+    .pd(bottom,25px);
+    
+    .col i{
+        .dsp();
+        .tc();
+        .f-s(52px);
+        .c(#9e9e9e);
+        .mg(25px 0)
+    }
+    
+    .menu-txt{
+        .hg(24px);
+        .l-hg(24px);
+        .f-s(24px);
+        .tc();
+        opacity: .87
+    }
+}
+
+//健康数据
+.health{
+    .bg-c();
+    .mg(top,20px);
+    .hg(202px);
+    
+    
+    div{
+        .wh(100%)
+    }
+    
+    //左侧类
+    .health-tit{
+        left: 24px;
+        .f-s(28px);
+        .hg(28px);
+        .l-hg(28px);            
+    }
+    .health-tit:nth-of-type(1){
+        top:20px;
+        .hg(35px);
+        .l-hg(35px);
+        .pd(left,50px);
+        //图标
+        &:after{
+            .p-abs;
+            content: '';
+           .hg(35px);
+           .wh(35px);
+           left: 0;
+           top: 0;
+           background: url(../img/icon/people-run.png) center center / 100% 100% no-repeat;
+        }
+    }
+    .health-tit:nth-of-type(2){
+        .f-s(50px);
+        .hg(50px);
+        .l-hg(50px);
+        .f-w();
+        opacity: .87;
+        top:90px
+    }
+    .health-tit:nth-of-type(3){
+        bottom: 16px
+    }
+    
+    //右侧类
+    .health-txt:nth-of-type(5),.health-txt:nth-of-type(7){
+        right: 24px;
+        .f-s(24px);
+        .hg(24px);
+        .l-hg(24px)
+    }
+    .health-txt:nth-of-type(4),.health-txt:nth-of-type(6){
+        .f-w();
+        opacity: .87;
+        .f-s(26px);
+        .hg(26px);
+        .l-hg(26px);
+        
+        right: 24px
+        
+    }
+    .health-txt:nth-of-type(4){
+        top:38px
+    }
+    .health-txt:nth-of-type(5){
+        top:78px
+    }
+    .health-txt:nth-of-type(6){
+        top:126px
+    }
+    .health-txt:nth-of-type(7){
+        bottom: 16px
+    }
+}
+
+//普通列表
+.xp-list{
+    .item{
+        .br(top,1px solid #e0e0e0);
+        .br(left,none);
+        .br(right,none);
+        .br(bottom,none);
+        .pd(0);
+        .f-s(28px);
+        .hg(120px);
+        .l-hg(120px)
+    }
+    .item:first-of-type{
+        .br(top,none)
+    }
+    
+    //箭头类
+    .item-icon-right{
+        .pd(right,0);
+        
+        .icon{
+            right: 0;
+            .f-s(28px);
+            opacity: .5;
+            .tr
+        }
+        
+    }
+    
+    //下拉框类
+    select,input{
+        .p-abs;
+        .f-s(28px);
+        .wh(100%);
+        .hg(100%);
+        background:none;
+        appearance:none;
+        -webkit-appearance:none;
+        right:45px;
+        top: 0;
+        .br(none);
+        opacity: .54;
+        direction: rtl;
+    }
+    input{
+        .tr;
+        .pd()!important;
+        .l-hg(120px)
+    }
+    
+    //头像类
+    .item-img-li{
+        .hg(149px);
+        .l-hg(149px)
+    }
+    .up-img{
+        .p-abs;
+        .hg(100px);
+        .wh(100px);
+        .br(1px solid #e1e1e1);
+        .br-rs(50%);
+        top:26px;
+        right: 45px;
+        .ovr();
+        
+        .show-img,.gm-input-file{
+            .dsp();
+            .wh(100%);
+            .hg(100%);
+            .p-abs;
+            top: 0;
+            left: 0;
+            z-index: 1;
+        }
+        
+        .gm-input-file {
+            opacity: 0;
+        }
+    }
+}
+.ix-item{
+    
+    .item{
+        opacity: .66
+    }   
+    
+}   
+
+
+//tab菜单
+.tab-head{
+    .hg(76px);
+    .l-hg(76px);
+    
+    //一类菜单
+    .tab-nav{
+    
+       .wh(100%);
+       .hg(100%);
+       .ovr();
+       
+       .tab-nav-li{
+           .fl;
+           .f-s(24px);
+           opacity: .87;
+           .f-w(500)
+       }
+       .tab-nav-li:nth-of-type(2){
+           .mg(left,15%)
+       }
+       .tab-nav-li-gray{
+           opacity:.54;
+           .f-w(500)
+       }
+       
+       .tab-nav-look{
+           .wh(68px);
+           .hg(4px);
+           .bg-c(#212121);
+           opacity: .87;
+           left: 0;
+           bottom: 0;
+       }
+    }
+    
+    //另一类菜单
+    .tab-nav2{
+        .dsp(flex);
+        
+        .tab-nav-li{
+           flex:1; 
+           -webkit-flex:1; 
+           .tc()
+        }
+        
+        .tab-nav-li:nth-of-type(2){
+           .mg(0)
+       }
+    }
+}
+.tab-cont{
+    top:76px
+}
+
+//订单
+.order{
+    .bg-c();
+    opacity: .87;
+    .mg(bottom,20px);
+    
+    //内容类
+    .order-mode{
+        .hg(150px);
+        .br(bottom,1px solid #e0e0e0);
+        .pd(29px 0);
+        
+        .order-mode-img{
+            opacity: 1;
+            .hg(100%);
+            .wh(120px);
+            .fl;
+            .mg(right,20px);
+            .br-rs(6px)
+        }
+        
+        .order-mode-tit{
+            .f-s(32px);
+            .f-w();
+            .mg(5px 0 20px);
+            .hg(32px);
+            .l-hg(32px);
+            .text-hide;
+            opacity: .87;
+        }
+        
+        .order-mode-txt{
+            .f-s(24px);
+            .hg(24px);
+            .l-hg(24px);
+            .text-hide
+        }
+        
+        .order-mode-time{
+            opacity: .38;
+            top: 29px;
+            right: 0;
+            .f-s(20px)
+        }
+    }
+    
+    //支付类
+    .order-pay{
+        .hg(100px);
+        .l-hg(100px);
+        .f-s(24px);
+        
+        .order-pay-btn{
+            .qcyd-btn;
+            .qcyd-btn-small;
+            top:24px
+            
+        }
+        
+        .order-pay-btn:nth-of-type(2){
+            right: 0
+        }
+        
+        .order-pay-btn:nth-of-type(1){
+            right: 180px; 
+        }
+    }
+}
+
+//约课
+.appt{
+    .bg-c();
+    .br(bottom,1px solid #e0e0e0);
+    .pd(30px 24px);
+    
+    //内容类
+    .appt-mode{
+        
+        .appt-mode-img{
+            .wh(100%);
+            .hg(240px)
+        }
+        
+        .appt-mode-tit{
+            .abs(28px);
+            .mg(30px 0 15px)
+        }
+        
+        .appt-mode-txt{
+            .abs(20px)
+        }
+        
+        .appt-mode-btn{
+            right: 0;
+            top: 50%;
+            .dsp();
+            .hg(52px);
+            .l-hg(52px);
+            .br(1px solid #000);
+            .tc();
+            .mg(top,-26px);
+            .pd(0 25px)
+        }
+        
+        .appt-mode-btn-gray{
+            opacity: .38;
+        }
+    }
+    
+}
+
+//约课新版
+.appt-two{
+    .bg-c();
+    .pd(60px 24px 0);
+    .ovr();
+    
+    //内容类
+    .appt-mode{
+        
+        .br(bottom,1px solid #e0e0e0);
+        .ovr();
+        .pd(bottom,40px);
+        
+        .appt-mode-img{
+            .wh(100%);
+            .hg(300px);
+            .p-rel;
+            
+            .appt-mode-bg{
+                .wh(100%);
+                .hg(300px);
+            }
+            
+            .appt-mode-num{
+                .p-abs;
+                .wh(100%);
+                .c(#fff);
+                .abs(28px);
+                opacity: .87;
+                .f-w(700);
+                left: 0;
+                bottom: 10px;
+                text-indent: 8px;
+                z-index: 999
+            }
+            
+            .appt-mode-barBg{
+                .p-abs;
+                .wh(100%);
+                .bg(url(../img/gradient01.png) left top repeat-x);
+                background-size:auto 100%;
+                z-index: 99;
+                .hg(50px);
+                left: 0;
+                bottom: 0;
+            }
+            
+            .appt-mode-barMv{
+                z-index: 999;
+                .p-abs;
+                .hg(8px);
+                left: 0;
+                bottom: 0;
+                .bg-c(#f28019);
+                .wh(0);
+                .anime-ease
+            }
+        }
+        
+        .appt-mode-tit{
+            .abs(32px);
+            .mg(40px 0 20px);
+            .f-w();
+            opacity: .87;
+        }
+        
+        .appt-mode-txt{
+            .abs(22px);
+            opacity: .66;
+        }
+        
+        .pay-course{
+            .mg(left,10px);
+            .c-red
+        }
+        
+    }
+    
+}
+.appt-two:first-of-type{
+    .pd(0 24px 0)
+}
+
+
+//我的约课
+.my-appt{
+    
+    box-shadow: 0 5px 20px 2px rgba(0,0,0,.8);
+    -webkit-box-shadow: 0 5px 20px 2px rgba(0,0,0,.2);
+    .br-rs(6px);
+    .mg(10px 0 30px);
+    .pd(0 20px);
+    .appt-cont{
+        .pd(40px 0);
+        .ovr();
+        
+        div{
+            opacity: .66;
+        }
+        
+        .appt-img{
+            opacity: 1;
+            .wh(160px);
+            .hg(120px);
+            .fl;
+            .mg(right,20px)
+        }
+        
+        .appt-name{
+            .abs(28px);
+            .f-w();
+            opacity: .87;
+            .mg(bottom,10px);
+            .text-hide
+        }
+        
+        .appt-txt{
+            
+            .abs(20px);
+            .text-hide;
+            
+            span{
+                .f-w()
+            }
+        }
+        
+        .appt-txt2{
+            .mg(10px auto)
+        }
+    }
+    
+    .appt-foot{
+        .ovr();
+        .br(top,1px solid #e0e0e0);
+        .pd(30px 0);
+            
+        .appt-btn{
+            
+            .dsp();
+            .fr;
+            .wh(140px);
+            .hg(52px);
+            .l-hg(52px);
+            .br(1px solid #f28019);
+            .br-rs(6px);
+            .tc;
+            .mg(left,30px);
+            .c(#f28019)
+        }
+        
+        .appt-btn-gray{
+            opacity: .44;
+            .br(1px solid #999);
+            .c(#999)
+        }
+        
+        .appt-coach{
+            .hg(52px);
+            .l-hg(52px);
+            .fl;
+            
+            .appt-coach-name{
+                .f-s(24px);
+                opacity: .66;
+                .fl;
+            }
+            
+            img{
+               .wh(52px);
+               .hg(52px);
+               .br-rs(50%);
+               .dsp();
+               .fl;
+               .mg(right,15px) 
+            }
+        }
+
+
+    }
+}
+
+//充值
+.recharge-mode{
+    .bg-c();
+    .pd(24px);
+    .mg(bottom,40px); 
+     
+    //文字描述类
+    .recharge-hr{
+        .f-s(28px);
+        .hg(28px);
+        .l-hg(28px);
+        opacity: .87;
+        .mg(30px 0)
+    }
+    
+    //输入类
+    .recharge-money{
+        .wh(100%);
+        .hg(65px);
+        .f-s(40px);
+        .f-w();
+        text-indent: 30px;
+        .br(bottom,1px solid #e3e3e4);
+        .p-rel;
+        &::-webkit-input-placeholder{
+            text-indent: 30px
+        }
+    }
+    
+    //间距
+    .recharge-wr{
+        .hg(30px)
+    }     
+}
+
+//反馈框
+.feedback-cont{
+    resize:none; 
+    .wh(100%);
+    .hg(350px);
+    .br(1px solid #727272);
+    .pd(25px);
+    .f-s(24px);
+    .l-hg(30px);
+    .mg(top,24px)
+}
+
+//账户
+.acc-pd{
+    .pd(80px 10%);
+}
+//账户输入类
+.acc-ipt{
+    .wh(100%);
+    .hg(40px);
+    .mg(bottom,60px);
+    
+    //图标类
+    i{
+        color: #fff;
+        .f-s(40px);
+        .hg(40px);
+        .dsp();
+        .fl;
+        .wh(15%)
+    }
+    
+    //输入类
+    input,select{
+        background: none;
+        .br(none);
+        .br(bottom,2px solid #939395);
+        .wh(85%);
+        .hg(100%);
+        .c(#fff);
+        .f-s()
+    }
+    
+    //验证码
+    .ipt-code{
+        .wh(140px);
+        .f-s(20px)!important;
+        .p-abs;
+        right: 0;
+        top:-10px
+        
+    }
+}
+//账号按钮
+.qcyd-btn-acc{
+    .br-rs(8px)!important
+}
+//账号提示
+.acc-txt{
+    .tc;
+    .abs(28px);
+    .c(#fff);
+    letter-spacing: 6px
+}
+
+
+//注册
+.reg-bg{
+    .bg(url(../img/reg-bg.jpg) no-repeat left center / auto 100%)
+}
+.reg-foot{
+    .p-abs;
+    .wh(80%);
+    left: 10%;
+    bottom: 160px;
+    
+    div{
+        .abs(28px);
+        .mg(bottom,50px);
+        .wh(100%);
+        .c(#fff);
+        .tc
+    }
+    
+    a{
+        opacity: .85;
+    }
+}
+
+//会员卡片
+.card-pd{
+    .pd(24px)
+}
+.cardlist-cont{
+    top:76px;
+    bottom: 100px;
+}
+.card-mode{
+    .wh(100%);
+    .hg(400px);
+    .br-rs(10px);
+    box-shadow: 0 10px 30px 5px rgba(0,0,0,.2);
+    -webkit-box-shadow: 0 10px 30px 5px rgba(0,0,0,.2);
+    .mg(bottom,45px);
+    .p-rel;
+    .ovr();
+    .c(#fff);
+    .pd(0 30px);
+    
+    //背景类
+    .card-mode-bg{
+        .p-abs;
+        .wh(100%);
+        .hg(100%);
+        left: 0;
+        top: 0;
+        z-index: -1;
+    }
+    
+    .card-mode-tit{
+        .mg(top,30px)
+    }
+    
+    .card-mode-name{
+        .mg(140px 0 20px);
+        .f-s(32px);
+        .hg(32px);
+        .l-hg(32px)
+    }
+    
+    .card-mode-money{
+        .f-s(36px);
+        .hg(36px);
+        .l-hg(36px)
+    }
+    
+    .card-mode-btn{
+        .wh(124px);
+        .hg(44px);
+        .tc;
+        .l-hg(44px);
+        .f-s(24px);
+        .br(1px solid #fff);
+        .mg(top,40px)
+    }
+}
+.card-wk{
+    .br(bottom,1px solid #e0e0e0);
+    .pd(30px 0);
+    
+    .card-wk-top{
+        .f-s(32px);
+        .hg(32px);
+        .l-hg(32px);
+        .f-w();
+        
+        .card-wk-money{
+            .fr;
+            .c(#f23503)
+        }
+    }
+    
+    .card-wk-txt{
+        .mg(top,40px)
+    }
+
+}
+.card-wk2{
+    .pd(30px 40px);
+    
+    .card-wk-btn{
+        .p-abs;
+        .wh(30px);
+        .hg(30px);
+        background: url(../img/icon/round-hook-blue.png) no-repeat center center / 100% 100%;
+        left:0;
+        top:26px;
+    }
+    .card-wk-btn-gray{
+        background: url(../img/icon/round-hook-gray.png) no-repeat center center / 100% 100%
+    }
+    
+    .card-wk-top{
+        .f-s(24px);
+        .hg(24px);
+        .l-hg(24px);
+    }
+}
+.card-wk-ipt{
+    
+    input{
+        .wh(70%);
+        .hg(50px);
+        .br(bottom,1px solid #4e7ff2);
+        .f-s(20px);
+        .mg(top,20px);
+        text-indent: 20px;
+        
+        &::-webkit-input-placeholder{
+            text-indent: 20px;
+        }
+    }
+    
+}
+
+
+.card-single{
+    .ovr();
+
+    .card-img{
+        .pd(40px 20px 0);
+        .ovr();
+        .p-rel;
+        
+        
+        .card-bg{
+            .wh(100%);
+            .hg(382px);
+            .br-rs(8px)
+            
+        }
+        
+        .card-tit{
+            .p-abs;
+            .abs(42px);
+            .wh(100%);
+            bottom: 36px;
+            .tr;
+            .pd(right,70px);
+            .c(#fff)
+        }
+    }
+    
+    .card-name{
+        .abs(40px);
+        .f-w(700);
+        .mg(top,60px);
+        opacity: .87;
+    }
+    
+    .card-money{
+        .abs(42px);
+        .c(#f45d42);
+        .mg(60px 0 30px);
+        .f-w();
+        
+        span{
+            .f-s(32px)
+        }
+    }
+    
+    .card-txt{
+        opacity: .66;
+        .f-s(24px);
+        .l-hg(35px);
+        
+             
+    }
+    
+    .card-vv{
+        .mg(top,60px);
+        .br(top,1px solid #e0e0e0);
+        .hg(108px);
+        .l-hg(108px);
+        
+        div{
+            opacity: .87;
+            .f-s(28px)
+        }
+        
+        .shop-name{
+            .wh(100%);
+            .f-w();
+            .c(#f28019)
+        }
+        
+    }
+    
+}
+
+
+
+//会员卡列表
+.card-li{
+    
+    .br(bottom,1px solid #e0e0e0);
+    .pd(40px 0);
+    .ovr();
+    
+    .card-img{
+        .wh(310px);
+        .hg(180px);
+        .br-rs(14px);
+        .ovr();
+        .fl;
+        .mg(right,40px)
+    }
+    
+    .card-name{
+        .abs(32px);
+        .f-w(700);
+        .mg(top,10px);
+        .text-hide
+    }
+    
+    .card-txt{
+        opacity: .66;
+        .f-s(24px);
+        .l-hg(35px);
+        .hg(75px);
+        .mg(17px 0 0);
+        .ovr()
+    }
+    
+    .card-money{
+        
+        .hg(36px);
+        .l-hg(36px);
+        .text-hide;
+        
+        span,em{
+            .f-w(700);
+        }
+        
+        .card-price{
+            .c(#f23503);
+            .f-s(24px);
+            .mg(right,15px);
+            opacity: .87;
+            em{
+                .f-s(36px);  
+            }
+        }
+        
+        .card-origin_price{
+            opacity: .38;
+            text-decoration:line-through;
+             
+            em{
+                .f-s(28px)            
+            }
+        }
+    }
+}
+
+//历史运动
+.sport-history{
+    .pd(30px 24px);
+    
+    //数字类
+    .sport-history-mode{
+        box-shadow: 0 5px 30px 5px rgba(0,0,0,.2);
+        -webkit-box-shadow: 0 5px 30px 5px rgba(0,0,0,.2);
+        .br-rs(6px);
+        .ovr();
+        
+        .menu-num{
+            .f-s(48px);
+            .tc;
+            .hg(48px);
+            .l-hg(48px);
+            .mg(30px 0);
+            
+            span{
+                .f-s(24px)
+            }
+        }
+        
+    }
+    
+    //日期类
+    .sport-history-year{
+        .mg(40px 0);
+        
+        i{
+            .mg(left,5px);
+            .f-s(22px);
+            .c-3
+        }
+    }
+}
+
+//私教列表
+.coach-cont{
+    top:80px;
+    bottom: 100px
+}
+
+.coach-row{
+    .wh(100%);
+    .pd(25px 0 35px);
+    .ovr();
+    
+    .coach-col{
+        .dsp();
+        .wh(20%);
+        .fl;
+        
+        .coach-col-img{
+            .wh(100px);
+            .hg(100px);
+            .db-center;
+            .p-rel;
+            
+            img{
+                
+                .wh(70%);
+                .hg(auto);
+                .abs-div-center
+                
+            }   
+        }
+
+        .coach-col-txt{
+            .tc;
+            .mg(top,20px);
+            .f-s(22px);
+            .hg(22px);
+            .l-hg(22px)
+        }
+    }
+
+}
+
+.coach-screen{
+    .br(top,1px solid #e0e0e0);
+    .pd(40px 0);
+     .ovr();
+    
+    .coach-screen-li{
+        .wh(25%);
+        .fl;
+        .tc;
+        .hg(24px);
+        .l-hg(24px);
+        .f-s(24px);
+        .f-w();
+        opacity: .87;
+        
+        .coach-icon-screen{
+            .dsp(inline-block);
+            .wh(18px);
+            .hg(18px);
+            .mg(left,8px);
+            background: url(../img/icon/screen.png); 
+            background-size: 100% 100%;
+        }
+    }
+    
+    //价格类
+    .coach-screen-arrow{
+        .p-rel;
+        
+        span:nth-of-type(1){
+            .p-abs;
+            .br(left,8px solid transparent);
+            .br(right,8px solid transparent);
+            .br(bottom,8px solid #757575);
+            left: 50%;
+            .mg(left,40px);
+            top: 2px
+        }
+        
+        span:nth-of-type(2){
+            .p-abs;
+            .br(left,8px solid transparent);
+            .br(right,8px solid transparent);
+            .br(top,8px solid  #757575);
+            left: 50%;
+            .mg(left,40px);
+            bottom: 2px
+        }
+        
+        .top-yl{
+            .br(bottom,10px solid #f28019)!important
+        }
+        
+        .bottom-yl{
+            .br(top,10px solid #f28019)!important
+        }
+    }
+    
+}
+
+.coach-li{
+    .pd(50px 0);
+    .br(bottom,1px solid #e0e0e0);
+    .p-rel;
+    
+    .coach-img{
+        .wh(120px);
+        .hg(120px);
+        .br-rs(50%);
+        .fl;
+        .mg(right,25px)
+    }
+    
+    .coach-name{
+        .f-s(36px);
+        .hg(36px);
+        .l-hg(36px);
+        .f-w();
+        .mg(bottom,20px);
+        opacity: .87
+    }
+    
+    .coach-stars{
+        .mg(10px 0 15px);
+        .ovr();
+        .hg(24px);
+        .l-hg(24px);
+        
+        span{
+            .dsp();
+            .wh(26px);
+            .hg(100%);
+            background:url(../img/icon/star.png) no-repeat;
+            background-size: 100% 100%;
+            .fl;
+            .mg(right,8px)
+        }
+        
+        .coach-txt{
+            .f-s(20px);
+            .hg(20px);
+            .l-hg(20px);
+            opacity: .54;
+            .fl
+        }
+    }
+    
+    .coach-good{
+        .f-s(24px);
+        opacity: .87;
+        .hg(24px);
+        .l-hg(24px);
+        
+        span{
+            .dsp();
+            .fl;
+            .mg(right,15px)
+        }
+    }
+    
+    .coach-money{
+        .p-abs;
+        top:45px;
+        right: 0;
+        .c(#f23503);
+        opacity: .87;
+        .f-s(20px);
+        .text-hide;
+        .hg(28px);
+        .l-hg(28px);
+        .wh(100%);
+        .tr;
+        
+        span{
+            .f-w();
+            .f-s(28px)
+        }
+    }
+    
+    .coach-hr{
+        .p-abs;
+        .wh(145px);
+        .hg(4px);
+        .bg-c(#fff);
+        left: 0;
+        bottom: -3px;
+        z-index: 99;
+    }
+}
+
+//筛选
+.screen-mode{
+    position: fixed;
+    .wh(90%);
+    .bg-c();
+    top:36%;
+    left: 5%;
+    z-index: 9999;
+    .pd(30px 24px);
+    .ovr();
+    box-shadow: 0 10px 30px 5px rgba(0,0,0,.2);
+    -webkit-box-shadow: 0 10px 30px 5px rgba(0,0,0,.2);
+    .br-rs(6px);
+    .dsp(none);
+    
+    .screen-tit{
+        .f-s();
+        .hg(22px);
+        .l-hg(22px);
+        .mg(bottom,15px);
+        .wh(100%);
+        .ovr()
+    }
+    
+    .screen-div{
+        .mg(bottom,30px);
+        .ovr();
+        
+        div{
+            .pd(15px 30px);
+            .br(1px solid #e6e6e6);
+            .br-rs(6px);
+            .fl;
+            .mg(0 15px 15px 0);
+            .ovr()    
+        }
+        
+        .ck-yl{
+            .bg-c(#f28019);
+            .c(#fff)
+        }
+    }
+}
+
+//私教课详情
+
+//私教卡片
+.coach-card{
+    box-shadow: 0 10px 30px 5px rgba(0,0,0,.2);
+    -webkit-box-shadow: 0 10px 30px 5px rgba(0,0,0,.2);
+    .anime-ease;
+    .hg(240px);
+    .ovr();
+    .mg(70px 0 50px);
+    .pd(40px 20px);
+    .br-rs(8px);
+    .p-rel;
+    
+    .coach-top{
+        .hg(40px);
+        opacity: .87;
+        
+        .coach-name{
+            .abs(40px)
+        }
+        
+        .coach-num{
+            opacity: .54;
+        }
+    }
+    
+    .coach-img{
+        .fr;
+        .wh(120px);
+        .hg(120px);
+        .br-rs(50%);
+        .p-abs;
+        right: 20px;
+        top: 40px;
+        z-index: 999;
+    }
+    
+    .coach-txt{
+        .f-s(24px);
+        opacity: .66;
+        .l-hg(35px);
+        .mg(top,30px);
+        .wh(75%)
+    }
+    
+    .coach-stars{
+        .ovr();
+        .p-abs;
+        right: 10px;
+        bottom: 40px;
+        
+        span{
+            .dsp();
+            .wh(26px);
+            .hg(24px);
+            background:url(../img/icon/star.png) no-repeat;
+            background-size: 100% 100%;
+            .fl;
+            .mg(right,8px)
+        }
+    }
+}
+
+//私教标题
+.coach-tit{
+    .f-s(28px);
+    opacity: .87;
+    .hg(28px);
+    .l-hg(28px);
+    .mg(30px 0);
+    .f-w()
+}
+
+//私教时间段
+.coach-times{
+    .ovr();
+    
+    div{
+        .fl;
+        .pd(0 25px);
+        .f-s(20px);
+        .hg(72px);
+        .l-hg(72px);
+        .br(1px solid #e0e0e0);
+        .ovr();
+        opacity: .87;
+        .mg(right,20px);
+        .mg(bottom,40px);
+        .br-rs(6px);
+        .c(#7e7e7e)
+    }
+
+    .active{
+        .bg-c(#f28019);
+        .br(none);
+        .c(#fff) 
+    }
+    
+    .no{
+        .bg-c(#e0e0e0);
+        .br(none);
+        .c(#6e6e6e)
+    }
+}
+
+//私教擅长
+.coach-good{
+    
+    .pd(0 0 15px);
+    .ovr();
+    div{
+        .fl;
+        .f-s(24px);
+        
+        opacity: .66;
+        .mg(0 20px 15px 0)
+    }
+}
+
+//私教照片
+.coach-images{
+    .pd(bottom,40px);
+    .br(bottom,1px solid #e0e0e0);
+    .ovr(y,hidden);
+    .ovr(x,auto);
+    white-space: nowrap;
+    
+    img{
+        .mg(right,18px);
+        .br-rs(4px);
+        .wh(200px);
+        .hg(auto)
+    }
+}
+
+//私教服务地点
+.coach-place{
+    .pd(bottom,20px);
+    .br(bottom,1px solid #e0e0e0);
+    .ovr();
+    
+    div{
+        .pd(15px 20px);
+        .fl;
+        .mg(0 20px 20px 0);
+        .br(1px solid #fbbb80);
+        .br-rs(35px);
+        .c(#f28019)
+    }
+}
+
+//所授课程
+.coach-courses{
+    .pd(bottom,20px);
+    .br(bottom,1px solid #e0e0e0);
+    .ovr();
+    .anime-ease;
+    
+    .coach-course-li{
+        .hg(120px);
+        .mg(bottom,40px);
+        .p-rel;
+
+        .coach-course-img{
+            .wh(160px);
+            .hg(100%);
+            .fl;
+            .mg(right,20px);
+            .br-rs(6px)
+        }
+        
+        .coach-course-name{
+            .abs(24px);
+            opacity: .87;
+            .f-w()
+        }
+        
+        .coach-course-txt{
+            .abs(20px);
+            opacity: .66;
+            .mg(15px 0 30px)
+        }
+        
+        .coach-course-money{
+            .c(#f45d42);
+            .f-s(20px);
+            
+            span{
+                .f-s(28px);
+                .f-w()
+            }
+        }
+        
+       .coach-course-radio{
+           .p-abs;
+           right: 25px;
+           top:35px;
+           .c(#ccc);
+           .abs(50px)
+       }
+       
+       .radio-yl{
+           .c(#f28019)
+       }
+    }
+}
+
+//服务流程
+.coach-service{
+    .pd(bottom,40px);
+    .br(bottom,1px solid #e0e0e0);
+    .ovr();
+}
+
+//会员评价
+.coach-eva{
+    .br(bottom,1px solid #e0e0e0);
+    .ovr();
+
+    .coach-eva-li{
+        .mg(bottom,60px);
+        
+        .coach-eva-top{
+            .hg(60px);
+            .mg(bottom,18px);
+            .p-rel;
+            
+            .coach-eva-img{
+                .wh(60px);
+                .hg(60px);
+                .br-rs(50%);
+                .fl;
+                .mg(right,20px);
+                .br(1px solid #ccc)
+            }
+            
+            .coach-eva-vor{
+                .hg(26px);
+                .l-hg(26px);
+                
+                .coach-eva-name{
+                    .f-s(26px);
+                    .c(#474747);
+                    .fl;
+                    .mg(right,20px)
+                }
+                
+                .coach-eva-stars{
+                    .fl;
+                    
+                    span{
+                        .dsp(inline-block);
+                        .wh(26px);
+                        .hg(26px);
+                        .fl;
+                        .mg(right,10px);
+                        background:url(../img/icon/star.png) center center / 100% 100% no-repeat
+                    }
+                }
+            }
+            
+            .coach-eva-time{
+                .f-s(18px);
+                opacity: .38;
+                .mg(top,10px)
+            }
+            
+            .coach-eva-coursename{
+                .p-abs;
+                right: 0;
+                top:2px
+            }
+                
+        }
+        
+        .coach-eva-txt{
+            .f-s(24px);
+            opacity: .66;
+            .l-hg(30px)
+        }
+
+    }
+}
+
+//购买私教课
+.coach-pay-top{
+    .hg(115px);
+    .ovr();
+    .mg(top,20px);
+    .p-rel;
+    .pd(bottom,40px);
+    .br(bottom,1px solid #e0e0e0);
+    
+    .coach-img{
+        .wh(100px);
+        .hg(75px);
+        .fl;
+        .br(1px solid #ccc);
+        .mg(right,22px)
+    }
+    
+    .coach-name{
+        .f-s(24px);
+        opacity: .87;
+        .hg(24px);
+        .l-hg(24px);
+    }
+    
+    .coach-txt{
+        .f-s(20px);
+        opacity: .66;
+        .hg(20px);
+        .l-hg(20px);
+        .mg(top,10px)
+    }
+    
+    .coach-money{
+        .c(#d13846);
+        .p-abs;
+        right: 0;
+        top: 25px;
+        
+        span{
+            .f-s(28px);
+            .f-w(500)
+        }
+    }
+    
+}
+
+//添加、减少课程节数
+.coach-pay .item span{
+    opacity: .38;
+    .f-s(20px);
+    .mg(left,5px)
+}
+.coach-pay .course-section{
+    .p-abs;
+    .hg(120px);
+    right: 0;
+    top: 0;
+    
+    em,a{
+        .dsp();
+        .fr
+    }
+    
+    .section-ck{
+        .wh(50px);
+        .hg(50px);
+        .mg(top,35px);
+        .ovr()
+    }
+    
+    .section-ck:last-child{
+        background: url(../img/icon/course-reduce.png) center center / 100% 100% no-repeat;
+    }
+    
+    .section-ck:first-child{
+        background: url(../img/icon/course-add.png) center center / 100% 100% no-repeat;
+    }
+    
+    .section-num{
+        .hg(100%);
+        .l-hg(120px);
+        .mg(0 20px);
+        opacity: .87
+    }
+}
+
+//私教课金额
+.coach-total{
+    .wh(100%);
+    .hg(120px);
+    .l-hg(120px);
+    .tr;
+    
+    em{
+        .f-s(48px);
+        .f-w();
+        .c(#f45d42)
+    }
+}
+
+
+//我的私教课
+.my-course-li{
+   .hg(200px);
+   .pd(40px 0);
+   .ovr();
+   .p-rel;
+   .br(bottom,1px solid #e0e0e0);
+   
+   .my-course-img{
+       .hg(120px);
+       .wh(160px);
+       .mg(right,20px);
+       .fl
+   }
+   
+   .my-course-name{
+       .f-s(28px);
+       .f-w(500);
+       .hg(28px);
+       .l-hg(28px);
+       opacity: .87;
+   }
+   
+   .my-course-time{
+       .f-s(20px);
+       opacity: .66;
+       .hg(20px);
+       .l-hg(20px);
+       .mg(14px 0 38px)
+   }
+   
+   .my-course-num{
+       .f-s(24px);
+       .hg(24px);
+       .l-hg(24px);
+       opacity: .87;
+       
+       span{
+            .c(#f4933b)
+       }
+   }
+   
+   .my-course-btn{
+       .p-abs;
+       .wh(120px);
+       .hg(52px);
+       .br(1px solid #9e9e9e);
+       .tc;
+       .l-hg(52px);
+       right: 0;
+       .bg-c();
+       top:74px
+   }
+}
+
+//预约
+.make-bg{
+    .pos(fixed);
+    z-index: 9990;
+    .wh(100%);
+    .hg(100%);
+    .bg-c(rgba(0,0,0,.8));
+    left: 0;
+    top: 0;
+    display: none;
+}
+.make-mode{
+    .pos(fixed);
+    .wh(100%);
+    z-index: 9999;
+    left: 0;
+    bottom: -1000px;
+    .anime-ease;
+    .bg-c();
+    
+    .make-top{
+        .hg(80px);
+        .l-hg(80px);
+        .bg-c(#efefef);
+        .p-rel;
+        
+        .make-tit{
+            .f-s(28px);
+            .f-w(500);
+            .tc;
+            
+            &:after{
+                content: '';
+                .p-abs;
+                .wh(0);
+                .hg(0);
+                .br(top,8px solid #000);
+                .br(left,8px solid transparent);    
+                .br(right,8px solid transparent);
+                left: 25%;
+                top: calc(50%-4px)
+                    
+            }
+            
+        }
+        
+        .make-cancel{
+            .p-abs;
+            .hg(100%);
+            .l-hg(80px);
+            right: 24px;
+            top: 0;
+            opacity: .66;
+        }
+        
+        .make-shop{
+            .p-abs;
+            .br(none);
+            .bg-c(#efefef);
+            opacity: .87;
+            .hg(100%);
+            .l-hg(80px);
+            left: 24px;
+            top: 0;
+            appearance:none;
+            -moz-appearance:none;
+            -webkit-appearance:none
+        }
+        
+    }
+    
+    .date-menu,.coach-times,.make-foot{
+        .bg-c()
+    }
+    
+    .make-foot{
+        .pd(20px 22px);
+        .br(top,1px solid #e0e0e0);
+        
+        .qcyd-btn{
+            .br-rs(6px)
+        }
+    }
+}
+
+
+//公共课列表
+.group-cont{
+    top:230px;
+    bottom:100px
+}    
+
+//公共课详情
+.groupCourse-dtl-img{
+    .wh(100%);
+    .hg(auto)
+}
+.lod-dtl{
+    .br(bottom,1px solid #e0e0e0);
+    .pd(40px 0);
+    opacity: .87;
+    .p-rel;
+    .ovr();
+    
+    .lod-tit{
+        .f-s(32px);
+        .text-hide;
+        .hg(32px);
+        .l-hg(32px);
+        
+        span{
+            .c-red;
+            .mg(left,10px)   
+        }
+    }
+    
+    .lod-txt{
+        .hg(22px);
+        .l-hg(22px);
+        
+        .mg(top,30px);
+        
+        i{
+            .dsp(inline-block);
+            .wh(35px);
+            .c(#9e9e9e);
+            .tc
+        }
+    }
+    
+    .lod-dl{
+        .wh(100%);
+        .p-abs;
+        .tr
+    }
+    
+    .lod-dl:nth-child(4){
+        top:45px;
+        .f-s(24px);
+        .f-w()
+    }
+    
+    .lod-dl:nth-child(5){
+        top:120px
+    }
+    
+    //私教类
+    .lod-dtl-img{
+        .wh(160px);
+        .hg(160px);
+        .br-rs(50%);
+        .fl;
+        .mg(right,30px);
+        .br(1px solid #ccc)
+    }
+    .lod-dtl-coach-name{
+        .abs(28px);
+        .mg(15px 0 30px)
+    }
+    .lod-dtl-coach-lcd{
+        .abs(22px);
+        .mg(bottom,20px);
+        .text-hide
+    }
+    .lod-dtl-coach-label{
+        span{
+            .dsp(inline-block);
+            .pd(10px 20px);
+            .br(1px solid #6590f5);
+            .br-rs(30px);
+            .mg(right,20px);
+            .c(#6590f5)
+        }
+    }
+    
+}
+//课程简介
+.course-ide{
+    .f-s(28px);
+    .mg(38px 0 30px)
+}
+.course-ide-cont{
+    .f-s(24px);
+    .l-hg(48px);
+    .pd(bottom,100px)
+}
+
+
+
+//首页会员卡模块
+/*
+.card-row-mode{
+    .wh(100%);
+    .tc;
+    .ovr();
+    .pd(top,40px);
+    .bg(#fff);
+    
+    .card-row-mode-img{
+        .dsp();
+        .wh(30%);
+        .hg(auto);
+        .fl;
+        .mg(0 0 40px 2.5%);
+        box-shadow: 0 10px 30px 5px rgba(0,0,0,.2);
+        -webkit-box-shadow: 0 10px 30px 5px rgba(0,0,0,.2);
+        .br-rs(6px)
+    }
+ 
+}
+*/
+
+//我的会员卡
+.my-card-dce{
+    .f-s(24px);
+    .mg(top,40px);
+    .l-hg(36px)
+}
+.my-card-mode{
+    .br(bottom,1px solid #e0e0e0);
+    opacity: .87;
+    .tc;
+    .pd(bottom,50px);
+    
+    .my-card-name{
+        .f-s(32px);
+        .hg(32px);
+        .l-hg(32px)
+    }
+    
+    .my-card-txt{
+        .mg(20px 0 20px);
+        .hg(22px);
+        .l-hg(22px) 
+    }
+    
+    .my-card-btn{
+        .dsp(table);
+        .wh(auto);
+        .mg(50px auto 0);
+        
+        a{
+            .dsp(table-cell);
+            .fl;
+            .f-s(24px);
+            .f-w();
+            .br(1px solid #ff8d27);
+            .br-rs(6px);
+            .tc;
+            .c(#ff8d27);
+            .pd(20px 50px);
+            .mg(0 10px)
+        }
+    }
+    
+    input{
+        .br(1px solid #ccc);
+        .br-rs(4px);
+        .wh(60%);
+        .hg(50px);
+        .dsp();
+        .mg(30px auto 0);
+        text-indent: 20px;
+        .f-s(22px);
+        &::-webkit-input-placeholder{
+            text-indent: 20px;
+            .f-s(22px);
+        }
+    }
+}
+
+
+
+
+
+
+
+//组合支付
+.pay-group-mode{
+   position: fixed;
+   .wh(100%);
+   .hg(100%);
+   background:rgba(0,0,0,.7);
+   z-index: 9999;
+   .dsp(none);
+   
+   .pay-group-div{
+       .p-abs;
+       .wh(80%);
+       .bg-c(#fff);
+       .br-rs(6px);
+       left: 10%;
+       top: 50%;
+       .hg(462px);
+       .mg(top,-231px);
+       .pd(0 30px);
+       
+       .pay-group-cont{
+           .hg(100px);
+           .l-hg(100px);
+           opacity: .87;
+           .f-s(28px);
+           .br(bottom,1px solid #e0e0e0)
+       }
+       
+       .pay-group-cont:first-child{
+           .f-w()
+       }
+       
+       .pay-group-money{
+           .hg(150px);
+           .l-hg(150px);
+           .text(right);
+           .f-s(24px);
+           
+           span{
+               .f-s(48px);
+               .c(#f45d42)
+           }
+       }
+       
+       .pay-group-foot{
+           .hg(72px);
+           .l-hg(72px);
+           .dsp(table);
+           .ovr();
+           .mg(bottom,40px);
+           .wh(100%);
+           
+           a{
+               .dsp(table-cell);
+               .fl;
+               .wh(35%);
+               .hg(100%);
+               .tc;
+               .f-s(24px);
+               .br-rs(6px)
+           }
+           
+           a:nth-of-type(1){
+               .br(1px solid #e0e0e0);
+               .c(#a4a4a4);
+               .mg(right,15%)
+           }
+          
+           a:nth-of-type(2){
+               .bg-c(#f28019);
+               .c(#fff);
+               .mg(left,15%)
+           }
+       }
+   }
+}
+
+
+
+//单选
+.xp-radio-list{
+    .hg(50px);
+    .l-hg(50px);
+    .p-rel;
+    .f-s(24px);
+    .let();
+    .dsp();
+    
+    //按钮类
+    .xp-radio-btn{
+        .p-abs;
+        .hg(40px);
+        .wh(40px);
+        top:5px;
+        right: 0;
+        background:url(../img/icon/round-hook-gray.png) no-repeat center center / 100% 100%;
+    }
+    
+    .xp-radio-btn-blue{
+        background:url(../img/icon/round-hook-blue.png) no-repeat center center / 100% 100%;
+    }
+    
+    //图标类
+    img{
+        .wh(50px);
+        .hg(50px);
+        .dsp(inline-block);
+        .mg(right,10px)   
+    }
+}
+
+
+//底部菜单
+.foot-nav{
+    .hg(100%);
+    .bg-c();
+    
+    
+    //图标类
+    .tab-item{
+        .mg(top,13px);
+        max-width:100%;
+        opacity: .85;
+    }
+    .tab-item .icon{
+        .hg(42px);
+        .f-s(42px)
+    }
+    .tab-item div{
+        .f-s(20px)
+    }
+    
+}
+
+//按钮
+.qcyd-btn{
+    .bg-c(#f28019);
+    .c(#fff);
+    .dsp();
+    .tc
+}
+.qcyd-btn-small{
+    .hg(52px);
+    .l-hg(52px);
+    .wh(140px);
+    .br-rs(4px);
+    .f-s(24px)
+}
+.qcyd-btn-large{
+    .hg(100px);
+    .l-hg(100px);
+    .wh(100%);
+    .f-s(28px)
+}
+.qcyd-btn-db{
+    .wh(100%);
+    .hg(100%);
+    .ovr();
+    
+    .qcyd-btn-li{
+        .wh(50%);
+        .hg(100%);
+        .fl;
+        
+        .course-txt{
+            .abs(28px);
+            opacity: .87;
+            .f-w();
+            .mg(20px 0 20px 24px)
+        }
+        
+        .course-bar{
+            .wh(70%);
+            .hg(8px);
+            .bg-c(#e3e3e4);
+            .mg(left,24px);
+            .br-rs(35px);
+            .ovr();
+            .p-rel;
+            
+            .bar-mv{
+                z-index: 999;
+                .p-abs;
+                .hg(8px);
+                left: 0;
+                bottom: 0;
+                .bg-c(#f28019);
+                .wh(0);
+                .anime-ease
+            }
+        }
+        
+        .btn{
+            .dsp();
+            .wh(90%);
+            .hg(100%);
+            .l-hg(60px);
+            .br-rs(6px);
+            .f-s(26px);
+            .fr
+        }
+
+    }
+    
+    .qcyd-btn-li2{
+        .pd(20px 24px)
+    }
+}
+
+
+//场馆头部
+.club-sel{
+    .p-abs;
+    .wh(100%);
+    .hg(80px);
+    left: 0;
+    top: 0;
+    z-index: 999;
+    opacity: 0;
+}
+.club-header{
+    .hg(80px);
+    .l-hg(80px);
+    .wh(100%);
+    opacity: .87;
+    
+    i{
+        .dsp(inline-block);
+        .mg(0 15px 0 25px);
+        .f-s(26px);
+        opacity: .87;
+    }
+    
+    img{
+        .wh(40px);
+        .hg(auto);
+        .mg(0 10px 0 25px)
+    }
+}
+
+//日期类
+.date-menu{
+    
+    .wh(100%);
+    .hg(150px);
+    .br(top,1px solid #e0e0e0);
+    .dsp(flex);
+    display: -webkit-box;
+    .p-rel;
+    
+    .date-menu-li{
+        .dsp();
+        flex:1;
+        -webkit-flex:1;
+        -webkit-box-flex:1;
+        .f-s(24px);
+        .tc;
+        .l-hg(150px);
+        .f-w();
+        .c-9
+    }
+    
+    .date-menu-active{
+        .p-abs;
+        .wh(80px);
+        .hg(80px);
+        left: 24px;
+        top:30px;
+        .bg(#f28019);
+        box-shadow: 0 8px 20px 2px rgba(242,128,25,.8);
+        -webkit-box-shadow: 0 8px 20px 2px rgba(242,128,25,.8);
+        border: 1px solid rgba(241, 151, 69, .9);
+        .br-rs(50%);
+        z-index: 999;
+        .c(#fff);
+        .pd(top,15px);
+        
+        div{
+            .tc;
+            .f-s(24px);
+            .hg(24px);
+            .l-hg(24px);
+            .mg(bottom,10px)
+        }
+
+    }
+}
+
+//人数类
+.people-mode{
+    .hg(80px);
+    .p-abs;
+    .l-hg(80px);
+    .wh(30%);
+    top: 0;
+    right: 0;
+    opacity: .87;
+    z-index: -1;
+    
+    div{
+        .fr;
+        .mg(right,24px);
+        
+        span{
+            .dsp(inline-block);
+            .wh(20px);
+            .hg(25px);
+            .mg(right,10px)
+        }
+    }
+}
+
+//协议
+.aet-mode{
+    .wh(100%);
+    .hg(100%);
+    background:rgba(0,0,0,.8);
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 9999;
+    .c(#fff);
+    .dsp(none);
+    .ovr();
+    
+    //头部
+    .aet-top{
+        .f-s(30px);
+        .tc;
+        .mg(10% 0)
+    }
+    
+    .aet-cont{
+        .pd(0 40px);
+        .hg(60%);
+        .ovr(y,auto);
+        .ovr(x,hidden);
+        .f-s(24px);
+        .l-hg(35px)
+    }
+    
+    .qcyd-btn-small{
+        .wh(200px);
+        .mg(30px auto)
+    }
+}
+
+//场馆列表
+.club-li{
+    .pd(40px 0);
+    .ovr();
+    .p-rel;
+    .br(bottom,1px solid #e8e8e8);
+    
+    .club-img{
+        .wh(200px);
+        .hg(150px);
+        .fl;
+        .mg(right,30px);
+        .br-rs(8px);
+        .ovr()
+    }
+    
+    .club-name{
+        .abs(32px);
+        .f-w(700);
+        opacity: .87;
+    }
+    
+    .club-add{
+        opacity: .66;
+        .f-s(24px);
+        .wh(350px);
+        .hg(70px);
+        .l-hg(35px);
+        .ovr();
+        .mg(10px 0 15px)
+    }
+    
+    .club-square{
+        .abs(24px);
+        opacity: .54;
+    }
+    
+    //箭头类
+    .icon{
+        .p-abs;
+        right: 20px;
+        .f-s(40px);
+        opacity: .5;
+        top: 50%;
+        .mg(top,-20px)
+    }
+}
+
+//场馆内容
+.club-cont{
+    
+    //场馆照片
+    .club-images{
+        img{
+            .wh(100%);
+            .hg(auto)
+        }
+    }
+    
+    //模块
+    .club-div{
+        .pd(60px 0);
+        .ovr();
+        .br(bottom,1px solid #e0e0e0);
+        
+        .club-name{
+            .abs(40px);
+            .f-w();
+            opacity: .87
+        }
+        
+        .club-add{
+            .abs(24px);
+            opacity: .66;
+            .mg(20px 0 40px);
+            .text-hide
+        }
+        
+        .club-adv{
+            span{
+                .dsp(inline-block);
+                .pd(0 15px);
+                .hg(40px);
+                .l-hg(40px);
+                .c(#f28019);
+                .bg-c(#feecdd);
+                .br(1px solid #facfa8);
+                .br-rs(8px);
+                .mg(right,20px)
+            }
+        }
+        
+        .club-tit{
+            .abs(32px);
+            .f-w();
+            opacity: .87;
+            .mg(bottom,40px)
+        }
+        
+        .club-tit2{
+            .mg(0)
+        }
+        
+        .club-per{
+            
+            .f-s(26px);
+            .wh(100%);
+            .ovr();
+            .mg(bottom,60px);
+            
+            div{
+                min-height: 26px;
+                .fl;
+                
+                .l-hg(40px)
+            }
+            
+            .club-per-left{
+                .wh(20%);
+                opacity: .54
+            }
+            
+            .club-per-right{
+                .wh(80%);
+                opacity: .87
+            }
+        }
+        
+        .club-per:last-of-type{
+            .mg(0)
+        }
+        
+        .club-per2{
+            .f-s(24px)
+        }
+        
+        .coach-cont{
+            .hg(113px);
+            .mg(bottom,60px);
+            .ovr();
+            
+            .coach-img{
+                .wh(113px);
+                .hg(113px);
+                .br-rs(50%);
+                .ovr();
+                .fl;
+                .mg(right,30px)
+            }
+            
+            .coach-name{
+                .abs(28px);
+                .f-w();
+                opacity: .87;
+            }
+            
+            .coach-txt{
+                opacity: .54;
+                .f-s(24px);
+                .wh(500px);
+                .hg(70px);
+                .l-hg(35px);
+                .ovr();
+                .mg(top,15px);
+                
+                span{
+                    .mg(right,25px)
+                }
+            }
+
+        }
+        
+        .coach-cont:last-of-type{
+            .mg(0)
+        }
+        
+        .date-menu{
+            .br(0)
+        }
+    }
+}
+
+//优惠劵
+.coupon-mode{
+    .ovr();
+    .pd(60px 40px 150px);
+
+    .coupon-bar{
+        .wh(100%);
+        .hg(388px);
+        .mg(bottom,58px);
+        .pd(left,40px);
+        .ovr();
+        .br-rs(8px);
+        .p-rel;
+        
+        div{
+            .c(#fff)
+        }
+        
+        .coupon-name{
+            .abs(28px);
+            .mg(top,50px)
+        }
+        
+        .coupon-txt{
+            .abs(32px);
+            .mg(30px 0 40px)
+        }
+        
+        .coupon-money{
+            .abs(60px);
+            .f-w();
+            span{
+                .f-s(36px)
+            }
+        }
+        
+        .coupon-term{
+            .p-abs;
+            .wh(100%);
+            .abs(24px);
+            left: 0;
+            .pd(right,30px);
+            .tr;
+            bottom: 50px;
+        }
+    }
+    
+    .coupon-des{
+        .f-s(28px);
+        .l-hg(48px);
+        opacity: .87;
+    }
+    
+    .qcyd-btn{
+        .hg(80px);
+        .l-hg(80px);
+        .br-rs(6px);
+        .mg(top,60px)
+    }
+    
+    .coupon-give{
+        .tc;
+        .abs(32px);
+        .f-w();
+        .mg(top,32px);
+        .c(#f28019)
+    }
+    
+    .slider-pager{
+        .hg(25px);
+        .l-hg(25px);
+        
+        .slider-pager-page{
+            .mg(0 6px)
+        }
+        
+        .active{
+            .c(#559dff)
+        }
+    }
+}
+
+//私教申请
+.recruit-div{
+    .br(top,1px solid #e0e0e0);
+    .pd(50px 0);
+    .ovr();
+    
+    .recruit-tit{
+        .abs(28px);
+        opacity: .87;
+        .mg(bottom,30px);
+        
+        span{
+            .f-s(20px);
+            opacity: .38;
+        }
+    }
+    
+    .recruit-channel{
+        .fl;
+        .pd(10px 18px);
+        .br(1px solid #ccc);
+        .br-rs(6px);
+        .mg(0 40px 30px 0);
+        opacity: .66;
+    }
+    
+    .channel-org{
+        .bg-c(#f28019);
+        .c(#fff);
+        opacity: 1;
+    }
+    
+    textarea{
+        .br(1px solid #e0e0e0);
+        .f-s(28px);
+        opacity: .87;
+        .mg(top,0)
+    }
+    
+    .photo-up{
+        .dsp();
+        .wh(112px);
+        .hg(112px);
+        .bg(url(../img/recruit-up.jpg) center center / 100% 100% no-repeat);
+        .fl;
+        .ovr();
+        .p-rel;
+        .mg(bottom,30px);
+        
+        input{
+            opacity: 0;
+            left: 0;
+            top: 0;
+            z-index: 999;
+        }
+    }
+    
+    .photo{
+        .wh(162px);
+        .hg(112px);
+        .p-rel;
+        .fl;
+        .mg(0 30px 30px 0);
+        
+        .phpoto-close{
+            .p-abs;
+            .wh(30px);
+            .hg(30px);
+            right: -15px;
+            top: -15px;
+            .bg(url(../img/icon/close-up.png) center center / 100% 100% no-repeat)
+        }
+
+    }
+    
+}
+.recruit-div2{
+    .pd(50px 0 20px)
+}
+
+//私教时间段
+.xp-coach-week{
+    
+    .hg(150px);
+    .ovr();
+    
+    .date-menu{
+        .wh(80%);
+        .fl;
+        
+        .date-menu-active{
+            left: 0
+        }
+    }
+    
+    .xp-coach-week-arr{
+        .wh(10%);
+        .fl;
+        .hg(100%);
+        .tc;
+        .f-s(40px);
+        .l-hg(150px);
+        .dsp()
+    }
+}
+
+//赠送卡
+.bean-mode{
+    position: fixed;
+    z-index: 9999;
+    .wh(100%);
+    .hg(100%);
+    left: 0;
+    top: 0;
+    .bg-c(rgba(0,0,0,.8));
+    .dsp(none);
+    
+    .bean-div{
+        .wh(0);
+        .hg(0);
+        .abs-div-center;
+        .anime-ease;
+        
+        img{
+            .wh(75%);
+            .hg(auto);
+            .abs-div-center;
+            z-index: 999
+        }
+
+    }
+}
+
+//开门弹窗
+.opendoor-mode{
+    position: fixed;
+    z-index: 9999;
+    .wh(100%);
+    .hg(100%);
+    left: 0;
+    top: 0;
+    .bg-c(rgba(0,0,0,.8));
+    .dsp(none);
+    
+    .opendoor-div{
+        .bg-c(#fff);
+        .wh(400px);
+        .hg(350px);
+        .abs-div-center;
+        .br-rs(6px);
+        .ovr();
+        
+        .opendoor-tit{
+            .hg(80px);
+            .l-hg(80px);
+            .tc;
+            .f-s(28px);
+            .br(bottom,1px solid #ccc)
+        }
+        
+        .opendoor-shop{
+            .br(none);
+            .wh(auto);
+            .hg(40px);
+            .l-hg(40px);
+            .f-s(28px);
+            .dsp();
+            .mg(50px auto)
+        }
+        
+        .opendorr-foot{
+            .hg(100px);
+            .ovr();
+            
+            .btn{
+                .wh(100%)
+            }
+        }
+        
+    }
+}
+
+
+
+//区域选择
+.region-mode{
+    .pos(absolute);
+    left: -110%;
+    top: 0;
+    .wh(100%);
+    .hg(100%);
+    .bg-c(#fff);
+    z-index: 9999;
+    .ovr(x,hidden);
+    .ovr(y);
+    .anime-easetwo;
+    
+    .region-tit{
+        .hg(120px);
+        .l-hg(120px);
+        .f-s(40px);
+        .f-w();
+        .tc;
+        .mg(bottom,30px);
+        .p-rel;
+        
+        .region-close{
+            .p-abs;
+            .wh(120px);
+            .hg(120px);
+            left: 0;
+            top: 0;
+            
+            div{
+                .p-abs;
+                .wh(30px);
+                .hg(30px);
+                left: 25px;
+                top: 45px;
+                
+                &:after,&:before{
+                    content: '';
+                    .bg-c(#000);
+                    opacity: .66;
+                    .wh(100%);
+                    .hg(3px);
+                    .br-rs(35px);
+                    .abs-div-center
+                }
+            
+                &:after{
+                    transform: rotate(45deg);
+                    -webkit-transform: rotate(45deg);
+                }
+                
+                &:before{
+                    transform: rotate(-45deg);
+                    -webkit-transform: rotate(-45deg);
+                }
+                
+            }
+            
+            
+        }
+    }
+    
+    .region-cont{
+        
+        .pd(0 25px);
+        .ovr();
+        
+        .region-nav{
+            .br(bottom,1px solid #e0e0e0);
+            .f-s(26px);
+            .hg(80px);
+            .wh(100%);
+            .ovr();
+            .anime-easetwo;
+            
+            .region-nav-tit{
+                opacity: .87;
+                .hg(80px);
+                .l-hg(80px);
+            }
+            
+            .region-snav{
+                .pd(0 35px 0 35px);
+                .ovr();
+                
+                div{
+                    .hg(70px);
+                    .l-hg(70px)
+                }
+                
+                div:last-of-type{
+                    .mg(bottom,35px)
+                }
+            }
+        }
+        
+    }
+}
+
+.sign-record{
+    
+    #calendar{
+        .ovr();
+        .bg(url(../img/sign-record.jpg) center center / auto 150% repeat-x);
+
+        .title{
+            .hg(115px);
+            .p-rel;
+            .mg(bottom,40px);
+            .ck-div{
+                
+                .wh(100px);
+                .hg(100%);
+                .p-abs;
+                top: 0;
+                z-index: 9999;
+                
+            }
+            
+            .ck-lf{
+                left: 0;
+            }
+            
+            .ck-rg{
+                right: 0;
+            }
+            
+            .prev,.next{
+                .wh(25px);
+                .hg(35px);
+                .p-abs;
+                top: 40px;
+                z-index:999;
+                
+                &:after,&:before{
+                    .p-abs;
+                    content: '';
+                    .wh(100%);
+                    .hg(4px);
+                    .bg-c(#fff);
+                    left: 0;
+                    top: calc(50%);
+                    .br-rs(35px)
+                }
+            }
+            
+            .prev{
+                left: 40px;
+                
+                &:after{
+                    transform: rotate(-45deg);
+                    -webkit-transform: rotate(-45deg);
+                    top: 2px;
+                }
+                
+                &:before{
+                    transform: rotate(45deg);
+                    -webkit-transform: rotate(45deg);
+                    bottom: 2px;
+                }
+            }
+            
+            .next{
+                right: 40px;
+                
+                &:after{
+                    transform: rotate(-45deg);
+                    -webkit-transform: rotate(-45deg);
+                    bottom: 2px;
+                }
+                
+                &:before{
+                    transform: rotate(45deg);
+                    -webkit-transform: rotate(45deg);
+                    top: 2px;
+                }
+            }
+            
+            .month-span{
+                .hg(100%);
+                .l-hg(115px);
+                .f-s(40px);
+                .f-w();
+                .c(#f28019);
+                .tc
+            }
+        }
+        
+        #signLayer{
+          
+          .sign{
+              
+              .sign-tit,.sign-li{
+                  .wh(100%);
+                  .mg(bottom,30px);
+                  min-height: 32px;
+                  .ovr();
+                  
+                  div{
+                      .fl;
+                      .wh(14.2%);
+                      .tc;
+                      .f-s(28px);
+                      .c(#fff)
+                  }   
+              }
+              
+              .sign-tit{
+                  div{
+                      .f-s(32px);
+                  }
+              }
+              
+              .sign-li{
+                  
+                  .mg(bottom,20px);
+                  
+                  div{
+                      
+                      .hg(60px);
+                      .l-hg(60px);
+                      
+                      span{
+                          .dsp();
+                          .wh(60px);
+                          .hg(60px);
+                          .br(3px solid #f28019);
+                          .br-rs(50%);
+                          .ovr();
+                          .mg(0 auto)
+                      }
+                  }
+              }
+
+            }  
+        }
+        
+    }
+    
+    .sign-hr{
+        .ovr();
+        .pd(30px 0);
+        .f-s(28px);
+        .l-hg(45px);
+        opacity: .66;
+        .br(bottom,2px solid rgba(0,0,0,.22))
+    }
+    
+    .record-mode{
+        .mg(50px auto 0);
+        .wh(350px);
+        
+        .record-txt{
+            .hg(52px);
+            .l-hg(32px);
+            .f-s(32px);
+            .tc;
+            .wh(100%);
+            .p-rel;
+            opacity: .87;
+            
+            &:after{
+                .p-abs;
+                content: '';
+                .wh(85px);
+                .hg(4px);
+                .bg-c(#f28019);
+                left: 50%;
+                bottom: 0;
+                .mg(left,-42.5px);
+                .br-rs(25px)
+            }
+        }
+        
+        .record-num{
+            .hg(70px);
+            .l-hg(70px);
+            .tc;
+            .mg(top,20px);
+            
+            span{
+                .f-s(60px);
+                opacity: .87;
+                .f-w(700);
+                .mg(right,10px)
+            }
+            
+            span:nth-of-type(2){
+                .mg(0 10px);
+                font-weight: normal
+            }
+            
+            em{
+                opacity: .66;
+                .f-s(28px);
+            }
+        }
+    }
+    
+    .time-tit{
+        font-size: 1.4rem;
+        opacity: .87;
+        height: 1.4rem;
+        line-height: 1.4rem;
+        margin: 1.5rem 0;
+        font-weight: 500;
+    }
+    
+}
+
+
+.member-card{
+    
+    .pd(0 25px); 
+    .ovr();
+     
+    .member-li{
+        .dsp();
+        .pd(30px 0);
+        .br(bottom,1px solid #e3e3e4);
+        .ovr();
+        .p-rel;
+        
+        .member-img{
+            .wh(80px);
+            .hg(80px);
+            .br-rs(50%);
+            .mg(right,20px);
+            .fl
+        }
+        
+        .member-name{
+            .abs(28px);
+            opacity: .87;
+            .f-w();
+            .mg(12px 0 15px)
+        }
+        
+        .member-phone{
+            opacity: .54;
+            .abs(22px);
+        }
+        
+        .member-float{
+            .abs(24px);
+            opacity: .66;
+            .p-abs;
+            top: 50%;
+            right: 33px;
+            .mg(top,-12px)
+        }
+        
+        .member-arr{
+            .p-abs;
+            right:0;
+            top:50%;
+            .wh(22px);
+            .hg(32px);
+            .mg(top,-16px);
+        }
+        
+        .member-arr:after,.member-arr:before{
+            .p-abs;
+            .wh(100%);
+            .hg(3px);
+            content: '';
+            .bg-c(#000);
+            opacity: .66;
+        }
+        
+        .member-arr:after{
+            transform: rotateZ(45deg);
+            top: 8px;
+        }
+        .member-arr:before{
+            transform: rotateZ(-45deg);
+            top: 22px;
+        }
+        
+    }
+     
+}
+
+//会员卡详情页
+.card-dtl-page{
+    .hx-cont-noTop{
+        bottom: 225px;
+    }
+    .hx-foot{
+        .hg(225px);
+        .dsp(block);
+        .cardtl-foot{
+            .pd(20px);
+            .br(bottom,1px solid #d9d8d8);
+            .wh(100%);
+            .hg(112.5px);
+            .p-rel;
+            
+            .cardtl-seltxt{
+                .f-s(28px);
+                .c(#cdcdd3);
+                .hg(112.5px);
+                .l-hg(112.5px);
+                .p-abs;
+                text-indent:20px;
+                top: 0;
+                left: 0;
+                z-index: 10;
+            }
+            
+            select{
+                .p-abs;
+                left: 20px;
+                top: 0;
+                .bg(none);
+                .br(none);
+                .wh(100%);
+                .hg(100%);
+                bottom: 20px;
+                -webkit-appearance: none;
+                appearance: none;
+                .f-s(28px);
+                z-index: 20;
+            }
+            
+            a{
+                .hg(72.5px);
+                .l-hg(72.5px);
+                .br-rs(6px)
+            }
+            .cardtl-arr{
+                .p-abs;
+                right:20px;
+                top:50%;
+                .wh(22px);
+                .hg(32px);
+                .mg(top,-16px);
+            }
+            
+            .cardtl-arr:after,.cardtl-arr:before{
+                .p-abs;
+                .wh(100%);
+                .hg(3px);
+                content: '';
+                .bg-c(#000);
+                opacity: .38;
+            }
+            
+            .cardtl-arr:after{
+                transform: rotateZ(45deg);
+                top: 8px;
+            }
+            .cardtl-arr:before{
+                transform: rotateZ(-45deg);
+                top: 22px;
+            }
+            
+        }
+    }
+}
+
+//乱七八糟
+.ix-list{
+    .mg(top,20px);
+}
+
+.set-btn{
+    .hg(80px);
+    .l-hg(80px);
+    .f-s(28px)     
+}
+
+.acc-logo{
+    .dsp();
+    .mg(100px auto 50px);
+    .wh(350px);
+    .hg(auto)
+}
+
+.acc-logo2{
+    .wh(136px)
+}
+
+.echartbar{
+    .wh(120%);
+    .hg(500px);
+    .mg(top,100px);
+    .mg(left,-10%)
+}
+
+.group-list-btn{
+    .bg(#f28019)!important;
+    .br(none)!important;
+    .c(#fff)!important;
+    .br-rs(6px)!important
+}
+
+.group-list-btn-gray{
+    .bg(#999)!important
+}
+
+.pay-coupon-tit{
+    .f-s(24px);
+    .pd(20px 0);
+    .br(bottom,1px solid #ccc);
+    box-sizing: content-box;
+    -webkit-box-sizing: content-box;
+    .mg(10px 0 20px);
+    .f-w()
+}
+
+.spr-lie{
+    .pd(24px 0)
+}
+
+.recruit-spy{
+    .fr;
+    .mg(right,45px)
+}
+
+.appt-bar{
+    
+    .ovr();
+
+    .appt-div{
+        .fl;
+        
+        .course-txt{
+            .abs(28px);
+            opacity: .87;
+        }
+    }
+    
+    .appt-div:first-child{
+        .wh(60%);
+        .hg(28px);
+        
+        .course-bar{
+            .wh(100%);
+            .hg(14px);
+            .bg-c(#e3e3e4);
+            .mg(top,7px);
+            .br-rs(35px);
+            .ovr();
+            .p-rel;
+            
+            .bar-mv{
+                z-index: 999;
+                .p-abs;
+                .hg(14px);
+                left: 0;
+                bottom: 0;
+                .bg-c(#f28019);
+                .wh(0);
+                .anime-ease
+            }
+        }
+    }
+    
+    .appt-div:last-child{
+        .wh(30%);
+        .tr;
+        .abs(28px);
+        opacity: .87;
+    }
+}
+
+//放大动画
+@-webkit-keyframes rotateIn {
+  0% {
+    -webkit-transform-origin: center;
+            transform-origin: center;
+    -webkit-transform: rotate3d(0, 0, 1, -360deg);
+            transform: rotate3d(0, 0, 1, -360deg);
+  }
+
+  100% {
+    -webkit-transform-origin: center;
+            transform-origin: center;
+    -webkit-transform: none;
+            transform: none;
+  }
+}
+
+@keyframes rotateIn {
+  0% {
+    -webkit-transform-origin: center;
+            transform-origin: center;
+    -webkit-transform: rotate3d(0, 0, 1, -360deg);
+            transform: rotate3d(0, 0, 1, -360deg);
+  }
+
+  100% {
+    -webkit-transform-origin: center;
+            transform-origin: center;
+    -webkit-transform: none;
+            transform: none;
+  }
+}
+
+.rotateIn {
+
+    -webkit-animation-duration: 3s;
+    -o-animation-duration: 3s;
+    animation-duration: 3s;
+    -webkit-animation-timing-function: linear;
+    -o-animation-timing-function: linear;
+    animation-timing-function: linear;
+    -webkit-animation-delay: 0s;
+    -o-animation-delay: 0s;
+    animation-delay: 0s;
+    -webkit-animation-iteration-count: infinite;
+    -o-animation-iteration-count: infinite;
+    animation-iteration-count: infinite;
+    -webkit-animation-direction: normal;
+    -o-animation-direction: normal;
+    animation-direction: normal;
+    -webkit-animation-fill-mode: both;
+    -o-animation-fill-mode: both;
+    animation-fill-mode: both;
+    -webkit-animation-name: rotateIn;
+    animation-name: rotateIn;
+
+}
+

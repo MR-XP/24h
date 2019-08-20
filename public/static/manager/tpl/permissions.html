@@ -1,0 +1,33 @@
+<div class="permissions general " ng-controller="permissionsController">
+	<div class="top row">
+		<div class="m-b-sm row f-14 c-3">您当前的位置：<span>{{txt}}</span></div>
+		<div class="screening row">
+			<div class="select">
+				<div class="m-select">
+					<button class="btn-new btn" ng-click="go(0)">新增分组</button>
+				</div>
+				<div class="m-select">
+					<input type="text" placeholder="输入分组名称查找" ng-model="key">
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="content">
+		<div class="box row">
+			<div class="list row">
+				<div class="col-md-3 col-xs-3 m-box no-padder">序号</div>
+				<div class="col-md-3 col-xs-3 m-box no-padder">分组名称</div>
+				<div class="col-md-3 col-xs-3 m-box no-padder">ID统计</div>
+				<div class="col-md-3 col-xs-3 m-box no-padder">操作</div>
+			</div>
+			<div class="list-details" ng-repeat="p in newgroupList.group | filter : {title:key}">
+				<div class="col-md-3 col-xs-3 m-box no-padder">{{$index+1}}</div>
+				<div class="col-md-3 col-xs-3 m-box no-padder">{{p.title}}</div>
+				<div class="col-md-3 col-xs-3 m-box no-padder">{{p.user_count}}人</div>
+				<div class="col-md-3 col-xs-3 m-box no-padder edit">
+					<a class="c-click" ng-click="go(p)">编辑</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,143 @@
+<ion-view id="user-groCourse-info" style="background-color: #fff;" hide-nav-bar="true" ng-init="setDocumentTitle('精品团课详情')" ng-controller="userGroCourseInfoCtrl">
+	<ion-content class="user-scroll"  overflow-scroll="false" scrollbar-y="false" has-bouncing="true" delegate-handle="mainScroll">
+		<!--公共课详情-->
+		<div class="groCourse-content c-32">
+			<div class="groCourse-img" ng-style="'uploads/'+groCourseDtl.cover | adaptBg"></div>
+			<div class="user-content">
+				<div class="course-name padder-b padder-t border-b12">
+					<div class="name">{{groCourseDtl.course_name}}</div>
+					<div class="stars" ng-init="stars=getStars(groCourseDtl.score)">
+						<img ng-repeat="k in stars" src="./static/mobilev2/images/star_icon.png" alt="">
+						<a class="c-orange">{{courseComments.total_results}}条评价<img src="./static/mobilev2/images/left_icon.png" alt=""></a>
+					</div>
+					<div class="course-price c-orange">￥<span class="txt1">{{::groCourseDtl.price*groCourseDtl.min_buy}}</span><span class="c-9b txt2">起</span><button class="c-w">特惠活动中</button></div>
+				</div>
+				<div class="course-time row border-b12">
+			    <div class="col col-75">
+						<div class="time">
+							<span class="title">时间</span>
+							<span class="c-54">详细时间请看每日课表</span>
+						</div>
+						<div class="addr">
+							<span class="title">地址</span>
+							<span class="c-54">{{shopDtl.address}}</span>
+						</div>
+			    </div>
+			    <div class="col col-25 addr-icon t-r"><img class="icon" src="./static/mobilev2/images/location_icon.png" /></div>
+				</div>
+				<div class="coach row border-b12">
+					<div class="col col-75">
+						<div class="coach-name">{{groCourseDtl.coach.real_name}}</div>
+						<div class="coach-intro c-54">{{groCourseDtl.coach.intro}}</div>
+			    </div>
+			    <div class="col col-25 coach-img t-r"><img class="icon" ng-style="'uploads/'+groCourseDtl.coach.avatar | adaptBg" /></div>
+				</div>
+				<div class="comments padder-b padder-t border-b12">
+					<div class="row title-txt">
+						<div class="col col-70">
+							<div class="title common-title">会员评价</div>
+						</div>
+						<div class="col col-30 t-r all-num c-orange" ng-click="">全部</div>
+					</div>
+					<div class="comments-txt">
+						<div class="comments-line1">
+							<img class="user-img" ng-style="'uploads/'+courseComments.list[0].avatar | adaptBg" />
+							<span class="span-name f-bold">{{courseComments.list[0].real_name}}</span>
+							<span class="span-time c-9b">{{courseComments.list[0].create_time | limitTo:10}}</span>
+							<span class="span-shop c-9b">{{courseComments.list[0].shop_name}}</span>
+						</div>
+					</div>
+				</div>
+				<div class="course-process padder-b padder-t border-b12">
+					<div class="title common-title">开课流程</div>
+					<div class="process-img t-c"><img src="./static/mobilev2/images/process_img.png" alt=""></div>
+				</div>
+
+
+				<div class="course-dtl padder-b padder-t border-b12">
+					<div class="title common-title">课程介绍</div>
+					<div class="course-intro">{{groCourseDtl.intro}}</div>
+					<div class="course-img" ng-repeat="i in groCourseDtl.images">
+						<img ng-src="uploads/{{i}}" />
+					</div>
+				</div>
+			</div>
+		</div>
+	</ion-content>
+	<script id="templates/modal.html" type="text/ng-template">
+    <ion-modal-view>
+      <ion-content id="buyGroCourse-model" has-bouncing="false">
+				<div class="mwq-content-course">
+					<div class="dtl-padder">
+						<div class="course-dtl">
+							<div class="course-txt">
+		        		<div class="course-price">
+		        			<button class="price c-orange">￥{{::groCourseDtl.price*groCourseDtl.min_buy}}</button>
+		        		</div>
+		        		<div class="course-ins c-32">已选：{{groCourseDtl.course_name}} * {{groCourseDtl.min_buy}}次</div>
+		        		<div class="course-time c-9b">该课程{{groCourseDtl.expire_day}}天内有效</div>
+		        	</div>
+		        	<div class="course-close" ng-click="closeModal()"><img src="./static/mobilev2/images/close_icon.png" alt=""></div>
+						</div>
+						<div class="course-name">
+							<button class="first c-orange" ng-click="chooseNum(groCourseDtl.min_count)">{{groCourseDtl.course_name}}*{{groCourseDtl.min_buy}}次</button>
+						</div>
+					</div>
+					<div class="order-submit" ng-click="creacteOrder({{groCourseDtl}})">提交订单</div>	
+				</div>
+      </ion-content>
+    </ion-modal-view>
+  </script>
+	<style>
+		button.first{
+			border: 0.013rem solid #ff9d35 !important;
+		}
+    .modal {
+      display: block;
+      position: absolute;
+      top: 0;
+      z-index: 10;
+      overflow: hidden;
+      min-height: 100%;
+      width: 100%;
+      background-color: rgba(0,0,0,0.3);
+    }
+    #buyGroCourse-model{
+	    background: rgba(0,0,0,0) !important;
+    }
+    #buyGroCourse-model .scroll{
+    	height: 100%;
+    }
+    .mwq-content-course{
+    	background: #fff;
+    	width: 100%;
+    	height: 7.12rem;
+    	position: absolute;
+    	bottom: 0;
+    }
+    .modal-backdrop {
+	    position: fixed;
+	    top: 0;
+	    right: 0;
+	    bottom: 0;
+	    left: 0;
+	    z-index: 1040;
+	    background-color: rgba(0,0,0,0);
+		}
+	</style>
+	<ion-footer-bar id="footer-btn" class="no-padder">
+		<div class="groCourse-btn row row-l row-r">
+	  	<div class="col col-60 schedule">
+  			<a href="tel:{{groCourseDtl.coach.phone}}"><div class="consult f-bold">咨询教练 <img src="./static/mobilev2/images/consult_icon.png" alt=""></div></a>
+	  	</div>
+	  	<div class="col col-40 bc-orange c-w">
+				<div class="groCourse-btn-buy" ng-click="goBuy()">立即购买</div>
+	  	</div>
+	  </div>
+	</ion-footer-bar>
+</ion-view>
+
+
+
+
+

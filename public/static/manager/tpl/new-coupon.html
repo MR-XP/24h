@@ -1,0 +1,155 @@
+<div class="bg">
+    <div class="new-coupon upimg" ng-controller="newcouponController">
+        <div class="title bc-darkpurple">
+            <div class="pull-left details">优惠券详情</div>
+            <div class="pull-right close" ng-click="location('app/coupon')">X</div>
+        </div>
+        <div class="content">
+            <div class="m-fengmian row m-b">
+                <div class="col-md-2 col-xs-2 no-padder text-right wenzi">封面：</div>
+                <div class="col-md-9 col-xs-9 no-padder text-left">
+                    <script type="text/javascript" src="/static/manager/js/plugin/cropper/sitelogo.js"></script>
+                    <div type="button" data-toggle="modal" data-target="#avatar-modal">
+                        <div class="m-fm">
+                            <img class="upload-img">
+                            <div class="m-fm-sc">上传封面</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="alone row m-b">
+                <label class="col-md-2 col-xs-2 no-padder text-right">名称：</label>
+                <div class="col-md-9 col-xs-9 no-padder text-left">
+                    <input type="text" id="coupon_name" ng-model="info.coupon_name" placeholder="如：优惠券1">
+                </div>
+            </div>
+            <div class="alone row m-b">
+                <label class="col-md-2 col-xs-2 no-padder text-right">关联卡：</label>
+                <div class="col-md-9 col-xs-9 no-padder text-left">
+                    <select ng-model="info.relation_id" ng-options="i.card_id as i.card_name for i in newCardList.list">
+                    </select>
+                </div>
+            </div>
+            <div class="alone row m-b">
+                <label class="col-md-2 col-xs-2 no-padder text-right">类型：</label>
+                <div class="col-md-9 col-xs-9 no-padder text-left">
+                    <select ng-model="info.type">
+                        <option value="1">折扣优惠券</option>
+                        <option value="2">现金优惠券</option>
+                    </select>
+                </div>
+            </div>
+            <div class="alone row m-b" ng-if="info.type==1">
+                <label class="col-md-2 col-xs-2 no-padder text-right">折扣：</label>
+                <div class="col-md-9 col-xs-9 no-padder text-left">
+                    <input type="text" ng-model="info.discount_value" placeholder="如：0.7">
+                </div>
+            </div>
+            <div class="alone row m-b" ng-if="info.type==2">
+                <label class="col-md-2 col-xs-2 no-padder text-right">价格：</label>
+                <div class="col-md-9 col-xs-9 no-padder text-left">
+                    <input type="text" id="price" ng-model="info.discount_value" placeholder="如：1280">
+                </div>
+                <label class="col-md-1">元</label>
+            </div>
+            <div class="alone row m-b">
+                <label class="col-md-2 col-xs-2 no-padder text-right">到期时间：</label>
+                <div class="col-md-9 col-xs-9 riqi padder-lr-none text-left">
+                    <input class="form-control" type="text" data-field="datetime" ng-model="info.expire_time">
+                </div>
+            </div>
+            <div class="alone row m-b">
+                <label class="col-md-2 col-xs-2 no-padder text-right">是否可赠送：</label>
+                <div class="col-md-9 col-xs-9 no-padder text-left">
+                    <select ng-model="info.is_give" required>
+                        <option value="1">可以赠送</option>
+                        <option value="0">不可赠送</option>
+                    </select>
+                </div>
+            </div>
+            <div class="alone row m-b">
+                <label class="col-md-2 col-xs-2 no-padder text-right">状态：</label>
+                <div class="col-md-9 col-xs-9 no-padder text-left">
+                    <select ng-model="info.status" required>
+                        <option value="1">正常</option>
+                        <option value="0">下架</option>
+                    </select>
+                </div>
+            </div>
+            <div class="alone row m-b">
+                <button class="col-md-offset-2 col-xs-offset-2 btn save" id="submitData" ng-click="save()">保存</button>
+                <button class="btn cancel" id="resetData" ng-click="location('app/coupon')">取消</button>
+            </div>
+        </div>
+        <!-- 上传封面 -->
+        <div myimg class="modal fade" id="avatar-modal" aria-hidden="true" aria-labelledby="avatar-modal-label" role="dialog" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <form class="avatar-form">
+                        <div class="modal-header">
+                            <button class="close" data-dismiss="modal" type="button">&times;</button>
+                            <h4 class="modal-title" id="avatar-modal-label">上传图片</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="avatar-body">
+                                <div class="avatar-upload">
+                                    <input class="avatar-src" name="avatar_src" type="hidden">
+                                    <input class="avatar-data" name="avatar_data" type="hidden">
+                                    <button class="btn btn-danger"  type="button" style="height: 35px;" onclick="$('input[id=avatarInput]').click();">请选择图片</button>
+                                    <span id="avatar-name"></span>
+                                    <input class="avatar-input hide" id="avatarInput" name="avatar_file" type="file"></div>
+                                <div class="row">
+                                    <div class="avatar-wrapper"></div>
+                                    <div class="avatar-preview preview-lg" id="imageHead"></div>
+                                </div>
+                                <div class="row avatar-btns">
+                                    <div class="col-md-5 col-xs-5 no-padder">
+                                        <div class="btn-group">
+                                            <button class="btn btn-danger fa fa-undo" data-method="rotate" data-option="-90" type="button" title="Rotate -90 degrees"> 向左旋转</button>
+                                        </div>
+                                        <div class="btn-group">
+                                            <button class="btn  btn-danger fa fa-repeat" data-method="rotate" data-option="90" type="button" title="Rotate 90 degrees"> 向右旋转</button>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-xs-4 no-padder" style="text-align: right;">
+                                        <button class="btn btn-danger fa fa-arrows" data-method="setDragMode" data-option="move" type="button" title="移动">
+                                        <span class="docs-tooltip" data-toggle="tooltip" title="" data-original-title="$().cropper(&quot;setDragMode&quot;, &quot;move&quot;)">
+                                        </span>
+                                      </button>
+                                      <button type="button" class="btn btn-danger fa fa-search-plus" data-method="zoom" data-option="0.1" title="放大图片">
+                                        <span class="docs-tooltip" data-toggle="tooltip" title="" data-original-title="$().cropper(&quot;zoom&quot;, 0.1)">
+                                          <!--<span class="fa fa-search-plus"></span>-->
+                                        </span>
+                                      </button>
+                                      <button type="button" class="btn btn-danger fa fa-search-minus" data-method="zoom" data-option="-0.1" title="缩小图片">
+                                        <span class="docs-tooltip" data-toggle="tooltip" title="" data-original-title="$().cropper(&quot;zoom&quot;, -0.1)">
+                                          <!--<span class="fa fa-search-minus"></span>-->
+                                        </span>
+                                      </button>
+                                      <button type="button" class="btn btn-danger fa fa-refresh" data-method="reset" title="重置图片">
+                                            <span class="docs-tooltip" data-toggle="tooltip" title="" data-original-title="$().cropper(&quot;reset&quot;)" aria-describedby="tooltip866214">
+                                       </button>
+                                    </div>
+                                    <div class="col-md-3 col-xs-3 padder-r-none">
+                                        <button class="btn btn-danger btn-block avatar-save fa fa-save" type="button" data-dismiss="modal"> 保存修改</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div id="dtBox"></div>
+
+        <script type="text/javascript">
+            $(function(){
+                $('.summernote').summernote({
+                    height:120,
+                });
+            });
+        </script>
+    </div>
+</div>
+
+

@@ -1,0 +1,464 @@
+<div class="store general " ng-controller="storeController">
+	<div class="top row">
+		<div class="m-b-sm row f-14 c-3">您当前的位置：<span>{{txt}}</span></div>
+		<div class="screening row">
+			<div class="select">
+				<div class="m-select">
+					<button class="btn-new btn" ng-click="editModal_open(0)">新建店铺</button>
+				</div>
+				<div class="m-select">
+					<select class="form-control" ng-model="parmList.province" ng-options="key as key for (key,value) in area"  data-tap-disabled="true" ng-change="load()">
+						<option value="">选择省份</option>
+					</select>
+				</div>
+				<div class="m-select">
+					<select class="form-control" ng-model="parmList.city" ng-options="key as key for (key,value) in area[parmList.province]" ng-change="load()"  data-tap-disabled="true">
+						<option value="">选择市</option>
+					</select>
+				</div>
+				<div class="m-select">
+					<select class="form-control" ng-model="parmList.county" ng-options="value as value for value in area[parmList.province][parmList.city]"  data-tap-disabled="true" ng-change="load()">
+						<option value="">选择区/县</option>
+					</select>
+				</div>
+				<div class="m-select">
+					<select ng-model="parmList.status" ng-change="load()">
+						<option value="">状态</option>
+						<option value="1">正常</option>
+						<option value="0">禁用</option>
+					</select>
+				</div>
+				<div class="m-select">
+					<input type="text" placeholder="请输入店铺名称查询"  ng-model="parmList.shop_name" ng-change="load()">
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="content">
+		<div class="box row">
+			<div class="list row">
+				<div class="col-md-2 col-xs-2 m-box no-padder">封面</div>
+				<div class="col-md-2 col-xs-2 m-box no-padder">名称</div>
+				<div class="col-md-2 col-xs-2 m-box no-padder">地点</div>
+				<div class="col-md-1 col-xs-1 m-box no-padder">面积</div>
+				<div class="col-md-1 col-xs-1 m-box no-padder">成立时间</div>
+				<div class="col-md-1 col-xs-1 m-box no-padder">在场人数</div>
+				<div class="col-md-1 col-xs-1 m-box no-padder">累计人数</div>
+				<div class="col-md-1 col-xs-1 m-box no-padder">状态</div>
+				<div class="col-md-1 col-xs-1 m-box no-padder">操作</div>
+			</div>
+			<div class="list-details" ng-repeat="v in newStoreList.list">
+				<div class="col-md-2 col-xs-2 m-box no-padder m-cover"><img ng-src="/uploads/{{v.cover}}" alt=""></div>
+				<div class="col-md-2 col-xs-2 m-box no-padder">{{v.shop_name}}</div>
+				<div class="col-md-2 col-xs-2 m-box no-padder">{{v.city}}-{{v.address}}</div>
+				<div class="col-md-1 col-xs-1 m-box no-padder">{{v.area}}</div>
+				<div class="col-md-1 col-xs-1 m-box no-padder">{{v.establishment_date|limitTo:10}}</div>
+				<div class="col-md-1 col-xs-1 m-box no-padder edit c-click" ng-click="goOnline({{v.shop_id}})" data-toggle="modal" data-target="#myModal">{{v.online}}</div>
+				<div class="col-md-1 col-xs-1 m-box no-padder">{{v.total}}</div>
+				<div class="col-md-1 col-xs-1 m-box no-padder c-green" ng-hide="v.status==0">{{v.status | storeStatus}}</div>
+				<div class="col-md-1 col-xs-1 m-box no-padder c-red" ng-hide="v.status==1">{{v.status | storeStatus}}</div>
+				<div class="col-md-1 col-xs-1 m-box no-padder">
+					<span class="edit c-click m-r-xs" ng-click="editModal_open({{v}})">编辑</span>
+					<span class="edit c-click" ng-show="v.status==1" ng-click="lock({{v}})">禁用</span>
+					<span class="edit c-click" ng-show="v.status==0" ng-click="unlock({{v}})">启用</span>
+				</div>
+			</div>
+		</div>
+		<div class="page-footer">
+			<div class="pull-left col-md-6 col-xs-6 no-padder text-left">
+				<span class="text-sm">共{{newStoreList.total_results}}条记录，共{{newStoreList.total_pages}}页，</span>
+				<span class="text-sm">当前显示第{{newStoreList.page_no}}页，</span>
+				<span class="text-sm">每页显示{{newStoreList.page_size}}条</span>
+			</div>
+        	<div class="col-md-6 col-xs-6 no-padder text-right">
+        		<pagination total-items="newStoreList.total_results" ng-model="parmList.page_no" max-size="maxSize" class="pagination-sm m-t-none m-b" boundary-links="true" rotate="false" num-pages="newStoreList.page_size" ng-click="pages()" items-per-page="newStoreList.page_size"></pagination>
+        	</div>
+		</div>
+	</div>
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static">
+	  	<div class="modal-dialog" role="document">
+	    	<div class="modal-content">
+	      		<div class="modal-header">
+	        		<div class="row title">
+						<div class="col-md-4 col-xs-4 no-padder text-center">头像</div>
+						<div class="col-md-4 col-xs-4 no-padder text-center">名称</div>
+						<div class="col-md-4 col-xs-4 no-padder text-center">电话</div>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	        		</div>
+	      		</div>
+	      		<div class="modal-body">
+	        		<div class="row online" ng-repeat="k in onlineList">
+	        			<div class="col-md-4 col-xs-4 no-padder text-center">
+	        				<img ng-style="'uploads/'+k.avatar | adaptBg">
+	        			</div>
+	        			<div class="col-md-4 col-xs-4 no-padder text-center">{{k.real_name}}</div>
+	        			<div class="col-md-4 col-xs-4 no-padder text-center">{{k.phone}}</div>
+	        		</div>
+	      		</div>
+	    	</div>
+	  	</div>
+	</div>
+	<div class="modal fade new_edit bs-example-modal-lg" id="editModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog modal-lg" role="document">
+		    <div class="new-coach upimg">
+		        <div class="title bc-darkpurple">
+		            <span class="pull-left details">店铺详情</span>
+		            <span class="pull-right close" ng-click="editModal_close()">X</span>
+		        </div>
+		        <div class="content">
+		            <div class="m-fengmian row m-b">
+		                <div class="col-md-2 col-xs-2 no-padder text-right wenzi">封面：</div>
+		                <div class="col-md-9 col-xs-9 no-padder text-left">
+		                    <script type="text/javascript" src="/static/manager/js/plugin/cropper/sitelogo.js"></script>
+		                    <div type="button" ng-click="imgModal_open()">
+		                        <div class="m-fm">
+		                            <img class="upload-img">
+		                            <div class="m-fm-sc">上传封面</div>
+		                        </div>
+		                    </div>
+		                </div>
+		            </div>
+		            <div class="alone row m-b">
+		                <div class="col-md-2 col-xs-2 no-padder text-right">名称：</div>
+		                <div class="col-md-9 col-xs-9 no-padder text-left"><input type="text" ng-model="info.shop_name"></div>
+		            </div>
+		            <div class="alone row m-b">
+		                <div class="col-md-2 col-xs-2 no-padder text-right">所在地：</div>
+		                <div class="col-md-9 col-xs-9 padder-lr-none">
+		                    <div class="col-md-4 col-xs-4 padder-l-none">
+		                        <select ng-model="info.province" ng-options="key as key for (key,value) in area" ng-change="info.city='';info.county='';"  data-tap-disabled="true"></select>
+		                    </div>
+		                    <div class="col-md-4 col-xs-4 padder-l-none">
+		                        <select ng-model="info.city" ng-options="key as key for (key,value) in area[info.province]" ng-change="info.county='';"  data-tap-disabled="true"></select>
+		                    </div>
+
+		                    <div class="col-md-4 col-xs-4 padder-lr-none">
+		                        <select ng-model="info.county" ng-options="value as value for value in area[info.province][info.city]"  data-tap-disabled="true"></select>
+		                    </div>
+		                </div>
+		            </div>
+		            <div class="alone row m-b">
+		                <div class="col-md-2 col-xs-2 no-padder text-right">详细地址：</div>
+		                <div class="col-md-9 col-xs-9 padder-lr-none"><input type="text" ng-model="info.address"></div>
+		            </div>
+		            <div class="alone row m-b">
+		                <div class="col-md-2 col-xs-2 no-padder text-right">坐标：</div>
+		                <div class="col-md-9 col-xs-9 padder-lr-none text-left"><input type="text" map-marker ng-model="info.jingweidu" placeholder="点击选择坐标"></div>
+		            </div>
+		            <div class="alone row m-b">
+		                <div class="col-md-2 col-xs-2 no-padder text-right">面积：</div>
+		                <div class="col-md-9 col-xs-9 padder-lr-none"><input type="text" ng-model="info.area"></div>
+		            </div>
+		            <div class="alone row m-b">
+		                <div class="col-md-2 col-xs-2 no-padder text-right">成立时间：</div>
+		                <div class="col-md-9 col-xs-9 padder-lr-none">
+		                    <input type="text" data-field="date" ng-model="info.establishment_date" readonly>
+		                </div>
+		            </div>
+		            <div class="alone row m-b">
+		                <div class="col-md-2 col-xs-2 no-padder text-right">状态：</div>
+		                <div class="col-md-9 col-xs-9 padder-lr-none">
+		                    <select ng-model="info.status">
+		                        <option value="1">启用</option>
+		                        <option value="0">禁用</option>
+		                    </select>
+		                </div>
+		            </div>
+		            <div class="alone row m-b" ng-show="type==0">
+		                <div class="col-md-2 col-xs-2 no-padder text-right">健康管家：</div>
+		                <div class="col-md-4 col-xs-4 padder-lr-none">
+		                    <input type="text" ng-model="stewards.real_name" placeholder="输入姓名查询">
+		                </div>
+		                <div class="col-md-1 col-xs-1 padder-lr-none mwq-search"><img src="/static/manager/img/search.png" ng-click="search_N({{v.user_id}})" ></div>
+		                <div class="col-md-4 col-xs-4 padder-lr-none">
+		                    <input type="text" ng-model="stewards.phone" placeholder="输入电话查询">
+		                </div>
+		                <div class="col-md-1 col-xs-1 padder-lr-none mwq-search"><img src="/static/manager/img/search.png" ng-click="search_P({{v.user_id}})" ></div>
+		            </div>
+		            <div class="alone1 row m-b user" ng-repeat="v in stewardsList" ng-show="type==0">
+		                <div class="col-md-9 col-xs-9 col-md-offset-2 col-xs-offset-2">
+		                    <div class="col-md-4 col-xs-4">
+		                       <!--  <img class="user-avatar" ng-src="/uploads/{{v.avatar}}" /> -->
+		                        <img class="user-avatar" ng-style="'uploads/'+v.avatar | adaptBg">
+		                    </div>
+		                    <div class="col-md-4 col-xs-4">{{v.real_name}}</div>
+		                    <div class="col-md-4 col-xs-4">{{v.phone}}</div>
+		                </div>
+		            </div>
+		            <div class="alone1 row m-b" ng-show="type==1">
+		                <div class="col-md-2 col-xs-2 no-padder text-right">健康管家：</div>
+		                <div class="alone1 row m-b user" ng-show="type==1">
+		                    <div class="col-md-9 col-xs-9 padder-lr-none">
+		                        <div class="col-md-4 col-xs-4 padder-lr-none">
+		                            <!-- <img class="user-avatar" ng-src="/uploads/{{info.manager.avatar}}" /> -->
+		                            <img class="user-avatar" ng-style="'uploads/'+info.manager.avatar | adaptBg">
+		                        </div>
+		                        <div class="col-md-4 col-xs-4 padder-lr-none text-left">{{info.manager.real_name}}</div>
+		                        <div class="col-md-4 col-xs-4 padder-lr-none text-left">{{info.manager.phone}}</div>
+		                    </div>
+		                    <div class="col-md-1 col-xs-1 padder-lr-none"><button class="mwq-change" ng-click="genggai()">更改</button></div>
+		                </div>
+		            </div>
+		            <div class="alone row m-b">
+		                <div class="col-md-2 col-xs-2 no-padder text-right">有氧器械：</div>
+		                <div class="col-md-9 col-xs-9 padder-lr-none"><input type="text" ng-model="info.aerobic_apparatus"></div>
+		            </div>
+		            <div class="alone row m-b">
+		                <div class="col-md-2 col-xs-2 no-padder text-right">无氧器械：</div>
+		                <div class="col-md-9 col-xs-9 padder-lr-none"><input type="text" ng-model="info.anaerobic_apparatus"></div>
+		            </div>
+		            <div class="alone row m-b">
+		                <div class="col-md-2 col-xs-2 no-padder text-right">添加设备：</div>
+		                <div class="col-md-9 col-xs-9 padder-lr-none"><button class="btn add">添加</button></div>
+		            </div>
+		            <div class="alone row equipment" style="height: 100%;"></div>
+		            <div class="alone row m-b">
+		                <div class="col-md-2 col-xs-2 no-padder text-right">详情图：</div>
+		                <div class="col-md-9 col-xs-9 padder-lr-none"><button class="btn add-picture" type="button" data-target="#avatar-modal1" data-toggle="modal">添加图片</button></div>
+		            </div>
+		            <div class="row m-b">
+		                <script type="text/javascript" src="/static/manager/js/plugin/cropper/sitelogo1.js"></script>
+		                <div class="details-figure col-md-9 col-xs-9 col-md-offset-2 col-xs-offset-2 no-padder text-left"></div>
+		            </div>
+		            <div class="row m-b">
+		                <div class="col-md-2 col-xs-2 no-padder text-right">简介：</div>
+		                <div class="col-md-9 col-xs-9 no-padder text-left">
+		                    <div class="txtedit">
+		                        <textarea class="summernote" id="intro"></textarea>
+		                    </div>
+		                </div>
+		            </div>
+		            <div class="alone row m-b">
+		                <button class="col-md-offset-2 col-xs-offset-2 btn save" ng-click="save()">保存</button>
+		                <button class="btn cancel" ng-click="editModal_close()">取消</button>
+		            </div>
+		        </div>
+		        <!-- 上传封面 -->
+		        <div myimg class="modal fade upload_img" id="avatar-modal" aria-hidden="true" aria-labelledby="avatar-modal-label" role="dialog" tabindex="-1">
+		            <div class="modal-dialog">
+		                <div class="modal-content">
+		                    <form class="avatar-form">
+		                        <div class="modal-header">
+		                            <span class="modal-title f-16">上传图片</span>
+		                            <span class="close_img edit f-16" ng-click="imgModal_close()">X</span>
+		                        </div>
+		                        <div class="modal-body">
+		                            <div class="avatar-body">
+		                                <div class="avatar-upload">
+		                                    <input class="avatar-src" name="avatar_src" type="hidden">
+		                                    <input class="avatar-data" name="avatar_data" type="hidden">
+		                                    <button class="btn btn-danger"  type="button" style="height: 35px;" onclick="$('input[id=avatarInput]').click();">请选择图片</button>
+		                                    <span id="avatar-name"></span>
+		                                    <input class="avatar-input hide" id="avatarInput" name="avatar_file" type="file"></div>
+		                                <div class="row">
+		                                    <div class="avatar-wrapper"></div>
+		                                    <div class="avatar-preview preview-lg" id="imageHead"></div>
+		                                </div>
+		                                <div class="row avatar-btns">
+		                                    <div class="col-md-5 col-xs-5 no-padder">
+		                                        <div class="btn-group">
+		                                            <button class="btn btn-danger fa fa-undo" data-method="rotate" data-option="-90" type="button" title="Rotate -90 degrees"> 向左旋转</button>
+		                                        </div>
+		                                        <div class="btn-group">
+		                                            <button class="btn  btn-danger fa fa-repeat" data-method="rotate" data-option="90" type="button" title="Rotate 90 degrees"> 向右旋转</button>
+		                                        </div>
+		                                    </div>
+		                                    <div class="col-md-4 col-xs-4 no-padder" style="text-align: right;">
+		                                        <button class="btn btn-danger fa fa-arrows" data-method="setDragMode" data-option="move" type="button" title="移动">
+		                                        <span class="docs-tooltip" data-toggle="tooltip" title="" data-original-title="$().cropper(&quot;setDragMode&quot;, &quot;move&quot;)">
+		                                        </span>
+		                                      </button>
+		                                      <button type="button" class="btn btn-danger fa fa-search-plus" data-method="zoom" data-option="0.1" title="放大图片">
+		                                        <span class="docs-tooltip" data-toggle="tooltip" title="" data-original-title="$().cropper(&quot;zoom&quot;, 0.1)">
+		                                        </span>
+		                                      </button>
+		                                      <button type="button" class="btn btn-danger fa fa-search-minus" data-method="zoom" data-option="-0.1" title="缩小图片">
+		                                        <span class="docs-tooltip" data-toggle="tooltip" title="" data-original-title="$().cropper(&quot;zoom&quot;, -0.1)">
+		                                        </span>
+		                                      </button>
+		                                      <button type="button" class="btn btn-danger fa fa-refresh" data-method="reset" title="重置图片">
+		                                            <span class="docs-tooltip" data-toggle="tooltip" title="" data-original-title="$().cropper(&quot;reset&quot;)" aria-describedby="tooltip866214">
+		                                       </button>
+		                                    </div>
+		                                    <div class="col-md-3 col-xs-3 padder-r-none">
+		                                        <button class="btn btn-danger btn-block avatar-save fa fa-save" type="button" ng-click="imgModal_close()"> 保存修改</button>
+		                                    </div>
+		                                </div>
+		                            </div>
+		                        </div>
+		                    </form>
+		                </div>
+		            </div>
+		        </div>
+		        <!-- 上传详情图 -->
+		        <div myimg1 class="modal fade upload_img" id="avatar-modal1" aria-hidden="true" aria-labelledby="avatar-modal-label" role="dialog" tabindex="-1">
+		            <div class="modal-dialog">
+		                <div class="modal-content">
+		                    <form class="avatar-form1">
+		                        <div class="modal-header">
+		                            <span class="modal-title f-16">上传图片</span>
+		                            <span class="close_img edit f-16" ng-click="imgModal1_close()">X</span>
+		                        </div>
+		                        <div class="modal-body">
+		                            <div class="avatar-body">
+		                                <div class="avatar-upload1">
+		                                    <input class="avatar-src1" name="avatar_src1" type="hidden">
+		                                    <input class="avatar-data1" name="avatar_data1" type="hidden">
+		                                    <button class="btn btn-danger"  type="button" style="height: 35px;" onclick="$('input[id=avatarInput1]').click();">请选择图片</button>
+		                                    <span id="avatar-name1"></span>
+		                                    <input class="avatar-input1 hide" id="avatarInput1" name="avatar_file1" type="file"></div>
+		                                <div class="row">
+		                                    <div class="avatar-wrapper1"></div>
+		                                    <div class="avatar-preview1 preview-lg" id="imageHead1"></div>
+		                                </div>
+		                                <div class="row avatar-btns1">
+		                                    <div class="col-md-5 col-xs-5 no-padder">
+		                                        <div class="btn-group">
+		                                            <button class="btn btn-danger fa fa-undo" data-method="rotate" data-option="-90" type="button" title="Rotate -90 degrees"> 向左旋转</button>
+		                                        </div>
+		                                        <div class="btn-group">
+		                                            <button class="btn  btn-danger fa fa-repeat" data-method="rotate" data-option="90" type="button" title="Rotate 90 degrees"> 向右旋转</button>
+		                                        </div>
+		                                    </div>
+		                                    <div class="col-md-4 col-xs-4 no-padder" style="text-align: right;">
+		                                        <button class="btn btn-danger fa fa-arrows" data-method="setDragMode" data-option="move" type="button" title="移动">
+		                                        <span class="docs-tooltip" data-toggle="tooltip" title="" data-original-title="$().cropper(&quot;setDragMode&quot;, &quot;move&quot;)">
+		                                        </span>
+		                                      </button>
+		                                      <button type="button" class="btn btn-danger fa fa-search-plus" data-method="zoom" data-option="0.1" title="放大图片">
+		                                        <span class="docs-tooltip" data-toggle="tooltip" title="" data-original-title="$().cropper(&quot;zoom&quot;, 0.1)">
+		                                          <!--<span class="fa fa-search-plus"></span>-->
+		                                        </span>
+		                                      </button>
+		                                      <button type="button" class="btn btn-danger fa fa-search-minus" data-method="zoom" data-option="-0.1" title="缩小图片">
+		                                        <span class="docs-tooltip" data-toggle="tooltip" title="" data-original-title="$().cropper(&quot;zoom&quot;, -0.1)">
+		                                          <!--<span class="fa fa-search-minus"></span>-->
+		                                        </span>
+		                                      </button>
+		                                      <button type="button" class="btn btn-danger fa fa-refresh" data-method="reset" title="重置图片">
+		                                            <span class="docs-tooltip" data-toggle="tooltip" title="" data-original-title="$().cropper(&quot;reset&quot;)" aria-describedby="tooltip866214">
+		                                       </button>
+		                                    </div>
+		                                    <div class="col-md-3 col-xs-3 padder-r-none">
+		                                        <button class="btn btn-danger btn-block avatar-save1 fa fa-save" type="button" ng-click="imgModal1_close()"> 保存修改</button>
+		                                    </div>
+		                                </div>
+		                            </div>
+		                        </div>
+		                    </form>
+		                </div>
+		            </div>
+		        </div>
+		        <style>
+					/*地图关闭按钮图标*/
+					.layui-layer-ico {
+					    background-position: 0px -40px;
+					}
+					.box1{
+					    width: 50px;
+					    height: 50px;
+					    border: 1px solid #333;
+					    float: left;
+					}
+				</style>
+				<script>
+					$(function(){
+		                $('.summernote').summernote({
+		                    height:180,
+		                });
+		            });
+
+					function remove(id){
+					   $('.remove[btnid="'+id+'"]').parents('.aa').remove();
+					   for(var i=0;i<btnSum.length;i++){
+
+					        if(id==btnSum[i]){
+					            btnSum.splice(i,1)
+					        }
+					    }
+
+					}
+					//记录
+					var btnSum = [],
+					    btnId  = 0;
+
+
+					$(document).ready(function(){
+
+					    $("button.add").click(function(){
+					    	console.log(1);
+
+					        btnId++;
+					        btnSum.push(btnId);
+
+					        $("div.equipment").append(function(){
+					            return  '<div class="alone row aa detail" style="height: 100%;">'+
+					                        '<div class="col-md-2 col-xs-2 m-b no-padder text-right">'+
+					                            '设备号：'+
+					                        '</div>'+
+					                        '<div class="col-md-3 col-xs-3 m-b padder-lr-none">'+
+					                            '<input type="text" class="shebeihao">'+
+					                        '</div>'+
+					                        '<div class="col-md-2 col-xs-2 m-b no-padder text-right">'+
+					                            '刷新时间：'+
+					                        '</div>'+
+					                        '<div class="col-md-3 col-xs-3 m-b padder-lr-none">'+
+					                            '<input type="number" class="shijian">'+
+					                        '</div>'+
+					                        '<div class="col-md-1 col-xs-1 m-b padder-r-none">'+
+					                            '秒'+
+					                        '</div>'+
+					                        '<div class="col-md-1 col-xs-1 m-b padder-l-none">'+
+					                            '<button class="btn remove" btnid="'+btnId+'" onclick="remove('+btnId+')">删除</button>'+
+					                        '</div>'+
+					                        '<div class="col-md-2 col-xs-2 m-b no-padder text-right">'+
+					                            '设备别名：'+
+					                        '</div>'+
+					                        '<div class="col-md-3 col-xs-3 m-b padder-lr-none">'+
+					                            '<input type="text" class="bieming">'+
+					                        '</div>'+
+					                        '<div class="col-md-2 col-xs-2 m-b no-padder text-right">'+
+					                            '附加数据：'+
+					                        '</div>'+
+					                        '<div class="col-md-3 col-xs-3 m-b padder-lr-none">'+
+					                            '<input type="text" class="fujiashuju">'+
+					                        '</div>'+
+					                    '</div>';
+					        });
+					    });
+					});
+
+				    function removePic(num){
+				        $('.removePic[picid="'+num+'"]').parents('.bb').remove();
+
+				    }
+				    //记录
+				    var picSum = [],
+				        picId  = 0;
+
+				    $(document).ready(function(){//点击添加详情图
+
+				        $("button.avatar-save1").click(function(){
+
+				            picId++;
+				            picSum.push(picId);
+
+				            $("div.details-figure").append(function(){
+				                return  '<div class="col-md-3 col-xs-3 no-padder bb" id="'+picId+'" data-img="">'+
+				                            '<div style="width:85px;height:50px;margin-bottom:10px;">'+
+				                                '<img class="img2" style="width:85px;height:50px;">'+
+				                            '</div>'+
+				                            '<div onclick="removePic('+picId+')" class="wenzi removePic" picid="'+picId+'" style="position: relative;top: -60px;right:-70px;width: 15px;height:15px;line-height:15px;background-color: rgba(0,0,0,0.3);color: #fff;text-align: center;cursor: pointer">'+
+				                                'X'+
+				                            '</div>'+
+				                        '</div>';
+				            });
+				        });
+				    });
+
+				</script>
+				<div id="dtBox"></div>
+		    </div>
+	  	</div>
+	</div>
+</div>

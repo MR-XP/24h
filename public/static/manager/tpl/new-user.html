@@ -1,0 +1,129 @@
+<div class="bg">
+    <div class="new-user upimg" ng-controller="newuserController">
+        <div class="title bc-darkpurple">
+            <div class="pull-left details">编辑用户</div>
+            <div class="pull-right close" ng-click="location('app/user')">X</div>
+        </div>
+        <div class="content">
+            <div class="row m-b m-pictures">
+                <div class="col-md-2 col-xs-2 no-padder text-right wenzi">头像：</div>
+                <div class="col-md-9 col-xs-9 no-padder text-left">
+                    <script type="text/javascript" src="/static/manager/js/plugin/cropper/sitelogo2.js"></script>
+                    <div type="button" data-toggle="modal" data-target="#avatar-modal2">
+                        <div class="m-fm1">
+                            <img class="upload-img touxiang">
+                            <div class="m-fm-sc1 f-12">上传头像</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row m-b">
+                <div class="col-md-2 col-xs-2 no-padder text-right">权限分组：</div>
+                <div class="col-md-9 col-xs-9 no-padder text-left">
+                    <div repeatfinish class="col-md-4 padder-l-none" ng-repeat="v in groupList" load="ego()">
+                        <label class="i-checks i-checks-sm">
+                            <input class="my-ipt" type="checkbox" value="{{v.id}}"><i></i>{{v.title}}
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="alone row m-b">
+                <div class="col-md-2 col-xs-2 no-padder text-right">登录名称：</div>
+                <div class="col-md-9 col-xs-9 no-padder text-left">
+                    <input class="form-control" ng-model="info.username" type="text" placeholder="如：张三">
+                </div>
+            </div>
+            <div class="alone row m-b">
+                <div class="col-md-2 col-xs-2 no-padder text-right">用户名称：</div>
+                <div class="col-md-9 col-xs-9 no-padder text-left"><input class="form-control" ng-model="info.real_name" type="text" placeholder="如：张三"></div>
+            </div>
+            <div class="alone row m-b">
+                <div class="col-md-2 col-xs-2 no-padder text-right">新密码：</div>
+                <div class="col-md-9 col-xs-9 no-padder text-left"><input ng-model="info.newPassword" class="form-control" type="password"></div>
+            </div>
+            <div class="alone row m-b">
+                <div class="col-md-2 col-xs-2 no-padder text-right">确认新密码：</div>
+                <div class="col-md-9 col-xs-9 no-padder text-left"><input class="form-control" ng-model="info.newRepassword" type="password"></div>
+            </div>
+            <div class="alone row m-b">
+                <div class="col-md-2 col-xs-2 no-padder text-right">手机号码：</div>
+                <div class="col-md-9 col-xs-9 no-padder text-left"><input class="form-control" type="text" ng-model="info.phone" placeholder="如：13658372838"></div>
+            </div>
+            <div class="alone row m-b">
+                <div class="col-md-2 col-xs-2 no-padder text-right">状态：</div>
+                <div class="col-md-9 col-xs-9 no-padder text-left">
+                    <select class="form-control" ng-model="info.status">
+                        <option value="1">正常</option>
+                        <option value="0">锁定</option>
+                    </select>
+                </div>
+            </div>
+            <div class="alone row m-b">
+                <div class="col-md-offset-2 col-xs-offset-2">
+                    <button class="save" ng-click="save()">保存</button>
+                    <button class="cancel" ng-click="location('app/user')">取消</button>
+                </div>
+            </div>
+        </div>
+        <!-- 上传头像 -->
+        <div myimg2 class="modal fade" id="avatar-modal2" aria-hidden="true" aria-labelledby="avatar-modal-label" role="dialog" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <form class="avatar-form2">
+                        <div class="modal-header">
+                            <button class="close" data-dismiss="modal" type="button">&times;</button>
+                            <h4 class="modal-title" id="avatar-modal-label">上传图片</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="avatar-body">
+                                <div class="avatar-upload2">
+                                    <input class="avatar-src2" name="avatar_src2" type="hidden">
+                                    <input class="avatar-data2" name="avatar_data2" type="hidden">
+                                    <button class="btn btn-danger"  type="button" style="height: 35px;" onclick="$('input[id=avatarInput2]').click();">请选择图片</button>
+                                    <span id="avatar-name2"></span>
+                                    <input class="avatar-input2 hide" id="avatarInput2" name="avatar_file2" type="file"></div>
+                                <div class="row">
+                                    <div class="avatar-wrapper2"></div>
+                                    <div class="avatar-preview2 preview-lg" id="imageHead2"></div>
+                                </div>
+                                <div class="row avatar-btns2">
+                                    <div class="col-md-5 col-xs-5 no-padder">
+                                        <div class="btn-group">
+                                            <button class="btn btn-danger fa fa-undo" data-method="rotate" data-option="-90" type="button" title="Rotate -90 degrees"> 向左旋转</button>
+                                        </div>
+                                        <div class="btn-group">
+                                            <button class="btn  btn-danger fa fa-repeat" data-method="rotate" data-option="90" type="button" title="Rotate 90 degrees"> 向右旋转</button>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-xs-4 no-padder" style="text-align: right;">
+                                        <button class="btn btn-danger fa fa-arrows" data-method="setDragMode" data-option="move" type="button" title="移动">
+                                        <span class="docs-tooltip" data-toggle="tooltip" title="" data-original-title="$().cropper(&quot;setDragMode&quot;, &quot;move&quot;)">
+                                        </span>
+                                      </button>
+                                      <button type="button" class="btn btn-danger fa fa-search-plus" data-method="zoom" data-option="0.1" title="放大图片">
+                                        <span class="docs-tooltip" data-toggle="tooltip" title="" data-original-title="$().cropper(&quot;zoom&quot;, 0.1)">
+                                          <!--<span class="fa fa-search-plus"></span>-->
+                                        </span>
+                                      </button>
+                                      <button type="button" class="btn btn-danger fa fa-search-minus" data-method="zoom" data-option="-0.1" title="缩小图片">
+                                        <span class="docs-tooltip" data-toggle="tooltip" title="" data-original-title="$().cropper(&quot;zoom&quot;, -0.1)">
+                                          <!--<span class="fa fa-search-minus"></span>-->
+                                        </span>
+                                      </button>
+                                      <button type="button" class="btn btn-danger fa fa-refresh" data-method="reset" title="重置图片">
+                                            <span class="docs-tooltip" data-toggle="tooltip" title="" data-original-title="$().cropper(&quot;reset&quot;)" aria-describedby="tooltip866214">
+                                       </button>
+                                    </div>
+                                    <div class="col-md-3 col-xs-3 padder-r-none">
+                                        <button class="btn btn-danger btn-block avatar-save2 fa fa-save" type="button" data-dismiss="modal"> 保存修改</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,50 @@
+<div class="bg">
+	<div class="new-partition" ng-controller="newpartitionController">
+	    <div class="title bc-darkpurple">
+	        <div class="pull-left details">分区设置</div>
+	        <div class="pull-right close" ng-click="location('app/partition')">X</div>
+	    </div>
+	    <div class="content f-12">
+	    	<form class="form-inline" role="form">
+		    	<div class="row fenzu">
+		    		<div class="col-md-1 col-xs-1 no-padder text-right name">分区名称：</div>
+		    		<div class="col-md-11 col-xs-11 no-padder text-left"><input type="text" ng-model="info.title"></div>
+		    	</div>
+		    	<div class="row shezhi m-t-md">
+		    		<div class="col-md-1 col-xs-1 no-padder text-right name">店铺名称：</div>
+		    		<div class="col-md-11 col-xs-11 text-left function wrapper-md">
+		    			<div class="row gongneng m-b-md">
+		    				<div class="col-md-12 col-xs-12 no-padder m-b-sm font-bold">
+		    				<label class="i-checks i-checks-sm">
+				                <input all2 type="checkbox">
+				                <i></i>全选
+						    </label>
+		    				</div>
+		    				<div class="col-md-12 col-xs-12 no-padder">
+		    					<div repeatfinish class="col-md-4 col-xs-4 m-b-sm" ng-repeat="a in shopList" load="ego()">
+		    						<div class="checkbox row">
+							            <label class="i-checks i-checks-sm">
+							                <input class="my-ipt" type="checkbox" value="{{a.shop_id}}">
+							                <i></i>{{a.shop_name}} - （{{a.province}}/{{a.city}}/{{a.county}}）
+							            </label>
+							        </div>
+		    					</div>
+		    				</div>
+		    			</div>
+		    		</div>
+		    	</div>
+		    	<div class="row">
+		    		<div class="col-md-offset-1 col-xs-offset-1 m-t-md">
+		    			<button class="save" ng-click="save()">保存</button>
+	                    <button class="cancel" ng-click="location('app/partition')">取消</button>
+		    		</div>
+		    	</div>
+	    	</form>
+	    </div>
+	</div>
+</div>
+
+
+
+
+

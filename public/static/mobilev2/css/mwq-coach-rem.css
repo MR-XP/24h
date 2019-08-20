@@ -1,0 +1,1085 @@
+  @media only screen and (max-width: 720px), only screen and (max-device-width:720px) {
+     html,body {
+         font-size:19.2px;
+     }
+   }
+     @media only screen and (max-width: 640px), only screen and (max-device-width:640px) {
+     html,body {
+         font-size:17.066666666666666px;
+     }
+   }
+     @media only screen and (max-width: 600px), only screen and (max-device-width:600px) {
+     html,body {
+         font-size:16px;
+     }
+   }
+     @media only screen and (max-width: 540px), only screen and (max-device-width:540px) {
+     html,body {
+         font-size:14.399999999999999px;
+     }
+   }
+     @media only screen and (max-width: 480px), only screen and (max-device-width:480px) {
+     html,body {
+         font-size:12.8px;
+     }
+   }
+     @media only screen and (max-width: 414px), only screen and (max-device-width:414px) {
+     html,body {
+         font-size:11.040000000000001px;
+     }
+   }
+     @media only screen and (max-width: 400px), only screen and (max-device-width:400px) {
+     html,body {
+         font-size:10.666666666666666px;
+     }
+   }
+     @media only screen and (max-width: 375px), only screen and (max-device-width:375px) {
+     html,body {
+         font-size:10px;
+     }
+   }
+     @media only screen and (max-width: 360px), only screen and (max-device-width:360px) {
+     html,body {
+         font-size:9.6px;
+     }
+   }
+     @media only screen and (max-width: 320px), only screen and (max-device-width:320px) {
+     html,body {
+         font-size:8.533333333333333px;
+     }
+   }
+     @media only screen and (max-width: 240px), only screen and (max-device-width:240px) {
+     html,body {
+         font-size:6.4px;
+     }
+   }
+.mwq-coach-index .m-header{
+	height: 4rem;
+	border-bottom: 1px solid #e0e0e0;
+}
+.mwq-coach-index .m-header .m-name{
+    height: 4rem;
+    line-height: 4rem;
+    float: left;
+}
+.mwq-coach-index .m-header .m-name .location{
+    width: 1.2rem;
+    height: 1.6rem;
+    margin: 0 0.6rem 0 1.3rem;
+}
+.mwq-coach-index .m-header .m-name .location img{
+    width: 1.2rem;
+    height: 1.6rem;
+}
+.mwq-coach-index .m-header .club-sel{
+    height: 4rem;
+    line-height: 4rem;
+}
+.mwq-coach-index .m-header .people-mode{
+    height: 4rem;
+    line-height: 4rem;
+}
+.mwq-coach-index .m-first{
+	margin-top: 1rem;
+	width: 100%;
+	height: 11.5rem;
+	padding: 0 1rem;
+}
+.mwq-coach-index .m-first .m-tx{
+	width: 8rem;
+	height: 11.5rem;
+	text-align: center;
+	line-height: 11.5rem;
+	float: left;
+	margin-right: 1rem;
+}
+.mwq-coach-index .m-first .m-tx .coach-img{
+    width: 8rem;
+    height: 8rem;
+    border-radius: 50%;
+    display: block;
+    -webkit-display: block;
+    -webkit-border-radius: 50%;
+    margin: 0 auto;
+}
+.mwq-coach-index .m-first .m-wz{
+	height:11.5rem;
+	padding: 2.5rem 0 2.5rem 1.1rem;
+}
+.mwq-coach-index .m-first .m-wz .line-one span:first-child{
+	font-size: 1.8rem;
+	color: #010101;
+	font-weight: 500;
+	line-height: 2rem;
+}
+.mwq-coach-index .m-first .m-wz .line-one span:last-child{
+	font-size: 1.2rem;
+	color: #000;
+	margin-left: 1rem;
+}
+.mwq-coach-index .m-first .m-wz .line-two{
+	margin-top: 1.5rem;
+	font-size: 1.2rem;
+	color: #000;
+	line-height: 1.5rem;
+}
+.mwq-coach-index .m-first .m-wz .line-two p{
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 2;
+	overflow: hidden;
+	table-layout: fixed;
+	word-break:break-all;
+	word-wrap:break-word;
+}
+.mwq-coach-index .m-second{
+	width: 100%;
+	padding: 0 1.2rem;
+	height: 6.7rem;
+}
+.mwq-coach-index .m-second .m-box{
+	height: 100%;
+	width: 100%;
+	padding: 0 1.2rem;
+	-webkit-box-shadow: 0 0 0.5rem rgba(0,0,0,0.1);
+    -moz-box-shadow: 0 0 0.5rem rgba(0,0,0,0.1);
+    box-shadow: 0 0 0.5rem rgba(0,0,0,0.1);
+    background-image: url(/static/mobile/img/mwq-coach-bg1.jpg);
+    background-size: 100% 6.7rem;
+}
+.mwq-coach-index .m-second .m-left,
+.mwq-coach-index .m-second .m-right{
+	height: 100%;
+	width: 50%;
+	float: left;
+}
+.mwq-coach-index .m-second .m-left .m-tb{
+	height: 100%;
+	width: 2.25rem;
+	line-height: 6.7rem;
+	float: left;
+}
+.mwq-coach-index .m-second .m-left .m-tb img{
+	width: 2.25rem;
+	height: 2.15rem;
+}
+.mwq-coach-index .m-second .m-left div:last-child{
+	font-size: 1.4rem;
+	color: #000;
+	height: 100%;
+	line-height: 6.7rem;
+	float: left;
+	margin-left: 0.7rem;
+}
+.mwq-coach-index .m-second .m-right{
+	text-align: right;
+	height: 100%;
+	font-size: 1.2rem;
+	line-height: 6.7rem;
+}
+.mwq-coach-index .m-second .m-right .p1{
+	height: 6.7rem;
+	font-weight: 1.2rem;
+	line-height: 6.7rem;
+	float: right;
+}
+.mwq-coach-index .m-second .m-right .p2{
+	height: 6.7rem;
+	font-size: 2.7rem;
+	line-height: 6.7rem;
+	color: #F28019;
+	font-weight: 500;
+	float: right;
+	margin: 0 0.8rem;
+}
+.mwq-coach-index .hx-foot {
+    height: 6.2rem;
+    background-color: #fff;
+    padding: 1rem 1.2rem;
+}
+.mwq-coach-index .qcyd-btn-large {
+	height: 4.2rem;
+    line-height: 4.2rem;
+    width: 100%;
+    font-size: 1.4rem;
+    border-radius: 6px;
+}
+.mwq-coach-index .ix-list {
+    margin-top: 1rem;
+    margin-bottom: 1.5rem;
+}
+/**************************************************************
+				私教的课程预约
+**************************************************************/
+.mwq-coach-appt .tab-head .tab-nav .tab-nav-look {
+    width: 4rem;
+}
+.mwq-coach-appt .my-appt .appt-img{
+	float: left;
+}
+.mwq-coach-appt .my-appt .appt-particulars{
+	float: left;
+	height: 6rem;
+	opacity: 1;
+}
+.mwq-coach-appt .my-appt .appt-particulars .appt-name{
+	height: 1.4rem;
+	line-height: 1.4rem;
+	font-size: 1.4rem;
+	font-weight: 500;
+	color: #000;
+	opacity: 0.87;
+	margin-bottom: 1rem;
+	overflow-y: hidden;
+}
+.mwq-coach-appt .my-appt .appt-particulars .appt-txt,
+.mwq-coach-appt .my-appt .appt-particulars .appt-address{
+	height: 1.1rem;
+	line-height: 1.1rem;
+	font-size: 1.1rem;
+	color: #000;
+	opacity: 0.66;
+	overflow-y: hidden;
+
+}
+.mwq-coach-appt .my-appt .appt-particulars .appt-address{
+	margin-top: 0.9rem;
+}
+.my-appt .appt-cont div{
+	opacity: 1;
+}
+.mwq-coach-appt .my-appt .app-state{
+	float: right;
+	height: 6rem;
+	line-height: 6rem;
+	font-weight: 500;
+	font-size: 1.4rem;
+	color: #f28019;
+}
+.mwq-coach-appt .appt-foot .appt-user{
+	height: 100%;
+	float: left;
+}
+.mwq-coach-appt .appt-foot .appt-user .appt-user-tx{
+	float: left;
+}
+.mwq-coach-appt .appt-foot .appt-user .appt-user-tx img{
+	width: 2.75rem;
+	height: 2.75rem;
+	border-radius: 50%;
+	margin-right: 0.7rem;
+}
+.mwq-coach-appt .appt-foot .appt-user .appt-user-xm{
+	float: left;
+	line-height: 2.75rem;
+	font-size: 1.2rem;
+	color: #000;
+	opacity: 0.66;
+}
+/**************************************************************
+				私教预约详情
+**************************************************************/
+.mwq-appt-dtl .single{
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+}
+.mwq-appt-dtl .course-del{
+	height: 12.5rem;
+	width: 100%;
+	padding: 1.8rem 1.2rem;
+	border-bottom: 1px solid rgba(0,0,0,0.12);
+}
+.mwq-appt-dtl .course-del .course-dtl-img{
+	width: 8rem;
+	height: 6rem;
+	float: left;
+}
+.mwq-appt-dtl .course-del .course-del-part{
+	height: 6rem;
+	padding-left: 1rem;
+	float: left;
+}
+.mwq-appt-dtl .course-del .course-del-part .course-name{
+	height: 3rem;
+	font-size: 1.4rem;
+	font-weight: 500;
+	color: rgba(0,0,0,0.87);
+}
+.mwq-appt-dtl .course-del .course-del-part .course-time,
+.mwq-appt-dtl .course-del .course-del-part .course-addr{
+	height: 1.5rem;
+	line-height: 1.5rem;
+}
+.mwq-appt-dtl .course-del .course-state{
+	height: 6rem;
+	line-height: 6rem;
+	font-size: 1.4rem;
+	font-weight: 500;
+	color: rgba(0,0,0,0.87);
+	position: relative;
+    right: -7rem;
+}
+.mwq-appt-dtl .course-del .appt-del-foot{
+	/*height: 4.5rem;*/
+	padding: 1.5rem 0;
+}
+.mwq-appt-dtl .course-del .appt-del-foot .appt-bar .appt-div:last-child {
+    width: 40%;
+}
+.mwq-appt-dtl .appt-dtl-title{
+	font-size: 1.9rem;
+	color: rgba(0,0,0,0.87);
+	font-weight: 500;
+	width: 100%;
+	padding: 2.3rem 1.2rem 0 1.2rem;
+}
+.mwq-appt-dtl .appt-dtl-list{
+	width: 100%;
+	height: 7rem;
+	padding: 0 1.2rem;
+}
+.mwq-appt-dtl .appt-dtl-list .appt-dtl-cover{
+	height: 100%;
+	padding: 1.5rem 0;
+	float: left;
+	border-bottom: 1px solid #fff;
+}
+.mwq-appt-dtl .appt-dtl-list .appt-dtl-img{
+	width: 4rem;
+	height: 4rem;
+	border-radius: 50%;
+}
+.mwq-appt-dtl .appt-dtl-list .appt-del{
+	height: 100%;
+	padding: 1.5rem 0;
+	margin-left: 5rem;
+	border-bottom: 1px solid rgba(0,0,0,0.12);
+}
+.mwq-appt-dtl .appt-dtl-list .appt-dtl-part{
+	float: left;
+}
+.mwq-appt-dtl .appt-dtl-list .appt-dtl-phone{
+	/*position: relative;
+    right: -22rem;
+    line-height: 4rem;*/
+    position: relative;
+    right: 1.2rem;
+    line-height: 4rem;
+    text-align: right;
+}
+.mwq-appt-dtl .appt-dtl-list .appt-dtl-phone img{
+	width: 1.6rem;
+	height: 1.6rem;
+}
+.mwq-appt-dtl .appt-dtl-list .appt-dtl-part .appt-user-name{
+	height: 2rem;
+	line-height: 2rem;
+	font-size: 1.4rem;
+	color: rgba(0,0,0,0.87);
+	font-weight: 500;
+}
+.mwq-appt-dtl .appt-dtl-list .appt-dtl-part .appt-user-time{
+	font-size: 1.1rem;
+	color: rgba(0,0,0,0.54);
+}
+.mwq-appt-dtl .appt-dtl-list .appt-dtl-part .appt-user-time.time-kk{
+	font-size: 1.1rem;
+	color: #f28019;
+}
+
+/**************************************************************
+				私教课程列表
+**************************************************************/
+.mwq-course-list .course-list{
+	padding: 2rem 0;
+	height: 10rem;
+	width: 100%;
+	border-bottom: 1px solid #e0e0e0;
+}
+.mwq-course-list .course-list .course-img{
+	width: 8rem;
+	height: 6rem;
+	float: left;
+	overflow: hidden;
+}
+.mwq-course-list .course-list .course-txt{
+	float: left;
+	height: 6rem;
+	margin: 0 1rem;
+	color: #000;
+	overflow: hidden;
+}
+.mwq-course-list .course-list .course-txt .p1{
+	font-size: 1.4rem;
+	height: 1.4rem;
+	font-weight: 500;
+	line-height: 1.4rem;
+	opacity: 0.87;
+	overflow: hidden;
+}
+.mwq-course-list .course-list .course-txt .p2{
+	font-size: 1rem;
+	height: 1rem;
+	line-height: 1rem;
+	margin-top: 0.7rem;
+	opacity: 0.66;
+}
+.mwq-course-list .course-list .course-txt .p3{
+	margin-top: 1.7rem;
+	font-size: 1rem;
+	height: 1.1rem;
+	line-height: 1.1rem;
+	color: #f45d42;
+	overflow: hidden;
+}
+.mwq-course-list .course-list .course-txt .p3 div{
+	float: left;
+}
+.mwq-course-list .course-list .course-txt .p3 div:first-child{
+	font-weight: 500;
+}
+.mwq-course-list .course-list .course-txt .p3 div:nth-child(2){
+	font-weight: 500;
+	font-size: 1.4rem;
+}
+.mwq-course-list .course-list .course-view{
+	height: 6rem;
+	float: left;
+}
+.mwq-course-list .course-list .course-view{
+	float: right;
+	height: 6rem;
+}
+.mwq-course-list .course-list .course-view .btn{
+	width: 6rem;
+	// height: 2.6rem;
+	// line-height: 2.6rem;
+	padding: 0 !important;
+	text-align: center;
+	border: 1px solid rgba(0,0,0,0.38);
+	margin-top: 1.7rem;
+	border-radius: 6px;
+}
+.mwq-course-list .course-list .course-view .btn .course-view-txt{
+	font-size: 1.1rem;
+	height: 2.6rem;
+	line-height: 2.6rem;
+	opacity: 0.87;
+}
+/**************************************************************
+				私教的课程详情
+**************************************************************/
+.mwq-course-dtl{
+	color: #000;
+}
+.mwq-course-dtl .dtl-img{
+	width: 100%;
+	height: 15rem;
+}
+.mwq-course-dtl .dtl-name{
+	width: 100%;
+	padding: 3rem 1.2rem;
+}
+.mwq-course-dtl .dtl-name .mwq-name .course-name{
+	float: left;
+	font-weight: 500;
+	font-size: 2rem;
+	height: 2rem;
+	line-height: 2rem;
+	opacity: 0.87;
+	margin-right: 0.6rem;
+}
+.mwq-course-dtl .dtl-name .mwq-name .course-class{
+	font-size: 1.2rem;
+	opacity: 0.66;
+	height: 2rem;
+	line-height: 2rem;
+}
+.mwq-course-dtl .dtl-name .mwq-price{
+	margin-top: 2.8rem;
+	color: #f45d42;
+}
+.mwq-course-dtl .dtl-name .mwq-price div:nth-child(1){
+	font-size: 1.6rem;
+	height: 1.6rem;
+	line-height: 1.6rem;
+	margin-right: 0.5rem;
+	font-weight: 500;
+	float: left;
+}
+.mwq-course-dtl .dtl-name .mwq-price div:nth-child(2){
+	font-size: 2.1rem;
+	height: 1.6rem;
+	line-height: 1.6rem;
+	float: left;
+	margin-right: 0.5rem;
+	font-weight: 500;
+}
+.mwq-course-dtl .dtl-name .mwq-price div:nth-child(3){
+	font-size: 1.1rem;
+	height: 1.6rem;
+	line-height: 1.6rem;
+}
+.mwq-course-dtl .dtl-time{
+	height: 7rem;
+	padding: 0 1.2rem;
+	width: 100%;
+}
+.mwq-course-dtl .dtl-time .content{
+	height: 7rem;
+	width: 100%;
+	border-top: 1px solid rgba(0,0,0,0.12);
+	border-bottom: 1px solid rgba(0,0,0,0.12);
+	padding: 0.8rem 0;
+}
+
+.mwq-course-dtl .dtl-time .content .course-time{
+	width: 50%;
+	height: 100%;
+	border-right: 1px solid rgba(0,0,0,0.12);
+	float: left;
+	padding: 1.4rem 0 0.5rem 0;
+}
+.mwq-course-dtl .dtl-time .content .course-time .time-icon{
+	height: 100%;
+	width: 1.7rem;
+	margin-right: 1.5rem;
+	margin-top: 0.4rem;
+	float: left;
+}
+.mwq-course-dtl .dtl-time .content .course-time .time-icon img{
+	width: 1.7rem;
+	height: 1.7rem;
+}
+.mwq-course-dtl .dtl-time .content .course-time .time-txt{
+	width: 100%;
+	height: 100%;
+}
+.mwq-course-dtl .dtl-time .content .course-time .time-txt div:nth-child(1){
+	font-size: 1.4rem;
+	font-weight: 500;
+	line-height: 1.4rem;
+	opacity: 0.87;
+	margin-top: 0.5rem;
+}
+.mwq-course-dtl .dtl-time .content .course-time .time-txt div:nth-child(2){
+	font-size: 1.2rem;
+	line-height: 1.2rem;
+	opacity: 0.54;
+}
+
+.mwq-course-dtl .dtl-time .content .service-address{
+	width: 50%;
+	height: 100%;
+	float: left;
+	padding: 1.4rem 0 0.5rem 1.3rem;
+}
+.mwq-course-dtl .dtl-time .content .service-address .address-icon{
+	height: 100%;
+	width: 1.4rem;
+	margin-right: 1.5rem;
+	margin-top: 0.3rem;
+	float: left;
+}
+.mwq-course-dtl .dtl-time .content .service-address .address-icon img{
+	width: 1.4rem;
+	height: 2rem;
+}
+.mwq-course-dtl .dtl-time .content .service-address .address-txt{
+	width: 100%;
+	height: 100%;
+}
+.mwq-course-dtl .dtl-time .content .service-address .address-txt div:nth-child(1){
+	font-size: 1.4rem;
+	font-weight: 500;
+	line-height: 1.4rem;
+	opacity: 0.87;
+	margin-top: 0.5rem;
+}
+.mwq-course-dtl .dtl-time .content .service-address .address-txt div:nth-child(2){
+	font-size: 1.2rem;
+	line-height: 1.2rem;
+	opacity: 0.54;
+}
+.mwq-course-dtl .dtl-content .content-instructions{
+	float: right;
+	font-size: 1rem;
+	color: #5e8cf9;
+	opacity: 0.87;
+}
+.mwq-course-dtl .first-content{
+	margin-top: 3rem;
+}
+.mwq-course-dtl .dtl-content{
+	padding: 0 1.2rem;
+	width: 100%;
+	height: 100%;
+	margin-bottom: 3rem;
+}
+.mwq-course-dtl .dtl-content .content-title{
+	font-size: 1.6rem;
+	height: 2rem;
+	line-height: 2rem;
+	font-weight: 500;
+	opacity: 0.87;
+	margin-bottom: 1.9rem;
+}
+.mwq-course-dtl .dtl-content .content-txt{
+	font-size: 1.4rem;
+	line-height: 1.5rem;
+	padding-bottom: 3rem;
+	border-bottom: 1px solid rgba(0,0,0,0.12);
+}
+.mwq-course-dtl .dtl-content .content-txt .txt{
+	opacity: 0.66;
+}
+.mwq-course-dtl .dtl-content .content-txt p{
+	line-height: 2rem;
+}
+.mwq-course-dtl .first-content .content-txt{
+	line-height: 2rem;
+}
+.mwq-course-dtl .dtl-content .instructions{
+	height: 2rem;
+	line-height: 2rem;
+	margin-bottom: 2rem;
+}
+.mwq-course-dtl .dtl-content .instructions .content-title{
+	float: left;
+}
+/**************************************************************
+				photos
+**************************************************************/
+.mwq-photos .hx-cont-noTop {
+    bottom: 6.2rem;
+}
+.mwq-photos .hx-foot{
+	height: 6.2rem;
+	width: 100%;
+	padding: 1rem;
+}
+.mwq-photos .mwq-delete{
+	width: 30%;
+	text-align: center;
+	font-size: 1rem;
+	opacity: 0.66;
+	float: left;
+}
+.mwq-photos .mwq-delete img{
+	// width: 1.4rem;
+	// width: 30%;
+	height: 1.75rem;
+	margin: 0.3rem 0 0.5rem 0;
+}
+.mwq-photos .mwq-up-btn{
+	height: 100%;
+	// width: 29.5rem;
+	width: 70%;
+	background-color: #000;
+	border-radius: 6px;
+	color: #fff;
+	font-size: 1.4rem;
+	text-align: center;
+	line-height: 4.2rem;
+}
+.mwq-photos .mwq-delete-btn{
+	height: 100%;
+	// width: 29.5rem;
+	width: 70%;
+	background-color: #000;
+	border-radius: 6px;
+	color: #fff;
+	font-size: 1.4rem;
+	text-align: center;
+	line-height: 4.2rem;
+}
+.mwq-photos .hx-cont-noTop{
+	padding: 1rem;
+}
+.mwq-photos .coach-album{
+	width: 50%;
+	float: left;
+	padding: 0.5rem;
+}
+.mwq-photos .coach-album .picture{
+	text-align: center;
+}
+.mwq-photos .coach-album .picture img{
+	height: auto;
+	width: 100%;
+}
+.mwq-photos .scroll{
+	height: 100% !important;
+}
+.mwq-photos #headimg{
+	width: 12rem;
+	height: 12rem;
+	border: 2px solid #ffffff;
+	border-radius:100% ;
+	margin: auto;
+	margin-bottom: 1.7rem;
+	background-size:100% 100% !important;
+	background-repeat:no-repeat;
+	background-position: center center;
+}
+/*截图上传页面*/
+.mwq-photos .clipbg{
+	position: fixed;
+	background: #eee;
+	top: 0;
+	z-index: 999;
+	width: 100%;
+	height: 100%;
+	left: 0;
+}
+.mwq-photos .clipbg #clipArea{
+	width: 100%;
+	height: 100%;
+	margin: auto;
+
+}
+.mwq-photos .clipbg .footer{
+	width: 100%;
+	position: fixed;
+	bottom: 0px;
+	text-align: center;
+	height: 6rem;
+}
+.mwq-photos .clipbg dl{
+	overflow: hidden;
+	background-color: #000;
+}
+.mwq-photos .clipbg dd{
+    position: relative;
+    height: 6rem;
+    line-height: 6rem;
+    width: 33.3%;
+    float: left;
+	border-radius: 6px;
+	color: #fff;
+	text-align: center;
+	font-size: 1.6rem;
+}
+.mwq-photos .clipbg dd input{
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	z-index: 11;
+	filter:alpha(opacity=0);
+  	-moz-opacity:0;
+  	-khtml-opacity: 0;
+  	opacity: 0;
+}
+.mwq-photos .choose{
+	text-align: right;
+	position: relative;
+	top: 0.5rem;
+	padding: 0 0.5rem;
+	height: 0.05rem;
+}
+.mwq-photos .choose input{
+	border: 0;
+}
+.mwq-photos .choose input[type="checkbox"]{
+	-webkit-appearance:none;
+	-moz-appearance:none;
+	-ms-appearance:none;
+	-o-appearance:none;
+	appearance:none;
+	width:1.8rem;
+	height:1.8rem;
+	background-image: url(/static/mobile/img/mwq-checkbox2.png);
+	background-size: 1.8rem 1.8rem;
+}
+.mwq-photos .choose input[type="checkbox"]:checked:before{
+	content:attr(x);
+	display:block;
+	width:1.8rem;
+	height:1.8rem;
+	background-image: url(/static/mobile/img/mwq-checkbox1.png);
+	background-size: 1.8rem 1.8rem;
+}
+
+/**************************************************************
+				times
+**************************************************************/
+.mwq-times .hx-cont-noTop {
+    bottom: 6.2rem;
+}
+.mwq-times .hx-foot{
+	height: 6.2rem;
+	padding: 1.2rem 0;
+}
+.mwq-times .hx-foot .txt{
+	opacity: 0.66;
+}
+.mwq-times .hx-foot .mwq-edit,
+.mwq-times .hx-foot .mwq-copy,
+.mwq-times .hx-foot .mwq-delete{
+	width: 20%;
+	text-align: center;
+	font-size: 1rem;
+}
+.mwq-times .hx-foot .tupian{
+	height: 1.75rem;
+	margin-bottom: 0.6rem;
+}
+.mwq-times .hx-foot .mwq-edit img{
+	width: 1.6rem;
+	height: 1.6rem;
+}
+.mwq-times .hx-foot .mwq-edit.diseditable .txt{
+	opacity: 0.38;
+}
+.mwq-times .hx-foot .mwq-copy img{
+	width: 1.5rem;
+	height: 1.7rem;
+}
+.mwq-times .hx-foot .mwq-delete.disdeleteable .txt{
+	opacity: 0.38;
+}
+.mwq-times .hx-foot .mwq-delete img{
+	width: 1.4rem;
+	height: 1.75rem;
+}
+.mwq-times .hx-foot .mwq-add{
+	padding-right: 1rem;
+	width: 40%;
+}
+.mwq-times .hx-foot .mwq-add div{
+	background-color: #000;
+	color: #fff;
+	height: 100%;
+	line-height: 3.8rem;
+	font-size: 1.4rem;
+	text-align: center;
+	border-radius: 6px;
+}
+.mwq-times .times{
+	padding: 0 1.2rem;
+	margin-bottom: 2rem;
+	overflow: hidden;
+}
+.mwq-times .times .appt-time{
+	width: 25%;
+	padding: 0.3rem;
+	float: left;
+	margin-bottom: 1rem;
+	font-size: 1.2rem;
+	color: rgba(0,0,0,0.66);
+}
+.mwq-times .times .appt-time .box1{
+	border-radius: 6px;
+	border: 1px solid rgba(0,0,0,0.12);
+	text-align: center;
+	padding: 1rem 0;
+}
+.mwq-times .times .appt-time .box2{
+	border-radius: 6px;
+	text-align: center;
+	padding: 1rem 0;
+	background-color: rgba(0,0,0,0.12);
+	border: 1px solid rgba(0,0,0,0);
+}
+.mwq-times .times .active {
+    background-color: #f28019;
+    border: none;
+    -webkit-border: none;
+    color: #fff;
+}
+.mwq-times .mwq-status{
+	padding: 0 1.2rem;
+	text-align: center;
+}
+.mwq-times .mwq-status span{
+	font-size: 1.2rem;
+	color: #000;
+	opacity: 0.75;
+	padding: 0 2rem 0 0.8rem;
+}
+.mwq-times .mwq-status img{
+	width: 1rem;
+	height: 1rem;
+}
+.mwq-times .xp-coach-week .xp-coach-week-arr {
+    color: #000;
+    opacity: 0.54;
+}
+
+
+.mwq-times  .mwq-make-bg {
+    position: fixed;
+    z-index: 9990;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    left: 0;
+    top: 0;
+    display: none;
+}
+.mwq-times  .mwq-make-mode {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    left: 0;
+    bottom: -100rem;
+    transition: all 0.6s ease-in-out;
+    -webkit-transition: all 0.6s ease-in-out;
+    background-color: #fff;
+}
+.mwq-times  .mwq-make-mode .mwq-make-top {
+    height: 4rem;
+    line-height: 4rem;
+    background-color: #efefef;
+    position: relative !important;
+}
+.mwq-times  .mwq-make-mode .mwq-make-top .mwq-make-tit {
+    font-size: 1.4rem;
+    font-weight: 500;
+    text-align: center !important;
+}
+.mwq-times  .mwq-make-mode .mwq-make-top .mwq-make-cancel {
+    position: absolute !important;
+    height: 100%;
+    line-height: 4rem;
+    right: 1.2rem;
+    top: 0;
+    opacity: .66;
+    font-size: 1.5rem;
+}
+.mwq-times  .mwq-make-mode .mwq-make-foot {
+    background-color: #fff;
+}
+.mwq-times  .mwq-make-mode .mwq-make-foot {
+    padding: 1rem 1.1rem;
+    border-top: 1px solid #e0e0e0;
+    -webkit-border-top: 1px solid #e0e0e0;
+}
+.mwq-times  .mwq-make-mode .mwq-make-foot .qcyd-btn {
+    border-radius: 6px;
+    -webkit-border-radius: 6px;
+}
+.mwq-times .qcyd-btn-large{
+	height: 5rem;
+    line-height: 5rem;
+    font-size: 1.4rem;
+}
+.mwq-times .mwq-choose-time{
+	text-align: center;
+	padding: 1.5rem 0 0 0;
+}
+
+/*时间选择样式*/
+.mwq-times input[type="time"],
+.mwq-times input[type="date"]
+{
+    border: none;
+    appearance:none;
+    -moz-appearance:none;
+    -webkit-appearance:none;
+    background: none;
+  }
+.mwq-times input[type="time"]::-ms-expand,
+.mwq-times input[type="date"]::-ms-expand{
+	display: none;
+}
+
+.mwq-times .mwq-choose-time input{
+	height: 4rem;
+    font-size: 1.8rem;
+    color: rgba(242,128,25,0.87);
+    margin: 0 auto;
+    text-align: center;
+    line-height: 4rem;
+    padding-top: 0 !important;
+}
+.mwq-times .mwq-choose-time .choose{
+	position: relative;
+    top: -3rem;
+    right: -6rem;
+    font-size: 1.6rem;
+    color: rgba(242,128,25,0.87);
+}
+
+.mwq-times .mwq-make-mode .mwq-txt{
+	font-size: 1.2rem;
+	color: rgba(0,0,0,0.87);
+	padding: 0 1.3rem;
+}
+.mwq-times .mwq-make-mode .mwq-when{
+	margin: 2rem 0 0 1.3rem;
+	border-left: 1px solid #000;
+	height: 3.5rem;
+	padding: 1rem 3rem 0 1.1rem;
+	width: 100%;
+}
+.mwq-times .mwq-make-mode .mwq-when input{
+	font-size: 1.6rem;
+	height: 2.6rem;
+	line-height: 2.2rem;
+	border: none;
+	width: 100%;
+	padding-top: 0 !important;
+}
+.mwq-times .mwq-make-mode .mwq-when .mwq-timeS{
+	width: 45%;
+	text-align: left;
+	float: left;
+}
+.mwq-times .mwq-make-mode .mwq-when .mwq-hx{
+	width: 10%;
+	float: left;
+	padding: 0.8rem 1rem;
+}
+.mwq-times .mwq-make-mode .mwq-when .mwq-hx hr{
+	color: #000;
+}
+.mwq-times .mwq-make-mode .mwq-when .mwq-timeE{
+	width: 45%;
+	text-align: right;
+	float: right;
+}
+.mwq-times .mwq-make-mode .mwq-when .mwq-timeS input,
+.mwq-times .mwq-make-mode .mwq-when .mwq-timeE input{
+	text-align: center;
+	border-bottom: 1px solid #ccc;
+}
+.mwq-times .mwq-make-mode .mwq-hx2{
+	margin: 0.5rem 1.2rem;
+	border-top: 1px solid rgba(0,0,0,0.12);
+}
+.mwq-times .mwq-make-mode .edit{
+	padding: 3rem 1rem;
+}
+.mwq-times .mwq-make-mode .edit button{
+	background-color: #000;
+	color: #fff;
+	font-size: 1.4rem;
+	width: 100%;
+	text-align: center;
+	height: 4.2rem;
+	line-height: 4.2rem;
+	border-radius: 6px;
+}
+.mwq-times  .mwq-make-mode-copy{
+    position: fixed;
+    width: 100%;
+    height: 6.2rem;
+    z-index: 9999;
+    left: 0;
+    bottom: -100rem;
+    transition: all 0.6s ease-in-out;
+    -webkit-transition: all 0.6s ease-in-out;
+    background-color: #fff;
+    padding: 1.2rem;
+}
+.mwq-times  .mwq-make-mode-copy div{
+	width: 33.3%;
+	float: left;
+	text-align: center;
+	line-height: 4.8rem;
+}

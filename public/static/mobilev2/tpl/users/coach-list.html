@@ -1,0 +1,117 @@
+<ion-view id="user-coach-list" hide-nav-bar="true" ng-init="setDocumentTitle('私教中心')" ng-controller="userCoachListCtrl">
+	<div id="header">
+	  <!--场馆选择-->
+		<div class="home-shop" ng-click="showCity()">
+			{{userLoc.province}}{{ userLoc.city == userLoc.province ? '':('-'+userLoc.city)}}-{{shop.name}}
+			<img class="down-icon" src="./static/mobilev2/images/down_icon.png" alt="">
+		</div>
+		<div class="scan-icon"><img ng-click="scanQRCode()" src="./static/mobilev2/images/scan_icon.png" alt=""></div>
+	</div>
+
+	<ion-content class="user-scroll" overflow-scroll="false" scrollbar-y="false" has-bouncing="true">
+		<div class="user-content-no coach-content">
+			<div class="adept row">
+			  <div class="col t-c">
+			  	<a href="javascript:;" class="coach-col" ng-click="get('增肌',2)">
+						<div class="coach-col-img"><img src="./static/mobilev2/images/adept_muscle.png"  /></div>
+						<div class="coach-col-txt">增肌</div>
+					</a>
+			  </div>
+			  <div class="col t-c">
+			  	<a href="javascript:;" class="coach-col" ng-click="get('产后恢复',2)">
+						<div class="coach-col-img"><img src="./static/mobilev2/images/adept_recovery.png"  /></div>
+						<div class="coach-col-txt">产后恢复</div>
+					</a>
+			  </div>
+			  <div class="col t-c">
+			  	<a href="javascript:;" class="coach-col" ng-click="get('格斗',2)">
+						<div class="coach-col-img"><img src="./static/mobilev2/images/adept_combat.png"  /></div>
+						<div class="coach-col-txt">格斗</div>
+					</a>
+			  </div>
+			  <div class="col t-c">
+					<a href="javascript:;" class="coach-col" ng-click="get('瑜伽',2)">
+						<div class="coach-col-img"><img src="./static/mobilev2/images/adept_yoga.png"  /></div>
+						<div class="coach-col-txt">瑜伽</div>
+					</a>
+			  </div>
+			  <div class="col t-c">
+			  	<a href="javascript:;" class="coach-col" ng-click="get('减脂塑形',2)">
+						<div class="coach-col-img"><img src="./static/mobilev2/images/adept_shaping.png"  /></div>
+						<div class="coach-col-txt">减脂塑形</div>
+					</a>
+			  </div>
+			</div>
+			<div class="coach-list-content">
+				<!--筛选 -->
+				<div class="coach-screen">
+					<div name="1" class="coach-screen-li" ng-class="{'c-yl':list.order==''}" ng-click="sort(1)">综合</div>
+					<div name="2" class="coach-screen-li coach-screen-arrow" ng-click="sort(2)">
+						销量
+						<span ng-class="{'top-yl'	:list.order=='buy_num asc'}"></span>
+						<span ng-class="{'bottom-yl':list.order=='buy_num desc'}"></span>
+					</div>
+					<div name="3" class="coach-screen-li coach-screen-arrow" ng-click="sort(3)">
+						价格
+						<span ng-class="{'top-yl'	:list.order=='price asc'}"></span>
+						<span ng-class="{'bottom-yl':list.order=='price desc'}"></span>
+					</div>
+					<!-- <div class="coach-screen-li" ng-click="look()">
+						{{nowTxt}}
+						<span class="coach-icon-screen"></span>
+					</div> -->
+				</div>
+				<div class="coach-list" ng-repeat="i in coachList track by $index" ng-init="stars=getStars(i.score)">
+					<div class="coach-li" ng-click="go(i.coach_id)">
+						<div class="coach"><div class="coach-img" ng-style="'uploads/'+i.avatar | adaptBg"></div></div>
+						<div class="caoch-dtl">
+							<div class="details">
+								<div class="coach-name c-32">{{i.coach_name}}</div>
+								<div class="coach-stars">
+									<img ng-repeat="j in stars" src="./static/mobilev2/images/star_icon.png" alt="">
+									<span class="coach-txt c-9b">/累计上课{{i.count}}节</span>
+								</div>
+								<div class="coach-good">
+									<span ng-repeat='k in i.speciality'>{{k}}</span>
+								</div>
+								<div class="coach-money c-orange">
+									￥<span>{{i.price}}</span> / 课时起
+								</div>	
+							</div>					
+						</div>
+					</div>
+				</div>
+				<div class="t-c" ng-if="!coachList || coachList.length==0">暂时没有服务的私教，换其他场馆吧</div>
+			</div>
+		</div>
+	</ion-content>
+	<!--城市menu-->
+	<div loadcity class="region-mode">
+		<div class="region-tit">
+			<div class="region-close" ng-click="closeCity()">
+				<img src="./static/mobilev2/images/close_icon.png" alt="">
+			</div>
+			<div>选择区域</div>
+		</div>
+		<div class="region-cont">
+			<div class="region-nav" style="height: 1.067rem;" ng-repeat="i in citys" type="0" ng-click="getProvince(i.province,$index,i.child[0].city)">
+				<div class="region-nav-tit" ng-class='{"c-orange" : i.province == userLoc.province}'>{{i.province}}</div>
+				<div class="region-snav">
+					<div ng-repeat="p in i.child" ng-class='{"c-orange" : p.city == userLoc.city}'  ng-click="getCity(p.city,false)">{{ p.city == i.province ? '主城区':p.city}}</div>
+				</div>
+			</div>
+		</div>
+		<br />
+		<br />
+		<br />
+		<div class="region-tit">
+			选择场馆
+		</div>
+		<div class="region-cont">
+			<div class="region-nav" ng-repeat="i in shop.list track by $index" type="0" ng-click="getShopId(i,true)">
+				<div class="region-nav-tit" ng-class='{"c-orange" : i.shop_id == shop.id}'>{{i.county}}-{{i.shop_name}}</div>
+			</div>
+		</div>
+	</div>
+</ion-view>
+

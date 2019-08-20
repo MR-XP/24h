@@ -1,0 +1,98 @@
+<!--我的时间-->
+<ion-view class="hx-page mwq-times" style="background-color: #fff;" hide-nav-bar="true" ng-init="setDocumentTitle('我的时间')" ng-controller="timesCtrl">
+
+    <ion-content class="hx-cont-noTop" overflow-scroll="false" scrollbar-y="false" has-bouncing="true">
+
+		<div class="xp-coach-week">
+
+			<a href="javascript:;" class="xp-coach-week-arr" ng-click="newWeek(-7)">
+				<i class="icon ion-ios-arrow-left"></i>
+			</a>
+			<week-date click="clickDateMenu"></week-date>
+			<a href="javascript:;" class="xp-coach-week-arr" ng-click="newWeek(7)">
+				<i class="icon ion-ios-arrow-right"></i>
+			</a>
+
+		</div>
+
+		<!--时间段-->
+		<div class="times">
+			<div class="appt-time" ng-repeat="i in nowTimes">
+				<div class="box1" ng-show="{{i.user_count}}==0" type="0" ng-click="change($event,i.plan_id,i.start_time,i.end_time)" value="{{i.plan_id}}">{{i.start_time | limitTo:-8 |limitTo:5}}-{{i.end_time | limitTo:-8 |limitTo:5}}</div>
+				<div class="box2" ng-show="{{i.user_count}}==1">{{i.start_time | limitTo:-8 |limitTo:5}}-{{i.end_time | limitTo:-8 |limitTo:5}}</div>
+			</div>
+		</div>
+		<div class="tc c-9 m-t-30" ng-if="!nowTimes || nowTimes.length==0">您没有时间安排</div>
+		<br />
+		<br />
+		<br />
+		<br />
+		<div class="mwq-status">
+			<img src="/static/mobile/img/mwq-times-status1.png" alt=""><span>已被预约</span>
+			<img src="/static/mobile/img/mwq-times-status2.png" alt=""><span>可预约</span>
+		</div>
+
+    </ion-content>
+    <div class="mwq-make-bg" ng-click="cancelCopy()"></div>
+	<div class="mwq-make-mode">
+		<div class="mwq-make-top">
+			<div class="mwq-make-cancel" ng-click="cancelAdd()">取消</div>
+		</div>
+		<div class="mwq-choose-time">
+			<input type="date" id="SDay" ng-model="info.SDay" ng-change="clearTime()" />
+			<i class="ion-arrow-down-b choose"></i>
+		</div>
+		<div class="mwq-txt">添加/编辑时间段</div>
+		<div class="mwq-when">
+			<div class="mwq-timeS">
+				<input type="time" ng-model="info.SHours" id="newHours" ng-change="autoTime()" />
+			</div>
+			<div class="mwq-hx">
+				<hr />
+			</div>
+			<div class="mwq-timeE">
+				<input type="text" id="SHours" readonly onfocus="this.blur()" style="background-color:#fff;">
+			</div>
+		</div>
+		<div class="edit">
+			<button ng-click="edit()">确定</button>
+		</div>
+	</div>
+	<div class="mwq-make-mode-copy">
+		<div ng-click="ckCopy('day')">复制今日</div>
+		<div ng-click="ckCopy('week')">复制本周</div>
+		<div ng-click="cancelCopy()">取消复制</div>
+	</div>
+
+    <ion-footer-bar class="hx-foot">
+		<div class="mwq-edit editable" ng-click="addTime(1)" ng-show="PlanID!=''">
+			<div class="tupian"><img src="/static/mobile/img/mwq-times-editable.png" alt=""></div>
+			<div class="txt">编辑</div>
+		</div>
+		<div class="mwq-edit diseditable" ng-show="PlanID==''">
+			<div class="tupian"><img src="/static/mobile/img/mwq-times-diseditable.png" alt=""></div>
+			<div class="txt">编辑</div>
+		</div>
+		<div class="mwq-copy" ng-click="showCopy()">
+			<div class="tupian"><img src="/static/mobile/img/mwq-times-copy.png" alt=""></div>
+			<div class="txt">复制</div>
+		</div>
+		<div class="mwq-delete deleteable" ng-click="delete()" ng-show="PlanID!=''">
+			<div class="tupian"><img src="/static/mobile/img/mwq-times-deleteable.png" alt=""></div>
+			<div class="txt">删除</div>
+		</div>
+		<div class="mwq-delete disdeleteable" ng-show="PlanID==''">
+			<div class="tupian"><img src="/static/mobile/img/mwq-times-disdeleteable.png" alt=""></div>
+			<div class="txt">删除</div>
+		</div>
+		<div class="mwq-add">
+			<div class="add" ng-click="addTime(0)">添加时间段</div>
+		</div>
+    </ion-footer-bar>
+    
+</ion-view>
+
+
+
+
+

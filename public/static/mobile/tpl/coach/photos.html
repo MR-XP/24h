@@ -1,0 +1,50 @@
+<!--我的时间-->
+<ion-view class="hx-page mwq-photos" style="background-color: #fff;" hide-nav-bar="true" ng-init="setDocumentTitle('我的相册')" ng-controller="photosCtrl">
+
+	<ion-content class="hx-cont-noTop" overflow-scroll="false" scrollbar-y="false" has-bouncing="true">
+
+		<div class="coach-album" ng-click="xuanze($event)" ng-repeat="i in coachPhotos track by $index">
+			<div  class="choose"><input class="mwq-choose" ng-if="selectdelete" type="checkbox" value="{{i}}"></div>
+			<div class="picture"><img ng-src="uploads/{{i}}" urll="{{i}}"></div>
+		</div>
+	</ion-content>
+	<ion-footer-bar class="hx-foot">
+		<div class="mwq-delete" ng-init="copyright=false" ng-click="selectdelete=!selectdelete">
+			<div><img src="/static/mobile/img/mwq-delete.png"></div>
+			<div ng-show="selectdelete">取消</div>
+			<div ng-show="!selectdelete">删除</div>
+		</div>
+		<div ng-show="selectdelete" class="mwq-delete-btn">
+			确定删除
+		</div>
+		<div ng-show="!selectdelete" class="mwq-up-btn">
+			上传图片
+		</div>
+    </ion-footer-bar>
+	<div class="photoList">
+		<div class="clipbg displaynone">
+			<div id="clipArea"></div>
+			<div class="footer">
+				<dl>
+					<dd>打开相册<input type="file" id="file" accept="image/*" ></dd>
+					<dd id="back">取消</dd>
+					<dd id="clipBtn">确认保存</dd>
+				</dl>
+			</div>
+		</div>
+	</div>
+
+<link rel="stylesheet" 		  href="/static/mobile/js/plugins/camera/css/intial.css" />
+<script type="text/javascript" src="/static/mobile/js/plugins/camera/js/hammer.min.js" ></script>
+<script type="text/javascript" src="/static/mobile/js/plugins/camera/js/lrz.all.bundle.js" ></script>
+<script type="text/javascript" src="/static/mobile/js/plugins/camera/js/iscroll-zoom-min.js" ></script>
+<script type="text/javascript" src="/static/mobile/js/plugins/camera/js/PhotoClip.js" ></script>
+
+</ion-view>
+
+
+
+
+
+
+

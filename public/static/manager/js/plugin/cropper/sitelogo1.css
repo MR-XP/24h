@@ -1,0 +1,93 @@
+.upimg .avatar-view1 {
+  display: block;
+  width: 85px;
+  height: 50px;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.upimg .avatar-view1 img {
+  width: 100%;
+}
+
+.upimg .avatar-body {
+  padding-right: 10px;
+  padding-left: 10px;
+}
+
+.upimg .avatar-upload1 {
+  overflow: hidden;
+}
+
+.upimg .avatar-upload1 label {
+  display: block;
+  float: left;
+  clear: left;
+  width: 100px;
+}
+
+.upimg .avatar-upload1 input {
+  display: block;
+  margin-left: 110px;
+}
+
+.upimg .avater-alert {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.upimg .avatar-wrapper1 {
+  height: 364px;
+  width: 100%;
+  margin-top: 15px;
+  box-shadow: inset 0 0 5px rgba(0,0,0,.25);
+  background-color: #fcfcfc;
+  overflow: hidden;
+}
+
+.upimg .avatar-wrapper1 img {
+  display: block;
+  height: auto;
+  max-width: 100%;
+}
+
+.upimg .avatar-preview1 {
+  float: left;
+  margin-top: 15px;
+  margin-right: 15px;
+  border: 1px solid #eee;
+  border-radius: 4px;
+  background-color: #fff;
+  overflow: hidden;
+}
+
+.upimg .avatar-preview1:hover {
+  border-color: #ccf;
+  box-shadow: 0 0 5px rgba(0,0,0,.15);
+}
+
+.upimg .avatar-preview1 img {
+  width: 100%;
+}
+
+.upimg .preview-lg {
+  height: 364px;
+  width: 538px;
+  margin-top: 15px;
+}
+
+@media (min-width: 992px) {
+  .avatar-preview1 {
+    float: none;
+  }
+}
+
+.upimg .avatar-btns1 {
+  margin-top: 30px;
+  margin-bottom: 15px;
+}
+
+.upimg .avatar-btns1 .btn-group {
+  margin-right: 5px;
+}
+

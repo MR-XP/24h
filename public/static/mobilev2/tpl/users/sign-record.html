@@ -1,0 +1,116 @@
+<ion-view class="hx-page" hide-nav-bar="true" ng-init="setDocumentTitle('签到记录')" ng-controller="signRecordCtrl">
+	
+	<ion-header-bar class="header-80 p-rel">
+		
+		<!--场馆选择-->
+		<div class="club-header" ng-click="showCity()">
+			
+			<img ng-src="static/mobile/img/icon/map-city.png">
+			{{userLoc.province}}{{ userLoc.city == userLoc.province ? '':('-'+userLoc.city)}}-{{shop.county}}-{{shop.name}}
+			
+		</div>
+		
+<!--	<select class="club-sel" ng-model="shopId" ng-options="i.shop_id as i.county+'--'+i.shop_name for i in loadShopList" ng-change="getName()">
+			
+		</select>-->
+		
+    </ion-header-bar>
+	
+    <ion-content class="hx-cont-noBtm" overflow-scroll="true" scrollbar-y="false" has-bouncing="true">
+		
+		<div class="sign-record">
+			
+			<div id="calendar">
+			
+				<div class="title">
+					<div class="ck-div ck-lf" ng-click="prev()">
+						<div class="prev"></div>
+					</div>
+					<div class="ck-div ck-rg" ng-click="next()">
+						<div class="next"></div>
+					</div>
+					<div class="month-span"></div>
+				</div>
+				
+				<div id="signLayer"></div>
+				
+			</div>
+			<div class="hx-pd">
+				<div class="sign-hr" ng-if="userId==0">
+					每天坚持锻炼，可以保持良好身材哟！
+				</div>
+				<div class="sign-hr" ng-if="userId!=0">
+					该会员卡成员签到记录
+				</div>
+			</div>
+			<br />
+			<div class="hx-pd time-tit" ng-if="giveList.length>0">当天锻炼时长：</div>
+			<div class="hx-pd bg-f ix-list">
+				<div class="list xp-list ix-item">
+					<a href="javascript:;" class="item item-icon-right" ng-repeat="i in giveList">
+						{{i.startTime}} -- {{i.endTime}}
+					</a>
+				</div>
+			</div>
+			
+			<div class="record-mode">
+				<div class="record-txt">本月签到</div>
+				<div class="record-num">
+					<span class="record-day"></span><em>天</em>
+					<span>/</span>
+					<span class="record-time"></span><em>次</em>
+				</div>
+			</div>
+			
+		</div>
+		
+    </ion-content>
+
+	<!--城市menu-->
+	<div loadcity class="region-mode">
+		
+		<div class="region-tit">
+			选择城市
+			<div class="region-close" ng-click="closeCity()">
+				<div></div>
+			</div>
+		</div>
+		
+		<div class="region-cont">
+			
+			<div class="region-nav" ng-repeat="i in citys" type="0" ng-click="getProvince(i.province,$index,i.child[0].city)">
+				
+				<div class="region-nav-tit" ng-class='{"c-red" : i.province == userLoc.province}'>{{i.province}}</div>
+				<div class="region-snav">
+					<div ng-repeat="p in i.child" ng-class='{"c-red" : p.city == userLoc.city}'  ng-click="getCity(p.city,false)">{{ p.city == i.province ? '主城区':p.city}}</div>
+				</div>
+				
+			</div>
+			
+		</div>
+		
+		<br />
+		<br />
+		<br />
+		
+		<div class="region-tit">
+			选择场馆
+		</div>
+		<div class="region-cont">
+
+			<div class="region-nav" ng-repeat="i in shop.list track by $index" type="0" ng-click="getShopId(i,true)">
+				
+				<div class="region-nav-tit" ng-class='{"c-red" : i.shop_id == shop.id}'>{{i.county}}-{{i.shop_name}}</div>
+
+			</div>
+			
+		</div>
+		
+	</div>
+	
+</ion-view>
+
+
+
+
+

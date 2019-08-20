@@ -1,0 +1,59 @@
+<ion-view id="user-card-list" style="background-color: #fff;" hide-nav-bar="true" ng-init="setDocumentTitle('会员卡列表')" ng-controller="userCardListCtrl">
+	<div id="header">
+	  <!--场馆选择-->
+		<div class="home-shop" ng-click="showCity()">
+			{{userLoc.province}}{{ userLoc.city == userLoc.province ? '':('-'+userLoc.city)}}-{{shop.name}}
+			<img class="down-icon" src="./static/mobilev2/images/down_icon.png" alt="">
+		</div>
+		<div class="scan-icon"><img ng-click="scanQRCode()" src="./static/mobilev2/images/scan_icon.png" alt=""></div>
+	</div>
+
+	<ion-content class="user-scroll"  overflow-scroll="false" scrollbar-y="false" has-bouncing="true" delegate-handle="mainScroll">
+		<!--会员卡列表-->
+		<div class="user-content-no">
+			<div class="user-card" ng-repeat="i in cardList" ng-click="go(i.card_id)">
+				<div class="card-list">
+					<div class="card-img" ng-style="'uploads/'+i.image | adaptBg"></div>
+					<div class="card-txt">
+						<div class="card-name">{{i.card_name}}</div>
+						<div class="card-att">{{shop.name}}<span>{{i.days}}天*24H</span></div>
+						<div class="card-price">
+							￥<span class="actual-price">{{i.price}}</span>
+							<!-- <span class="rect bounceIn cut-down" ng-if="i.price != i.origin_price" class="label">已减{{::i.origin_price-i.price}}</span> -->
+							<button class="rect bounceIn cut-down" ng-if="i.price != i.origin_price" class="label" ng-if="cardDtl.price != cardDtl.origin_price">已减{{::i.origin_price-i.price}}</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="tc c-9 m-t-30" ng-if="!cardList || cardList.length==0">该场馆暂时没有会员卡出售，看看其他吧</div>
+	</ion-content>
+	<!--城市menu-->
+	<div loadcity class="region-mode">
+		<div class="region-tit">
+			选择城市
+			<div class="region-close" ng-click="closeCity()">
+				<div></div>
+			</div>
+		</div>
+		<div class="region-cont">
+			<div class="region-nav" ng-repeat="i in citys" type="0" ng-click="getProvince(i.province,$index,i.child[0].city)">
+				<div class="region-nav-tit" ng-class='{"c-red" : i.province == userLoc.province}'>{{i.province}}</div>
+				<div class="region-snav">
+					<div ng-repeat="p in i.child" ng-class='{"c-red" : p.city == userLoc.city}'  ng-click="getCity(p.city,false)">{{ p.city == i.province ? '主城区':p.city}}</div>
+				</div>
+			</div>
+		</div>
+		<br />
+		<br />
+		<br />
+		<div class="region-tit">
+			选择场馆
+		</div>
+		<div class="region-cont">
+			<div class="region-nav" ng-repeat="i in shop.list track by $index" type="0" ng-click="getShopId(i,true)">
+				<div class="region-nav-tit" ng-class='{"c-red" : i.shop_id == shop.id}'>{{i.county}}-{{i.shop_name}}</div>
+			</div>
+		</div>
+	</div>
+</ion-view>

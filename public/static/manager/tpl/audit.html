@@ -1,0 +1,89 @@
+<div class="audit general " ng-controller="auditController">
+	<div class="top row">
+		<div class="m-b-sm row f-14 c-3">您当前的位置：<span>{{txt}}</span></div>
+		<div class="screening row">
+			<div class="select">
+				<div class="m-select">
+					<select ng-model="parmList.type" ng-change="load()">
+						<option value="">所有代购</option>
+						<option value="1">卡</option>
+						<option value="2">小团课</option>
+						<option value="3">私教课</option>
+						<option value="4">充值</option>
+						<option value="6">添加成员</option>
+					</select>
+				</div>
+				<div class="m-select">
+					<select ng-options="k.shop_id as k.county +'--'+ k.shop_name for k in shopList" ng-model="parmList.shop_id" ng-change="load()">
+						<option value="">所有场馆</option>
+					</select>
+				</div>
+				<div class="m-select">
+					<input type="text" placeholder="电话号码查找" ng-model="parmList.phone" ng-change="load()">
+				</div>
+				<div class="m-select">
+					<input type="text" placeholder="输入会员名称查找" ng-model="parmList.name" ng-change="load()">
+					&nbsp;
+					<span style="font-size:12px">(充值，绑定，清除旷课这三类属于平台收入，不属于单店收入)</span>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="content">
+		<div class="box row">
+			<div class="list row">
+				<div class="col-md-1 col-xs-1 no-padder m-box">操作者</div>
+				<div class="col-md-1 col-xs-1 no-padder m-box">联系电话</div>
+				<div class="col-md-2 col-xs-2 no-padder m-box">时间</div>
+				<div class="col-md-1 col-xs-1 no-padder m-box">原因</div>
+				<div class="col-md-1 col-xs-1 no-padder m-box">状态</div>
+				<div class="col-md-1 col-xs-1 no-padder m-box">会员名</div>
+				<div class="col-md-1 col-xs-1 no-padder m-box">优惠金额(元)</div>
+				<div class="col-md-2 col-xs-2 no-padder m-box">代购物品</div>
+				<div class="col-md-2 col-xs-2 no-padder m-box">操作</div>
+			</div>
+			<div class="list-details" ng-repeat="v in newAuditList.list">
+				<div class="col-md-1 col-xs-1 no-padder m-box">{{v.create_user}}</div>
+				<div class="col-md-1 col-xs-1 no-padder m-box">{{v.phone}}</div>
+				<div class="col-md-2 col-xs-2 no-padder m-box">{{v.create_time}}</div>
+				<!-- <div class="col-md-1 col-xs-1 no-padder m-box">{{v.attach}}</div> -->
+				<div class="col-md-1 col-xs-1 no-padder  number">
+					<span class="c-click edit"  tabindex="0" role="button" data-toggle="popover" data-placement="bottom" data-trigger="focus"  data-content="{{v.attach}}">查看</span>
+				</div>
+					<style>
+						.popover{
+							margin-top: -8px !important;
+							top: 55px !important;
+						}
+					</style>
+					<script>
+						$(function () {
+							$("[data-toggle='popover']").popover();
+						});
+					</script>
+				<div class="col-md-1 col-xs-1 no-padder m-box c-red" ng-show="v.status==2">{{v.status | passType}}</div>
+				<div class="col-md-1 col-xs-1 no-padder m-box c-green" ng-show="v.status==1">{{v.status | passType}}</div>
+				<div class="col-md-1 col-xs-1 no-padder m-box c-red" ng-show="v.status==0">{{v.status | passType}}</div>
+				<div class="col-md-1 col-xs-1 no-padder m-box name">{{v.real_name}}</div>
+				<div class="col-md-1 col-xs-1 no-padder m-box name">￥{{v.discount_money}}</div>
+				<div class="col-md-2 col-xs-2 no-padder m-box name">{{v.product_name}} <span style="color:red;font-weight: bold;">&nbsp;/&nbsp;</span> ￥{{v.price}}</div>
+				<div class="col-md-2 col-xs-2 no-padder m-box">
+					<a href="" class="c-click edit" ng-click="pass(v.approval_id,v.status)" ng-show="v.status==0">通过</a>
+					<a href="" class="c-click edit m-l-xs" ng-click="reject(v.approval_id,v.status)" ng-show="v.status==0">拒绝</a>
+					<a href="" class="c-lightgrey chuli" ng-show="v.status==1">已通过</a>
+					<a href="" class="c-lightgrey chuli" ng-show="v.status==2">已拒绝</a>
+				</div>
+			</div>
+		</div>
+		<div class="page-footer">
+			<div class="pull-left col-md-6 col-xs-6 no-padder text-left">
+				<span class="text-sm">共{{newAuditList.total_results}}条记录，共{{newAuditList.total_pages}}页，</span>
+				<span class="text-sm">当前显示第{{newAuditList.page_no}}页，</span>
+				<span class="text-sm">每页显示{{newAuditList.page_size}}条</span>
+			</div>
+        	<div class="col-md-6 col-xs-6 no-padder text-right">
+        		<pagination total-items="newAuditList.total_results" ng-model="parmList.page_no" max-size="maxSize" class="pagination-sm m-t-none m-b" boundary-links="true" rotate="false" num-pages="newAuditList.page_size" ng-click="pages()" items-per-page="newAuditList.page_size"></pagination>
+        	</div>
+		</div>
+	</div>
+</div>

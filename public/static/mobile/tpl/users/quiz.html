@@ -1,0 +1,32 @@
+<ion-view class="hx-page" style="background-color: #64B959;" id="quiz" hide-nav-bar="true" ng-init="setDocumentTitle('竞猜')" ng-controller="quizCtrl">
+    <ion-content class="" overflow-scroll="false" scrollbar-y="false" has-bouncing="true"><!-- hx-cont-noTop -->
+		<div class="hx-pd quiz" style="background-color: #64B959; padding: 0;">
+			<div class="quiz-bg"></div>
+			<div class="quiz-content">
+				<div class="endTime"><button>{{activityData[0].end_time | limitTo: 16}} 结束竞猜</button></div>
+				<div class="quiz-shadow">
+					<div class="quiz-txt">
+						<div class="shape1"><img src="./static/mobile/img/shape1.png" alt=""></div>
+						<div class="quiz-title">{{activityData[0].name}}</div>
+						<div class="team-list">
+							<div class="list">
+								<div class="team" ng-repeat="k in activityTeam">
+									<div><img class="team-logo" value="{{k.id}}" ng-src="uploads/{{k.logo}}" ng-click="chooseTeam(k.id)"></div>
+									<div>{{k.name}}</div>
+								</div>
+							</div>
+							<div class="quiz-submit"><img ng-click="quizSave()" src="./static/mobile/img/quiz-submit.png" alt=""></div>
+						</div>
+					</div>
+					<div class="quiz-rule">
+						<div class="quiz-rule-title">活动规则</div>
+						<div class="quiz-rule-txt">1.此活动仅购买“世界杯专属会员卡”用户参与</div>
+						<div class="quiz-rule-txt">2.必须竞猜全部正确才能获得奖品</div>
+						<div class="quiz-rule-txt">3.如果32进16，16进8，8进4，总冠军竞猜全部成功，只能在获奖奖品中任选其一</div>
+						<div class="quiz-rule-txt">4.逾期则不能参与竞猜</div>
+					</div>	
+				</div>
+			</div>
+		</div>
+    </ion-content>
+</ion-view>

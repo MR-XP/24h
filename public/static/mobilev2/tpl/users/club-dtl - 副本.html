@@ -1,0 +1,99 @@
+<ion-view class="hx-page" style="background-color: #fff;" hide-nav-bar="true" ng-init="setDocumentTitle('场馆详情')" ng-controller="clubDtlCtrl">
+
+	<ion-content class="club-cont" overflow-scroll="false" scrollbar-y="false" has-bouncing="true">
+	
+		<ion-slide-box auto-play="true" does-continue="true" show-pager="false" slide-interval="3000" class="club-images"> 
+			
+			<ion-slide ng-repeat="i in info.images">
+				<img imgzoom ng-src="uploads/{{i}}" clsname="imgbar" zoomurl="uploads/{{i}}" />
+			</ion-slide>
+			
+		</ion-slide-box>
+
+		<div class="hx-pd">
+			
+			<div class="club-div">
+				<div class="club-name">{{info.shop_name}}</div>
+				<div class="club-add">{{info.address}}</div>
+				<div class="club-adv">
+					<span>wifi</span>
+					<span>24H</span>
+					<span>免费团课</span>
+					<span>私教服务</span>
+				</div>
+			</div>
+			
+			<div class="club-div">
+				<div class="club-tit">门店介绍</div>
+				<div class="club-per">
+					<div class="club-per-left">门店面积：</div>
+					<div class="club-per-right">{{info.area}}m<sup>2</sup></div>
+				</div>
+				<div class="club-per">
+					<div class="club-per-left">有氧器械：</div>
+					<div class="club-per-right">{{info.aerobic_apparatus}}</div>
+				</div>
+				<div class="club-per">
+					<div class="club-per-left">力量器械：</div>
+					<div class="club-per-right">{{info.anaerobic_apparatus}}</div>
+				</div>
+			</div>
+			
+			<div class="club-div">
+				<div class="club-tit">私人教练</div>
+				<div class="coach-cont" ng-repeat="i in info.coach track by $index">
+					<div imgzoom class="coach-img" ng-style="'uploads/'+i.avatar | allBg" clsname="imgCoach" zoomurl="uploads/{{i.avatar}}"></div>
+					<div class="coach-name">{{i.coach_name}}</div>
+					<div class="coach-txt">
+						<span>擅长:</span>
+						<span ng-repeat="p in i.speciality track by $index">{{p}}</span>
+					</div>
+				</div>
+			</div>
+			
+		</div>
+		
+		<div class="club-div">
+			<div class="hx-pd club-tit club-tit2">门店课表</div>
+			<!--日期选择-->
+			<date-menu click="clickDateMenu" active="active"></date-menu>
+			
+<!--		<div class="appt" ng-repeat="i in nowCourseList track by $index">
+				<div class="appt-mode">
+					<div class="appt-mode-img" ng-style="'uploads/'+i.cover | allBg"></div>
+					<div class="p-rel">
+						<div class="appt-mode-tit">{{i.course_name}} {{getTime(i.start_time)}} 还可预约：<span style="color: #f28019;">{{i.max_count - i.user_count}}</span>人</div>
+						<div class="appt-mode-txt">{{getYear(i.start_time)}} {{i.county}} {{i.adress}} 教练：{{i.coach_name}}</div>
+						<a ng-if="i.status==1" href="#/users/groupCourse-dtl/{{i.plan_id}}/{{shopId}}" class="p-abs appt-mode-btn group-list-btn">预约</a>
+						<a ng-if="i.status==0" href="javascript:;" class="p-abs appt-mode-btn group-list-btn group-list-btn-gray">预约</a>
+					</div>
+				</div>
+	       </div>-->
+
+	        <div class="appt-two" ng-repeat="i in nowCourseList track by $index">
+			
+				<div class="appt-mode" ng-click="go(i.plan_id)">
+					<div class="appt-mode-img">
+						<div class="appt-mode-bg" ng-style="'uploads/'+i.cover | adaptBg"></div>
+						<div class="appt-mode-num" ng-if="i.max_count>i.user_count">已约{{i.user_count}}/{{i.max_count}}</div>
+						<div class="appt-mode-num" ng-if="i.max_count==i.user_count">已约满</div>
+						<div class="appt-mode-barBg"></div>
+						<div class="appt-mode-barMv" ng-init="bar($index,i.user_count,i.max_count)"></div>
+					</div>
+					<div class="p-rel">
+						<div class="appt-mode-tit">{{i.course_name}}&nbsp;&nbsp;{{getTime(i.start_time) | limitTo:6}} -{{getTime(i.end_time) | limitTo:6}}</div>
+						<div class="appt-mode-txt">{{getYear(i.start_time)}} / {{i.shop.province}} {{i.shop.city}} / 预约{{i.min_count}}人开课 / 教练：{{i.coach_name}}</div>
+					</div>
+				</div>
+			
+        	</div>
+		
+			<div class="tc c-9 m-t-30" ng-if="!nowCourseList || nowCourseList.length==0">暂时没有排课安排</div>
+	       
+		</div>	
+		
+
+	</ion-content>
+
+</ion-view>
+

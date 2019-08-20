@@ -1,0 +1,280 @@
+<div class="financial general" ng-controller="financialController">
+    <div class="top row">
+        <div class="m-b-sm f-14 c-3 col-md-6 col-xs-6 no-padder">您当前的位置：<span>{{txt}}</span></div>
+        <div class="m-b-sm col-md-6 col-xs-6 no-padder text-right c-click edit"><span ng-click="go()">返回</span></div>
+    </div>
+    <div class="select row">
+        <div class="m-select">
+            <select class="form-control" ng-model="parmList.province" ng-options="key as key for (key,value) in area"  data-tap-disabled="true" ng-change="getShopList()">
+                <option value="">选择省份</option>
+            </select>
+        </div>
+        <div class="m-select">
+            <select class="form-control" ng-model="parmList.city" ng-options="key as key for (key,value) in area[parmList.province]" ng-change="getShopList()"  data-tap-disabled="true">
+                <option value="">选择市</option>
+            </select>
+        </div>
+        <div class="m-select">
+            <select class="form-control" ng-model="parmList.county" ng-options="value as value for value in area[parmList.province][parmList.city]"  data-tap-disabled="true" ng-change="getShopList()">
+                <option value="">选择区/县</option>
+            </select>
+        </div>
+        <div class="m-select">
+            <select class="form-control" ng-model="total.shopId" ng-options="v.shop_id as v.shop_name for v in shopList" ng-change="again()">
+                <option value="">选择场馆</option>
+            </select>
+        </div>
+    </div>
+    <div class="shops">
+    	<div class="mwq-left">
+    		<div class="row" ng-show="total.shopId=='' || total.shopId=='undefined' || total.shopId==undefined">
+                <div class="biaoqian col-md-4 col-xs-4" ng-init="loadTotal('day',1);loadTotal('week',1);loadTotal('month',1);loadTotal('year',1)">
+                    <div class="card">
+                        <div class="title single">会员卡销量(元)</div>
+                        <div class="row quantity">
+                            <div class="row statistics">
+                                <div class="col-md-6 col-xs-6 no-padder single">今日销量</div>
+                                <div class="col-md-6 col-xs-6 no-padder text-right single f-18 font-bold">{{total.card[0]}}</div>
+                            </div>
+                            <div class="row statistics">
+                                <div class="col-md-6 col-xs-6 no-padder single">本周销量</div>
+                                <div class="col-md-6 col-xs-6 no-padder text-right single f-18 font-bold">{{total.card[1]}}</div>
+                            </div>
+                            <div class="row statistics">
+                                <div class="col-md-6 col-xs-6 no-padder single">本月销量</div>
+                                <div class="col-md-6 col-xs-6 no-padder text-right single f-18 font-bold">{{total.card[2]}}</div>
+                            </div>
+                            <div class="row statistics">
+                                <div class="col-md-6 col-xs-6 no-padder single">本年销量</div>
+                                <div class="col-md-6 col-xs-6 no-padder text-right single f-18 font-bold">{{total.card[3]}}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="biaoqian col-md-4 col-xs-4" ng-init="loadConsumption('day');loadConsumption('week');loadConsumption('month');loadConsumption('year')">
+                    <div class="course">
+                        <div class="title single">私教耗课量(元)</div>
+                        <div class="row quantity">
+                            <div class="row statistics">
+                                <div class="col-md-6 col-xs-6 no-padder single">今日耗课量</div>
+                                <div class="col-md-6 col-xs-6 no-padder text-right single f-18 font-bold">{{total.consumption[0]}}</div>
+                            </div>
+                            <div class="row statistics">
+                                <div class="col-md-6 col-xs-6 no-padder single">本周耗课量</div>
+                                <div class="col-md-6 col-xs-6 no-padder text-right single f-18 font-bold">{{total.consumption[1]}}</div>
+                            </div>
+                            <div class="row statistics">
+                                <div class="col-md-6 col-xs-6 no-padder single">本月耗课量</div>
+                                <div class="col-md-6 col-xs-6 no-padder text-right single f-18 font-bold">{{total.consumption[2]}}</div>
+                            </div>
+                            <div class="row statistics">
+                                <div class="col-md-6 col-xs-6 no-padder single">本年耗课量</div>
+                                <div class="col-md-6 col-xs-6 no-padder text-right single f-18 font-bold">{{total.consumption[3]}}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="biaoqian col-md-4 col-xs-4" ng-init="loadTotal('day',4);loadTotal('week',4);loadTotal('month',4);loadTotal('year',4)">
+                    <div class="recharge">
+                        <div class="title single">金豆充值(元)</div>
+                        <div class="row quantity">
+                            <div class="row statistics">
+                                <div class="col-md-6 col-xs-6 no-padder single">今日充值</div>
+                                <div class="col-md-6 col-xs-6 no-padder text-right single f-18 font-bold">{{total.bean[0]}}</div>
+                            </div>
+                            <div class="row statistics">
+                                <div class="col-md-6 col-xs-6 no-padder single">本周充值</div>
+                                <div class="col-md-6 col-xs-6 no-padder text-right single f-18 font-bold">{{total.bean[1]}}</div>
+                            </div>
+                            <div class="row statistics">
+                                <div class="col-md-6 col-xs-6 no-padder single">本月充值</div>
+                                <div class="col-md-6 col-xs-6 no-padder text-right single f-18 font-bold">{{total.bean[2]}}</div>
+                            </div>
+                            <div class="row statistics">
+                                <div class="col-md-6 col-xs-6 no-padder single">本年充值</div>
+                                <div class="col-md-6 col-xs-6 no-padder text-right single f-18 font-bold">{{total.bean[3]}}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+    		</div>
+            <div class="row" ng-hide="total.shopId=='' || total.shopId=='undefined' || total.shopId==undefined">
+                <div class="biaoqian col-md-6 col-xs-6" ng-init="loadTotal('day',1);loadTotal('week',1);loadTotal('month',1);loadTotal('year',1)">
+                    <div class="card">
+                        <div class="title single">会员卡销量(元)</div>
+                        <div class="row quantity">
+                            <div class="row statistics">
+                                <div class="col-md-6 col-xs-6 no-padder single">今日销量</div>
+                                <div class="col-md-6 col-xs-6 no-padder text-right single f-18 font-bold">{{total.card[0]}}</div>
+                            </div>
+                            <div class="row statistics">
+                                <div class="col-md-6 col-xs-6 no-padder single">本周销量</div>
+                                <div class="col-md-6 col-xs-6 no-padder text-right single f-18 font-bold">{{total.card[1]}}</div>
+                            </div>
+                            <div class="row statistics">
+                                <div class="col-md-6 col-xs-6 no-padder single">本月销量</div>
+                                <div class="col-md-6 col-xs-6 no-padder text-right single f-18 font-bold">{{total.card[2]}}</div>
+                            </div>
+                            <div class="row statistics">
+                                <div class="col-md-6 col-xs-6 no-padder single">本年销量</div>
+                                <div class="col-md-6 col-xs-6 no-padder text-right single f-18 font-bold">{{total.card[3]}}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="biaoqian col-md-6 col-xs-6" ng-init="loadConsumption('day');loadConsumption('week');loadConsumption('month');loadConsumption('year')">
+                    <div class="course">
+                        <div class="title single">私教耗课量(元)</div>
+                        <div class="row quantity">
+                            <div class="row statistics">
+                                <div class="col-md-6 col-xs-6 no-padder single">今日耗课量</div>
+                                <div class="col-md-6 col-xs-6 no-padder text-right single f-18 font-bold">{{total.consumption[0]}}</div>
+                            </div>
+                            <div class="row statistics">
+                                <div class="col-md-6 col-xs-6 no-padder single">本周耗课量</div>
+                                <div class="col-md-6 col-xs-6 no-padder text-right single f-18 font-bold">{{total.consumption[1]}}</div>
+                            </div>
+                            <div class="row statistics">
+                                <div class="col-md-6 col-xs-6 no-padder single">本月耗课量</div>
+                                <div class="col-md-6 col-xs-6 no-padder text-right single f-18 font-bold">{{total.consumption[2]}}</div>
+                            </div>
+                            <div class="row statistics">
+                                <div class="col-md-6 col-xs-6 no-padder single">本年耗课量</div>
+                                <div class="col-md-6 col-xs-6 no-padder text-right single f-18 font-bold">{{total.consumption[3]}}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    		<div class="row m-t mwq-chart">
+    			<div class="row bc-white mwq-tubiao">
+    				<div class="row col-md-12">
+                        <div class="row">
+                            <div class="col-md-5 col-xs-5 title edit">员工提成表Top6</div>
+                            <div class="col-md-7 col-xs-7 tabs" ng-init="loadCommission(3);loadCommission(2);loadCommission(1);loadCommission(0)">
+                                <ul class="nav nav-pills">
+                                    <li ng-class="{'active': tabs[3]}">
+                                        <a href ng-click="tab(3)">管家</a>
+                                    </li>
+                                    <li ng-class="{'active': tabs[2]}">
+                                        <a href ng-click="tab(2)">会籍</a>
+                                    </li>
+                                    <li ng-class="{'active': tabs[1]}">
+                                        <a href ng-click="tab(1)">教练</a>
+                                    </li>
+                                    <li ng-class="{'active': tabs[0]}" class="active">
+                                        <a href ng-click="tab(0)">全部</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="tab-pane row">
+                            <div class="left" style="height: 100%;">
+                                <div class="tu bc-white"  ng-click="goTC(total.shopId)">
+                                    <div id="main" style="width: 100%;height:500px;position: relative;margin: 0 auto;background-color: pink;"></div>
+                                </div>
+                            </div>
+                        </div>
+    				</div>
+    			</div>
+    		</div>
+    	</div>
+    	<div class="mwq-right">
+    		<div class="gross-sales row">
+    			<div class="title row">
+					<div class="col-md-12 col-xs-12 no-padder single">总销量(元)</div>
+    			</div>
+    			<div class="data">
+					<div class="amount single" ng-init="loadsalesALL('')">{{salesAll}}</div>
+    				<div class="txt row" ng-init="loadsalesALL(1)">
+                        <div class="col-md-6 col-xs-6 no-padder single light-color">会员卡</div>
+                        <div class="col-md-6 col-xs-6 no-padder single text-right">{{salesAllCard}}</div>
+    				</div>
+                    <div class="txt row" ng-init="loadsalesALL(3)">
+                        <div class="col-md-6 col-xs-6 no-padder single light-color">私教</div>
+                        <div class="col-md-6 col-xs-6 no-padder single text-right">{{salesAllCourse}}</div>
+                    </div>
+                    <div class="txt row" ng-init="loadsalesALL(4)">
+                        <div class="col-md-6 col-xs-6 no-padder single light-color">金豆</div>
+                        <div class="col-md-6 col-xs-6 no-padder single text-right">{{salesAllBeans}}</div>
+                    </div>
+    			</div>
+    		</div>
+            <div class="shop-single row m-t m-b" ng-init="loadsales('month')" ng-show="total.shopId=='' || total.shopId=='undefined' || total.shopId==undefined">
+                <div class="title row">
+                    <div class="col-md-6 col-xs-6 no-padder single">本月销量(元)Top5</div>
+                    <div class="col-md-6 col-xs-6 no-padder c-click edit text-right single"  ng-click="go('statistica-salesmonth')">查看全部</div>
+                </div>
+                <div class="shop-data row" ng-repeat="k in total.shopSalesMonth track by $index">
+                    <div class="col-md-8 col-xs-8 no-padder single">{{k.province}}-{{k.city}}-{{k.shop_name}}</div>
+                    <div class="col-md-4 col-xs-4 no-padder text-right single">
+                        <span class="ranking">{{k.income}}</span>
+                        <i class="fa fa-long-arrow-up" ng-show="{{k.float}}==1"></i>
+                        <i class="fa  fa-long-arrow-down" ng-show="{{k.float}}==3"></i>
+                    </div>
+                </div>
+            </div>
+    		<div class="annual-sales" ng-init="loadsales('year')" ng-show="total.shopId=='' || total.shopId=='undefined' || total.shopId==undefined">
+    			<div class="title row">
+					<div class="col-md-6 col-xs-6 no-padder single">年销量(元)</div>
+					<div class="col-md-6 col-xs-6 no-padder c-click edit text-right single f-12" ng-click="go('statistica-salesyear')">查看全部</div>
+    			</div>
+    			<div class="row data-show">
+    				<div class="col-md-4 col-xs-4 no-padder shuju" ng-repeat="p in total.shopSalesYear track by $index">
+	    				<div class="shop-cover text-center single">
+	    					<img ng-src="/uploads/{{p.cover}}">
+	    				</div>
+	    				<div class="shop-name text-center single">{{p.city}}-{{p.shop_name}}</div>
+	    				<div class="txt text-center">年销量</div>
+	    				<div class="total text-center single">{{p.income}}</div>
+    				</div>
+    			</div>
+    		</div>
+            <div class="shop-single-course row m-t m-b" ng-init="loadCourseConsumption('month')" ng-hide="total.shopId=='' || total.shopId=='undefined' || total.shopId==undefined">
+                <div class="title row single">本月私教耗课量(元)Top4</div>
+                <div class="shop-data row" ng-repeat="v in total.courseConsumptionMonth track by $index">
+                    <div class="col-md-8 col-xs-8 no-padder single">
+                        <div class="col-md-6 col-xs-6">{{v.real_name}}</div>
+                        <div class="col-md-6 col-xs-6">{{v.classNum}}课时</div>
+                    </div>
+                    <div class="col-md-4 col-xs-4 no-padder text-right single">
+                        <span class="ranking">{{v.price}}</span>
+                        <i class="fa fa-long-arrow-up" ng-show="{{v.float}}==1"></i>
+                        <i class="fa  fa-long-arrow-down" ng-show="{{v.float}}==3"></i>
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="sales-statistics tab-content row mwq-chart">
+                <div class="row mwq-tubiao">
+                    <div class="col-md-4 col-xs-4 no-padder single title">本店销售统计图</div>
+                    <div class="col-md-8 col-xs-8 no-padder single">
+                        <ul class="nav nav-pills">
+                            <li ng-class="{'active': shoptabs[2]}">
+                                <a href ng-click="shoptab(2)">本周</a>
+                            </li>
+                            <li ng-class="{'active': shoptabs[1]}">
+                                <a href ng-click="shoptab(1)">本月</a>
+                            </li>
+                            <li ng-class="{'active': shoptabs[0]}" class="active">
+                                <a href ng-click="shoptab(0)">本年</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="tab-pane row" ng-class="{'active': shoptabs[0]}">
+                    <div class="row text-center c-white">本年</div>
+                    <div id="sale-all" style="width: 330px;height:230px;position: relative;margin: 0 auto;background-color: pink;"></div>
+                </div>
+                <div class="tab-pane row" ng-class="{'active': shoptabs[1]}">
+                    <div class="row text-center c-white">本月</div>
+                    <div id="sale-year" style="width: 330px;height:230px;position: relative;margin: 0 auto;background-color: green;"></div>
+                </div>
+                <div class="tab-pane row" ng-class="{'active': shoptabs[2]}">
+                    <div class="row text-center c-white">本周</div>
+                    <div id="sale-month" style="width: 330px;height:230px;position: relative;margin: 0 auto;background-color: grey;"></div>
+                </div>
+            </div> -->
+    	</div>
+    </div>
+
+</div>

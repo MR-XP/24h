@@ -1,0 +1,19 @@
+<div class="bg bg1" ng-controller="timeController">
+    <div class="new-time">
+        <div class="content">
+            <div class="title bc-darkpurple">
+                <div class="pull-left details">添加/编辑时间段</div>
+                <div class="pull-right close" ng-click="location('app/appointment-time')">X</div>
+            </div>
+        	<div class="shijianduan">
+                <!-- <div class="shijian" id="m-time"></div> -->
+                <input type="time" class="text-center">
+            </div>
+            <div class="text-center font-bold m-b-lg">根据课长自动计算结束时间</div>
+            <div class="m-foot text-center">
+            	<button type="button" class="btn save" ng-click="save()">确定</button>
+           		<button type="button" class="btn cancel" ng-click="location('app/appointment-time')">取消</button>
+            </div>
+        </div>
+    </div>
+</div>

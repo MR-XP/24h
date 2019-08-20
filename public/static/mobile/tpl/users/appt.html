@@ -1,0 +1,190 @@
+<!--我的约课-->
+<ion-view class="hx-page" style="background-color: #fff;" hide-nav-bar="true" ng-init="setDocumentTitle('我的预约')" ng-controller="apptCtrl">
+
+	<ion-header-bar class="hx-pd tab-head">
+		<div class="p-rel tab-nav">
+			<div class="tab-nav-li" ng-click="toggleActive(0)"  ng-class="{'tab-nav-li-gray':active==1}">进行中</div>
+			<div class="tab-nav-li" ng-click="toggleActive(1)"  ng-class="{'tab-nav-li-gray':active==0}">待处理</div>
+			<div class="p-abs anime-ease tab-nav-look"></div>
+		</div>
+    </ion-header-bar>
+
+    <ion-content class="tab-cont" overflow-scroll="false" scrollbar-y="false" has-bouncing="false" delegate-handle="mainScroll">
+		
+		<!--进行中-->
+		<div ng-if="active==0">
+			<ion-refresher
+                    spinner="ios"
+                    pulling-icon="ion-arrow-down-c"
+                    pulling-text="下载刷新"
+                    refreshing-text="加载中..."
+                    on-refresh="doPTRefresh()">
+        	</ion-refresher>
+
+        	<div class="hx-pd">
+        		
+        		<div class="my-appt" ng-repeat="i in haveApptpage.list">
+	        		<div class="appt-cont">
+
+	        			<div class="appt-img" ng-style="'uploads/'+i.course.cover | adaptBg"></div>
+	        			<div class="appt-particulars">
+	        				<div class="appt-name">{{i.course.course_name}} <span ng-if="i.plan.type==2 || i.plan.type==3" class="c-red">(付费课)</span></div>
+	        				<div class="appt-txt">上课时间：{{i.start_time | limitTo:10}}<span>&nbsp;&nbsp;{{i.start_time | limitTo:-8 | limitTo:5}}-{{i.end_time | limitTo:-8 | limitTo:5}}</span></div>
+	        				<div class="appt-txt appt-txt2">上课地点：{{i.shop.county}}-{{i.shop.shop_name}}</div>
+	        				<div class="appt-txt" ng-if="i.plan.type==1 || i.plan.type==2">预约{{i.plan.min_count}}人开课</div>
+	        				<div class="appt-txt" ng-if="i.plan.type==3">上课前一小时将无法取消</div>
+	        			</div>
+	        			
+	        		</div>
+
+	        		<div class="appt-foot" ng-if="i.plan.type==3">
+	        			
+	        			<div class="appt-coach">
+	        				<!-- <img ng-src="uploads/{{i.plan.coach_avatar}}"> -->
+	        				<img ng-style="'uploads/'+i.plan.avatar | adaptBg">
+	        				<div class="appt-coach-name">{{i.plan.coach_name}}</div>
+	        			</div>
+	        			
+	        			<a ng-if="i.status==1 && i.can_cancel" ng-click="cancel(i)" href="javascript:;" class="appt-btn">取消预约</a>
+	        			<a ng-if="i.status==-1" href="javascript:;" class="appt-btn appt-btn-gray">已取消</a>
+	        			<a ng-if="!i.can_cancel && judge(i.start_time)==1" href="javascript:;" class="appt-btn appt-btn-gray">等待开始</a>
+	        			<a ng-if="!i.can_cancel && i.sign==0 && (judge(i.start_time)==2 || judge(i.start_time)==3)" href="javascript:;" class="appt-btn appt-btn-gray">你已迟到</a>
+	        			<a ng-if="!i.can_cancel && i.sign==1 && (judge(i.start_time)==2 || judge(i.start_time)==3)" href="javascript:;" class="appt-btn appt-btn-gray">进行中</a>
+	        			<a href="tel:{{i.plan.coach_phone}}" class="appt-btn">联系教练</a>
+	        			
+	        		</div>
+	        		
+	        		<div class="appt-foot" ng-if="i.plan.type==1 || i.plan.type==2">
+	        			
+	        			<div class="appt-bar">
+	        				<div class="appt-div">
+	        					<div class="course-txt" ng-if="i.plan.max_count>i.plan.user_count">已约{{i.plan.user_count}}/{{i.plan.max_count}}</div>
+								<div class="course-txt" ng-if="i.plan.max_count==i.plan.user_count">已约满</div>
+								<div class="course-bar">
+									<div class="bar-mv bar-mv-{{$index}}" ng-init="showRow(i.plan,$index)"></div>
+								</div>
+							</div>
+
+							<a ng-if="i.status==1 && i.can_cancel" ng-click="cancel(i)" href="javascript:;" class="appt-btn">取消预约</a>
+		        			<a ng-if="i.status==-1" href="javascript:;" class="appt-btn appt-btn-gray">已取消</a>
+		        			<a ng-if="!i.can_cancel && judge(i.start_time)==1" href="javascript:;" class="appt-btn appt-btn-gray">等待开始</a>
+		        			<a ng-if="!i.can_cancel && i.sign==0 && (judge(i.start_time)==2 || judge(i.start_time)==3)" href="javascript:;" class="appt-btn appt-btn-gray">你已迟到</a>
+		        			<a ng-if="!i.can_cancel && i.sign==1 && (judge(i.start_time)==2 || judge(i.start_time)==3)" href="javascript:;" class="appt-btn appt-btn-gray">进行中</a>
+	        			</div>
+
+	        		</div>
+	        		
+        		</div>
+        		<br /><br /><br /><br />
+        	</div>
+        	
+        	
+	        <ion-infinite-scroll
+	                    ng-if="haveApptpage.currPage < haveApptpage.totalPage"
+	                    spinner="android"
+	                    distance="1%"
+	                    on-infinite="onPTLoadMore()">
+	        </ion-infinite-scroll>
+	        
+	        <div class="tc c-9 m-t-30" ng-if="haveApptpage.list.length==0">您还没有预约记录</div>
+		</div>
+		
+		<!--已完成-->
+		<div ng-if="active==1">
+			<ion-refresher
+                    spinner="ios"
+                    pulling-icon="ion-arrow-down-c"
+                    pulling-text="下载刷新"
+                    refreshing-text="加载中..."
+                    on-refresh="doPTRefresh()">
+        	</ion-refresher>
+
+        		<div class="hx-pd">
+        		
+	        		<div class="my-appt" ng-repeat="i in finishApptpage.list">
+	        			
+		        		<div class="appt-cont">		
+
+		        			<div class="appt-img" ng-style="'uploads/'+i.course.cover | adaptBg"></div>
+		        			<div class="appt-particulars">
+		        				<div class="appt-name">{{i.course.course_name}} <span ng-if="i.course.type==2 || i.plan.type==3" class="c-red">(付费课)</span></div>
+		        				<div class="appt-txt">上课时间：{{i.start_time | limitTo:10}}<span>&nbsp;&nbsp;{{i.start_time | limitTo:-8 | limitTo:5}}-{{i.end_time | limitTo:-8 | limitTo:5}}</span></div>
+		        				<div class="appt-txt appt-txt2">上课地点：{{i.shop.county}}-{{i.shop.shop_name}}</div>
+<!--		        			<div class="appt-txt" ng-if="i.plan.type==1">预约{{i.plan.min_count}}人开课</div>
+		        				<div class="appt-txt" ng-if="i.plan.type==3">上课前一小时将无法取消</div>-->
+		        			</div>
+	        			
+		        		</div>
+
+						<div ng-if="(contrastTime(i.plan.coach_sign_time,i.end_time)==2 || contrastTime(i.plan.coach_sign_time,i.end_time)==3) && contrastTime(i.sign_time,i.end_time)==1">
+		        			
+		        			<div class="appt-foot">
+<!--		        				<div ng-if="i.course.type==3 || i.course.type==2" class="tr">私教旷课，该节课不扣除</div>-->
+		        				<div ng-if="i.course.type==3 || i.course.type==2" class="tr">私教未签到</div>
+		        				<div ng-if="i.course.type==1" class="tr">私教未签到</div>
+		        			</div>
+
+		        		</div>
+
+		        		<div ng-if="(contrastTime(i.sign_time,i.end_time)==2 || contrastTime(i.sign_time,i.end_time)==3)">
+		        			
+		        			<div class="appt-foot">
+		        				<a ng-if="i.course.type==1" href="javascript:;" class="appt-btn" ng-click="createOrder(i.appointment_id)">消除不良记录</a>
+		        				<a href="javascript:;" class="appt-btn appt-btn-gray">您已旷课</a>
+		        			</div>
+
+		        		</div>
+		        		
+		        		<div ng-if="contrastTime(i.plan.coach_sign_time,i.end_time)==1 && contrastTime(i.sign_time,i.end_time)==1">
+		        			
+							<div class="appt-foot" ng-if="i.plan.type==3">
+		        			
+			        			<div class="appt-coach" ng-if="i.sign==2 || i.sign==3 || i.sign==4">
+			        				<!-- <img ng-src="uploads/{{i.plan.coach_avatar}}"> -->
+			        				<img ng-style="'uploads/'+i.plan.avatar | adaptBg">
+			        				<div class="appt-coach-name">{{i.plan.coach_name}}</div>
+			        			</div>
+
+								<a ng-if="i.sign==1" href="javascript:;" class="appt-btn appt-btn-gray">待私教确认</a>
+								<a ng-if="i.sign==2" href="javascript:;" class="appt-btn" ng-click="save(i)">点击确认</a>
+								<a ng-if="i.sign==3" href="javascript:;" class="appt-btn" ng-click="cmet(i)">立即评价</a>
+								<a ng-if="i.sign==4" class="appt-btn appt-btn-gray">已评价</a>
+			        			<a ng-if="i.sign==1 || i.sign==2" href="tel:{{i.plan.coach_phone}}" class="appt-btn">联系教练</a>
+
+			        		</div>
+		        		
+			        		<div class="appt-foot" ng-if="i.plan.type==1 || i.plan.type==2">
+
+								<a ng-if="i.sign==1" href="javascript:;" class="appt-btn" ng-click="save(i)">点击确认</a>
+								<a ng-if="i.sign==3" href="javascript:;" class="appt-btn" ng-click="cmet(i)">立即评价</a>
+								<a ng-if="i.sign==4" class="appt-btn appt-btn-gray">已评价</a>
+								<a ng-if="i.sign==1 || i.sign==2" href="tel:{{i.plan.coach_phone}}" class="appt-btn">联系教练</a>
+								
+			        		</div>
+		        			
+		        		</div>
+
+	        		</div>
+	        		
+        			<br /><br /><br /><br />
+        		</div>
+        		
+	        <ion-infinite-scroll
+	                    ng-if="finishApptpage.currPage < finishApptpage.totalPage"
+	                    spinner="android"
+	                    distance="1%"
+	                    on-infinite="onPTLoadMore()">
+	        </ion-infinite-scroll>
+	        
+	        <div class="tc c-9 m-t-30" ng-if="finishApptpage.list.length==0">您还没有待处理的课程</div>
+		</div>
+		
+        
+    </ion-content>
+
+</ion-view>
+
+
+
+
+

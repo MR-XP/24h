@@ -1,0 +1,217 @@
+@import '../../mobile/css/public.less';
+
+.xp-cont{
+    .ovr(y,auto)
+}
+
+.xp-rowCourse-top{
+    
+    .hg(45px);
+    
+    div{
+        .dsp(inline-block);
+        .f-s(12px);
+        .pd(0 12px);
+        .hg(28px);
+        .l-hg(28px);
+        .fl;
+        .mg(right,10px);
+        .cur(pointer)
+    }
+    
+    
+    .xp-rowCourse-btn{
+        .bg-c(#eb9621);
+        .c(#fff);
+        .br-rs(4px)
+    }
+    
+    .xp-week-btn{
+        .c(#757575);
+        .br(1px solid #dcdcdc)
+    }
+    
+    select{
+        .dsp(inline-block);
+        .fl;
+        .hg(28px);
+        .mg(right,10px)
+    }
+}
+
+.xp-rowCourse-body{
+    .ovr();
+    .br(1px solid #e2e2e2);
+    
+    .xp-rowCourse-head{
+        .hg(60px);
+        .ovr();
+        .wh(100%);
+        .dsp(flex);
+        
+        .xp-rowCourse-day{
+            flex: 1;
+            -webkit-flex: 1;
+            .bg-c(#d5dee6);
+            .tc;
+            .br(right,1px solid #fbfcfd);
+            
+            div{
+                .abs(12px);
+            }
+            
+            div:nth-of-type(1){
+                .mg(top,17px)
+            }
+            
+            div:nth-of-type(2){
+                .c(#3498db);
+                .mg(top,8px);
+                .cur(pointer)
+            }
+        }
+        
+        .xp-rowCourse-day:last-of-type{
+            .br(none)
+        }
+    }
+    
+    .xp-rowCourse-cont{
+       .ovr();
+       .wh(100%);
+       .dsp(flex);
+        
+       .xp-rowCourse-row{
+           .fl;
+           .ovr();
+           flex: 1;
+           -webkit-flex: 1;
+           
+           .xp-rowCourse-col{
+               .wh(100%);
+               .hg(150px);
+               .bg-c(#eee);
+               .br(bottom,1px solid #fbfcfd);
+               .br(right,1px solid #fbfcfd);
+               .tc;
+               .ovr();
+               
+               div{
+                   .abs(12px);
+                   .mg(top,15px)
+               }
+               
+               div:first-of-type{
+                   .abs(14px);
+                   .f-w(700)
+               }
+               
+               div:last-of-type{
+                   .c(#3498db);
+                   
+                   span{
+                       .mg(0 10px);
+                       .cur(pointer)
+                   }
+               }
+               
+               .coach-time{
+                   .abs(16px)
+               }
+           }
+
+       }
+            
+       .xp-rowCourse-row:last-of-type{
+           
+           .xp-rowCourse-col{
+               .br(right,none)
+           }
+           
+       }
+
+    }
+
+}
+
+.rowCourse-dtl{
+    .pos(fixed);
+    .wh(100%);
+    .hg(100%);
+    left: 0;
+    top: 0;
+    .bg-c(rgba(0,0,0,.6));
+    z-index: 999;
+    
+    .rowCourse-dtl-cont{
+        .p-abs;
+        .wh(450px);
+        .hg(450px);
+        .bg-c(#fff);
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        margin: auto;        
+        
+        .rowCourse-dtl-top{
+            .hg(30px);
+            .l-hg(30px);
+            .f-s(14px);
+            .c(#fff);
+            .bg-c(#19194d);
+            .tl;
+            text-indent: 15px;
+            .mg(bottom,20px)
+        }
+    }
+    
+    .rowCourse-dtl-cont2{
+        .wh(600px);
+        
+        .users-top{
+            .f-w(700);
+            .c(#000);
+            .mg(bottom,10px)
+        }
+        .users-cont{
+            .hg(300px);
+            .ovr(x,hidden);
+            .ovr(y,auto);
+            .mg(bottom,20px);
+            .row{
+                
+                .hg(40px);
+                .l-hg(40px);
+                .ovr();
+                
+                .coach-img{
+                    .wh(40px);
+                    .hg(40px);
+                    .db-center
+                }
+            }
+        }
+    }
+        
+}
+
+.app-ix-tit{
+    .wh(100%);
+    .hg(80px);
+    .l-hg(80px);
+    .f-s(26px);
+    .f-w(700);
+    
+    select{
+        .hg(45px);
+        .f-s(26px);
+        .mg(left,20px)
+    }
+}
+
+.app-ix-cont{
+    .wh(100%);
+    .hg(auto);
+    .ovr()
+}

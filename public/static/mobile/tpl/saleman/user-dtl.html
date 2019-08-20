@@ -1,0 +1,33 @@
+<ion-view class="hx-page member-user-dtl" style="background-color: #fff;" hide-nav-bar="true" ng-init="setDocumentTitle('会员详情')" ng-controller="userDtlCtrl">
+	<ion-content overflow-scroll="false" scrollbar-y="false" has-bouncing="true">
+		<div class="dtl">
+			<div class="touxiang">
+				<img ng-style="'uploads/'+info.avatar | adaptBg">
+			</div>
+			<div class="name">{{info.real_name}}</div>
+			<div class="user-dtl">
+				<div class="line">
+					<div class="title">电话</div>
+					<div class="txt">{{info.phone}}</div>
+				</div>
+				<div class="line" ng-if="info.card_name">
+					<div class="title">会员卡</div>
+					<div class="txt" ng-show="info.active==1">{{info.card_name}}</div>
+					<div class="txt" ng-show="info.active==0">{{info.card_name}}(未激活)</div>
+				</div>
+				<div class="line" ng-if="info.pay_time">
+					<div class="title">购卡时间</div>
+					<div class="txt">{{info.pay_time | limitTo:10}}</div>
+				</div>
+				<div class="line" ng-if="info.active == 1">
+					<div class="title">到期时间</div>
+					<div class="txt">{{info.expire_time | limitTo:10}}</div>
+				</div>
+				<div class="line" ng-if="info.sign_time">
+					<div class="title">最近签到</div>
+					<div class="txt">{{info.sign_time}}</div>
+				</div>
+			</div>
+		</div>
+	</ion-content>
+</ion-view>

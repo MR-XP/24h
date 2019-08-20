@@ -1,0 +1,24 @@
+<ion-view class="hx-page mwq-course-list" style="background-color: #fff;" hide-nav-bar="true" ng-init="setDocumentTitle('课程列表')" ng-controller="courseListCtrl">
+
+	<ion-content overflow-scroll="false" scrollbar-y="false" has-bouncing="true" delegate-handle="mainScroll">
+
+		<!--课程列表-->
+		<div class="hx-pd">
+			<div class="course-list" ng-repeat="i in courseList" ng-click="location('coach/course-dtl/{{i.course_id}}')">
+				<div class="course-img" ng-style="'uploads/'+ i.cover | adaptBg"></div>
+				<div class="course-txt">
+					<p class="p1">{{i.course_name}}</p>
+					<p class="p2">{{i.min_buy}}课时起售</p>
+					<div class="p3"><div>￥</div><div>{{i.price}}</div><div>/课时</div></div>
+				</div>
+				<div class="course-view">
+					<button class="btn"><span class="course-view-txt">查看</span></button>
+				</div>
+			</div>
+		</div>
+		
+		<div class="tc c-9 m-t-30" ng-if="!courseList || courseList.length==0">暂时没有课程，请联系主管安排课程</div>
+
+	</ion-content>
+
+</ion-view>

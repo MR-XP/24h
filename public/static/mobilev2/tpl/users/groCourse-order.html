@@ -1,0 +1,163 @@
+<ion-view id="order-dtl" class="user-groCourse-order" style="background-color: #f8f8f8;" hide-nav-bar="true" ng-init="setDocumentTitle('精品团课详情')" ng-controller="userGroCourseOrderCtrl">
+	<ion-content class="user-scroll"  overflow-scroll="false" scrollbar-y="false" has-bouncing="true" delegate-handle="mainScroll">
+		<!--精品团课订单详情-->
+		<div class="order-content c-32">
+			<div class="order-line order-line1 border-b12">
+				<div class="order-img"><img src="" ng-style="'uploads/'+orderDtl.image | adaptBg" alt=""></div>
+				<div class="order-name">
+					<div class="name">{{orderDtl.product_info}}</div>
+					<div class="count c-9b">{{orderDtl.product_num}}次</div>
+					<div class="price c-orange"><span>￥</span>{{orderDtl.price}}</div>
+				</div>
+			</div>
+			<div class="order-line order-line2 border-b12">
+				<div class="row c-54">
+					<div class="col">教练</div>
+					<div class="col t-r">{{orderTxt.coach.real_name}}</div>
+				</div>
+			</div>
+			<div class="order-line order-line3 border-b12">
+				<div class="row c-54">
+					<div class="col">课时</div>
+					<div class="col t-r">{{orderDtl.product_num}}次</div>
+				</div>
+			</div>
+			<div class="order-line order-line4">
+				<div class="row c-54">
+					<div class="col">上课地点</div>
+					<div class="col t-r">{{shopDtl.shop_name}}</div>
+				</div>
+			</div>
+			<div class="order-line order-line5 border-b12">
+				<div class="row c-54">
+					<div class="col">
+						<input type="checkbox" id="box-1">
+	    			<label for="box-1">优惠券</label>
+    			</div>
+					<div class="col t-r" ng-click="getCoupon()">
+						<span ng-if="orderDtl.use_coupon.length!=0">选择优惠券</span>
+						<span ng-if="orderDtl.use_coupon.length==0">暂无可用优惠券</span>
+						<img src="./static/mobilev2/images/arrow_icon.png" alt="">
+					</div>
+				</div>
+			</div>
+			<div class="order-line order-line6">
+				<div class="row c-54">
+					<div class="col">
+						<input type="checkbox" id="box-2">
+	    			<label for="box-2">金豆</label>
+    			</div>
+					<div class="col t-r">{{orderDtl.pre_paid}}</div>
+				</div>
+			</div>
+			<div class="order-line order-line7 border-b12">
+				<div class="row c-54">
+					<div class="col">支付金额</div>
+					<div class="col t-r">￥{{orderDtl.price}}</div>
+				</div>
+			</div>
+			<div class="order-line order-line8">
+				<div class="row c-54">
+					<div class="col col-80">
+						<input type="checkbox" id="box-3">
+	    			<label for="box-3">请详阅倾城运动购买协议，同意后付款</label>
+					</div>
+					<div class="col col-20 t-r"><img src="./static/mobilev2/images/arrow_icon.png" alt=""></div>
+				</div>
+			</div>
+			<div class="order-line9 t-c c-9b">· 让家人、邻居、朋友更亲近 ·</div>
+		</div>
+	</ion-content>
+	<ion-footer-bar id="footer-btn" class="no-padder">
+		<div class="groCourse-btn row row-l row-r">
+	  	<div class="col col-60 schedule">
+  			<span class="price-txt">支付金额</span>￥<span>{{orderDtl.price}}</span>
+	  	</div>
+	  	<div class="col col-40 bc-orange c-w">
+				<div class="groCourse-btn-buy" ng-click="goPay()">去支付</div>
+	  	</div>
+	  </div>
+	</ion-footer-bar>
+	<script id="templates/modal.html" type="text/ng-template">
+    <ion-modal-view>
+      <ion-content id="coupon-model" has-bouncing="false">
+				<div class="mwq-content-coupon">
+					<div class="dtl-padder">
+						<div class="coupon-dtl">
+							<div class="coupon-title">
+								<div class="title c-32">
+									<div class="t-c">选择优惠券</div>
+									<div class="coupon-close" ng-click="closeModal()"><img src="./static/mobilev2/images/close_icon.png" alt=""></div>
+								</div>
+								<div class="coupon-tab row">
+									<div class="col t-c"><button class="coupon-btn1" ng-click="loadCoupon(1)">可用优惠券</button></div>
+									<div class="col t-c"><button class="coupon-btn2" ng-click="loadCoupon(0)">不可用优惠券</button></div>
+								</div>
+							</div>
+							<ion-content has-bouncing="true">
+								<div class="coupon-content">
+									<div class="coupon-list" ng-repeat="i in orderDtl.use_coupon">
+										<div class="coupon-img" ng-click="chooseCoupon({{i.coupon_user_id}})">
+											<img class="coupon_bg" alt="" value="i.coupon_user_id">
+										</div>
+										<div class="coupon-txt row">
+											<div class="col col-67 describe">
+												<div class="coupon-name">{{i.coupon_name}}</div>
+												<div class="coupon-describe c-9b">不能与其他优惠券叠加使用</div>
+												<div class="coupon-time c-9b coupon-describe">有效期{{i.create_time | limitTo:10}}至{{i.expire_time | limitTo:10}}</div>
+											</div>
+											<div class="col col-33">aa</div>
+										</div>
+									</div>	
+								</div>
+								<div class="no-coupon c-9b t-c">没有更多的优惠券了哦～</div>
+							</ion-content>
+						</div>
+					</div>
+				</div>
+      </ion-content>
+    </ion-modal-view>
+  </script>
+	<style>
+		button.first{
+			border: 0.013rem solid #ff9d35 !important;
+		}
+    .modal {
+      display: block;
+      position: absolute;
+      top: 0;
+      z-index: 10;
+      overflow: hidden;
+      min-height: 100%;
+      width: 100%;
+      background-color: rgba(0,0,0,0.3);
+    }
+    #coupon-model{
+	    background: rgba(0,0,0,0) !important;
+    }
+    #coupon-model .scroll{
+    	height: 100%;
+    }
+    .mwq-content-coupon{
+    	background: #f8f8f8;
+    	width: 100%;
+    	height: 9.787rem;
+    	position: absolute;
+    	bottom: 0;
+    }
+    .modal-backdrop {
+	    position: fixed;
+	    top: 0;
+	    right: 0;
+	    bottom: 0;
+	    left: 0;
+	    z-index: 1040;
+	    background-color: rgba(0,0,0,0);
+		}
+	</style>
+</ion-view>
+
+
+
+
+

@@ -1,0 +1,22 @@
+<ion-view class="hx-page" style="background-color: #fff" hide-nav-bar="true" ng-init="setDocumentTitle('我的会员卡-成员列表')" ng-controller="memberCardCtrl">
+
+    <ion-content overflow-scroll="false" scrollbar-y="false" has-bouncing="true">
+		
+		<div class="member-card">
+			<a ng-repeat="i in list" href="#/users/sign-record/{{i.user_id}}/{{i.sold_card_id}}" class="member-li">
+				<div class="member-img" ng-style="'uploads/'+i.avatar | adaptBg"></div>
+				<div class="member-name">{{i.real_name}}</div>
+				<div class="member-phone">{{i.phone}}</div>
+				<div class="member-float">总签到{{i.count}}次</div>
+				<div class="member-arr"></div>
+			</a>
+		</div>
+		
+    </ion-content>
+
+</ion-view>
+
+
+
+
+

@@ -1,0 +1,98 @@
+<div class="apply general " ng-controller="applyController">
+	<div class="top row">
+		<div class="m-b-sm row f-14 c-3">您当前的位置：<span>{{txt}}</span></div>
+	</div>
+	<div class="content">
+		<div class="box row">
+			<div class="list row">
+				<div class="col-md-1 col-xs-1 no-padder m-box">头像</div>
+				<div class="col-md-1 col-xs-1 no-padder m-box">姓名（性别）</div>
+				<div class="col-md-1 col-xs-1 no-padder m-box">联系方式</div>
+				<div class="col-md-2 col-xs-2 no-padder m-box">擅长</div>
+				<div class="col-md-1 col-xs-1 no-padder m-box">执教方式</div>
+				<div class="col-md-1 col-xs-1 no-padder m-box">从业年限</div>
+				<div class="col-md-1 col-xs-1 no-padder m-box">所在城市</div>
+				<div class="col-md-1 col-xs-1 no-padder m-box">证书</div>
+				<div class="col-md-1 col-xs-1 no-padder m-box">了解渠道</div>
+				<div class="col-md-1 col-xs-1 no-padder m-box">自我介绍</div>
+				<div class="col-md-1 col-xs-1 no-padder m-box">操作</div>
+			</div>
+			<div class="list-details" ng-repeat="v in applyList.list">
+				<div class="col-md-1 col-xs-1 no-padder touxiang m-box">
+					<img ng-style="'uploads/'+v.avatar | adaptBg">
+				</div>
+				<div class="col-md-1 col-xs-1 no-padder m-box" ng-show="v.sex==1">{{v.real_name}}（男）</div>
+				<div class="col-md-1 col-xs-1 no-padder m-box" ng-show="v.sex==2">{{v.real_name}}（女）</div>
+				<div class="col-md-1 col-xs-1 no-padder m-box" ng-show="v.sex==0">{{v.real_name}}（未知）</div>
+				<div class="col-md-1 col-xs-1 no-padder m-box">{{v.phone}}</div>
+				<div class="col-md-2 col-xs-2 no-padder m-box">{{v.speciality}}</div>
+				<div class="col-md-1 col-xs-1 no-padder m-box" ng-show="v.type==0">无</div>
+				<div class="col-md-1 col-xs-1 no-padder m-box" ng-show="v.type==1">全职</div>
+				<div class="col-md-1 col-xs-1 no-padder m-box" ng-show="v.type==2">兼职</div>
+				<div class="col-md-1 col-xs-1 no-padder m-box">{{v.seniority}}</div>
+				<div class="col-md-1 col-xs-1 no-padder m-box">{{v.address}}</div>
+				<div class="col-md-1 col-xs-1 no-padder c-click edit chakan" ng-click="editModal_open({{v.certs}})">证书</div>
+				<div class="col-md-1 col-xs-1 no-padder m-box">{{v.channel}}</div>
+				<div class="col-md-1 col-xs-1 no-padder c-click chakan edit" tabindex="0" role="button" data-toggle="popover" data-placement="bottom" data-trigger="focus"  data-content="{{v.intro}}">查看</div>
+					<style>
+						.popover{
+							margin-top: -8px !important;
+						}
+					</style>
+					<script>
+						$(function () {
+							$("[data-toggle='popover']").popover();
+						});
+					</script>
+				<div class="col-md-1 col-xs-1 no-padder m-box">
+					<a href="" class="c-click" ng-click="pass(v.application_id,v.status)" ng-show="v.status==0">通过</a>
+					<a href="" class="c-click m-l-xs" ng-click="reject(v.application_id,v.status)" ng-show="v.status==0">拒绝</a>
+					<a href="" class="c-lightgrey chuli" ng-show="v.status==1">已通过</a>
+					<a href="" class="c-lightgrey chuli" ng-show="v.status==2">已拒绝</a>
+				</div>
+			</div>
+		</div>
+		<div class="page-footer">
+			<div class="pull-left col-md-6 col-xs-6 no-padder text-left">
+				<span class="text-sm">共{{newAuditList.total_results}}条记录，共{{newAuditList.total_pages}}页，</span>
+				<span class="text-sm">当前显示第{{newAuditList.page_no}}页，</span>
+				<span class="text-sm">每页显示{{newAuditList.page_size}}条</span>
+			</div>
+        	<div class="col-md-6 col-xs-6 no-padder text-right">
+        		<pagination total-items="newAuditList.total_results" ng-model="parmList.page_no" max-size="maxSize" class="pagination-sm m-t-none m-b" boundary-links="true" rotate="false" num-pages="newAuditList.page_size" ng-click="pages()" items-per-page="newAuditList.page_size"></pagination>
+        	</div>
+		</div>
+		<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" id="editModal" aria-labelledby="myLargeModalLabel" data-backdrop="static">
+		  	<div class="modal-dialog modal-lg" role="document">
+		      	<div class="modal-content">
+			      	<div class="modal-header">
+			        	<span>证书详情</span>
+			        	<span class="btn_close" ng-click="editModal_close()">X</span>
+			      	</div>
+			      	<div class="modal-body">
+			        	<div class="content">
+					        <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+					            <div class="carousel-inner" role="listbox" style="height: 600px;">
+					                <div class="item" ng-repeat="i in coachImages" ng-class="{'active' : $index==0}">
+					                    <img ng-src="uploads/{{i}}">
+					                    <div class="carousel-caption"></div>
+					                </div>
+					            </div>
+					            <div style="width: 700px;text-align: center;margin: 0 auto;">
+					                <div class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+					                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+					                    <span class="sr-only">Next</span>
+					                </div>
+					                <div class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+					                    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+					                    <span class="sr-only">Next</span>
+					                </div>
+					            </div>
+					        </div>
+					    </div>
+			      	</div>
+			    </div>
+		  	</div>
+		</div>
+	</div>
+</div>

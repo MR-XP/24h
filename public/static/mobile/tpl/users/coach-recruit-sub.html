@@ -1,0 +1,143 @@
+<ion-view class="hx-page" style="background-color: #fff" hide-nav-bar="true" ng-init="setDocumentTitle('信息填写')" ng-controller="coachRecruitSubCtrl">
+
+    <ion-content class="bg-f" overflow-scroll="false" scrollbar-y="false" has-bouncing="true">
+
+		<!--列表-->
+		<div class="hx-pd bg-f">
+			<div class="list xp-list">
+			    <div class="item item-icon-right">
+			      	身份证号
+			      	<input type="text" ng-model="coach.id_card" />
+			    </div>
+			    <div class="item item-icon-right">
+			    	<i class="icon ion-ios-arrow-right"></i>
+			      	性别
+			      	<select ng-model="coach.sex" ng-options="i.val as i.name for i in list.sex">
+			      		
+			      	</select>
+			    </div>
+			    <div class="item item-icon-right">
+			    	<i class="icon ion-ios-arrow-right"></i>
+			      	出生日期
+			      	<input type="date" ng-model="coach.birthday" />
+			    </div>
+			    <div class="item item-icon-right">
+			    	联系地址
+			      	<input type="text" ng-model="coach.address" />
+			    </div>
+				<div class="item item-icon-right">
+			    	<i class="icon ion-ios-arrow-right"></i>
+			      	应聘类型
+			      	<select ng-model="coach.type" ng-options="i.val as i.name for i in list.type">
+			      		
+			      	</select>
+			    </div>
+			    <div class="item item-icon-right" ng-click="makeCk()">
+			    	<i class="icon ion-ios-arrow-right"></i>
+			      	擅长
+			      	<div class="recruit-spy" style="opacity: .54;">{{coach.speciality}}</div>
+			    </div>
+				<div class="item item-icon-right">
+			    	<i class="icon ion-ios-arrow-right"></i>
+			      	从业年限
+			      	<select ng-model="coach.seniority" ng-options="i as i+'年' for i in list.years">
+			      		
+			      	</select>
+			    </div>
+			    <div class="recruit-div recruit-div2">
+			    	<div class="recruit-tit">
+			    		证书+生活照上传
+			    		<span>至少上传一张专业证书，单张图片控制在10M内</span>
+			    	</div>
+			    	<div class="photo" ng-repeat="i in coach.certs.bases track by $index" ng-style="i | adaptBg">
+		    			<div class="phpoto-close" ng-click="del($index)"></div>
+		    		</div>
+			    	<a href="javascript:;" class="photo-up" ng-click="loadImg()"></a>
+			    </div>
+			    <div class="recruit-div recruit-div2">
+			    	<div class="recruit-tit">了解渠道</div>
+			    	<div class="recruit-channel" ng-click="coach.channel='朋友介绍'" ng-class="{'channel-org' : coach.channel=='朋友介绍'}">朋友介绍</div>
+			    	<div class="recruit-channel" ng-click="coach.channel='朋友圈转发'" ng-class="{'channel-org' : coach.channel=='朋友圈转发'}">朋友圈转发</div>
+			    	<div class="recruit-channel" ng-click="coach.channel='网上搜索'" ng-class="{'channel-org' : coach.channel=='网上搜索'}">网上搜索</div>
+			    	<div class="recruit-channel" ng-click="coach.channel='倾城运动公众号/官网'" ng-class="{'channel-org' : coach.channel=='倾城运动公众号/官网'}">倾城运动公众号/官网</div>
+			    	<div class="recruit-channel" ng-click="coach.channel='其他'" ng-class="{'channel-org' : coach.channel=='其他'}">其他</div>
+			    </div>
+			    <div class="recruit-div">
+			    	<div class="recruit-tit">自我介绍</div>
+			    	<textarea ng-model="coach.intro" class="feedback-cont" maxlength="200" placeholder="用一段话做个自我介绍吧！"></textarea>
+			    </div>
+				
+			</div>
+		</div>
+		<div class="hx-pd">
+			<button class="button button-block button-positive set-btn" ng-click="save()" style="background-color: #f28019;">提交</button>
+		</div>
+		<div style="height: 40px;"></div>
+		
+    </ion-content>
+	
+	<div class="make-bg" ng-click="cancel()"></div>
+	<div class="make-mode">
+		<div class="make-top">
+			<div class="make-tit">
+				您最擅长的
+			</div>
+			<div class="make-cancel" ng-click="cancel()">关闭</div>
+		</div>
+		<div class="hx-pd">
+			
+			<ul class="list spr-lie">
+			  <li class="item item-toggle">
+			        增肌
+			     <label class="toggle" title="增肌">
+			       <input type="checkbox" class="spy-ipt">
+			       <div class="track">
+			         <div class="handle"></div>
+			       </div>
+			     </label>
+			  </li>
+			  <li class="item item-toggle">
+			        产后修复
+			     <label class="toggle" title="产后修复">
+			       <input type="checkbox" class="spy-ipt">
+			       <div class="track">
+			         <div class="handle"></div>
+			       </div>
+			     </label>
+			  </li>
+			  <li class="item item-toggle">
+			        格斗
+			     <label class="toggle" title="格斗">
+			       <input type="checkbox" class="spy-ipt">
+			       <div class="track">
+			         <div class="handle"></div>
+			       </div>
+			     </label>
+			  </li>
+			  <li class="item item-toggle">
+			        瑜伽
+			     <label class="toggle" title="瑜伽">
+			       <input type="checkbox" class="spy-ipt">
+			       <div class="track">
+			         <div class="handle"></div>
+			       </div>
+			     </label>
+			  </li>
+			  <li class="item item-toggle">
+			        减脂塑形
+			     <label class="toggle" title="减脂塑形">
+			       <input type="checkbox" class="spy-ipt">
+			       <div class="track">
+			         <div class="handle"></div>
+			       </div>
+			     </label>
+			  </li>
+			</ul>
+			
+		</div>
+		<div class="make-foot">
+			<div class="qcyd-btn qcyd-btn-large" ng-click="cancel()">确定</div>
+		</div>
+	</div>
+	
+</ion-view>

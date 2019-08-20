@@ -1,0 +1,85 @@
+<ion-view class="hx-page my-course" style="background-color: #fff;" hide-nav-bar="true" ng-init="setDocumentTitle('我的课程')" ng-controller="myCourseCtrl">
+
+	<ion-header-bar class="hx-pd tab-head">
+		<div class="p-rel tab-nav">
+			<div class="tab-nav-li" ng-click="toggleActive(0)"  ng-class="{'tab-nav-li-gray':active==1}">小团课</div>
+			<div class="tab-nav-li" ng-click="toggleActive(1)"  ng-class="{'tab-nav-li-gray':active==0}">私教课</div>
+			<div class="p-abs anime-ease tab-nav-look"></div>
+		</div>
+    </ion-header-bar>
+
+    <ion-content class="tab-cont" overflow-scroll="false" scrollbar-y="false" has-bouncing="false" delegate-handle="mainScroll">
+
+		<!--小团课-->
+		<div ng-if="active==0">
+
+        	<div class="hx-pd">
+				<div class="my-course-li" ng-repeat="i in groupClassList">
+					<div class="my-course-img" ng-style="'uploads/'+i.cover | allBg"></div>
+					<div class="my-course-name">{{i.course_name}}</div>
+					<div class="my-course-time">教练： {{i.coach_name}}</div>
+					<!--<div class="my-course-time">教练： {{i.coach_name}} 上课时长：{{i.time}}分钟</div>-->
+					<div class="my-course-num">剩余<span>{{i.buy_num-i.use_num}}</span>课时&nbsp;有效期至：{{i.expire_time | limitTo:10}}</div>
+					<div class="my-course-btn" ng-if="i.expire_type==1" ng-click="checkClass()">查看排课</div>
+					<div class="my-course-btn" style="opacity: 0.5" ng-if="i.expire_type==0">已过期</div>
+				</div>
+			</div>
+
+	        <div class="tc c-9 m-t-30" ng-if="!groupClassList || groupClassList.length==0">您还没有购买小团课记录</div>
+
+		</div>
+
+		<!--私教课-->
+		<div ng-if="active==1">
+
+        	<div class="hx-pd">
+				<div class="my-course-li" ng-repeat="i in privateClassList">
+					<div class="my-course-img" ng-style="'uploads/'+i.cover | allBg"></div>
+					<div class="my-course-name">{{i.course_name}}</div>
+					<div class="my-course-time">教练： {{i.coach_name}}</div>
+					<!--<div class="my-course-time">教练： {{i.coach_name}} 上课时长：{{i.time}}分钟</div>-->
+					<!-- <div class="my-course-num">剩余<span>{{i.buy_num-i.use_num}}</span>课时</div> -->
+					<div class="my-course-num">剩余<span>{{i.buy_num-i.use_num}}</span>课时&nbsp;有效期至：{{i.expire_time | limitTo:10}}</div>
+					<div class="my-course-btn" ng-if="i.expire_type==1" ng-click="makeCk(i)">预约</div>
+					<div class="my-course-btn" style="opacity: 0.5" ng-if="i.expire_type==0">已过期</div>
+				</div>
+			</div>
+
+	        <div class="tc c-9 m-t-30" ng-if="!privateClassList || privateClassList.length==0">您还没有购买私教课记录</div>
+		</div>
+
+    </ion-content>
+	
+	<div class="make-bg" ng-click="cancel()"></div>
+	<div class="make-mode">
+		<div class="make-top">
+			<div class="make-tit">
+				选择上课时间
+			</div>
+			<select class="make-shop" ng-model="make.shopId" ng-options="i.shop_id as i.shop_name for i in shopList">
+				
+			</select>
+			<div class="make-cancel" ng-click="cancel()">取消</div>
+		</div>
+		<!--日期选择-->
+		<date-menu click="clickDateMenu" active="active"></date-menu>
+		<div class="hx-pd">
+			<!--时间段-->
+			<div class="coach-times">
+				
+				<div ng-repeat="i in nowTimes" ng-if="i.course_id==0" ng-class="{'active':make.planId==i.plan_id}" ng-click="make.planId=i.plan_id">{{i.start_time | cutwo:11:5}} - {{i.end_time | cutwo:11:5}}</div>
+			
+			</div>
+			<div class="tc c-9 m-b-50" ng-if="!nowTimes || nowTimes.length==0">他暂时没有时间安排</div>
+		</div>
+		<div class="make-foot">
+			<div class="qcyd-btn qcyd-btn-large" ng-click="go()">确定</div>
+		</div>
+	</div>
+	
+</ion-view>
+
+
+
+
+
