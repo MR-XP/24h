@@ -152,17 +152,14 @@ class Code {
 
     //官网地址
     public static $webUrl = [
-        'qcydj.com',
-        'testqcydj.com',
-        'www.qcydj.com',
-        'test.qcydj.com',
-        'www.test.qcydj.com'
+        'qcydj.xiapei.vip',
+        'www.qcydj.xiapei.vip',
+        'testqcydj.com'
     ];
 
     //本地移动端调试
     public static $mobileUrl = [
-         '127.0.0.1',
-         '192.168.0.12'
+         '127.0.0.1'
     ];
 
 }
