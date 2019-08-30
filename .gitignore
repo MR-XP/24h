@@ -5,3 +5,4 @@ thinkphp
 /.env
 nbproject
 /public/static/pc/node_modules
+/*.env
